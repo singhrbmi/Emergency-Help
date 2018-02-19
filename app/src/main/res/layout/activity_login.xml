@@ -28,7 +28,6 @@
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:adjustViewBounds="true"
-                    android:contentDescription="@string/app_name"
                     android:src="@drawable/logo" />
             </LinearLayout>
 
@@ -36,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin20"
+                android:layout_gravity="center"
                 android:orientation="vertical">
 
                 <EditText
@@ -103,7 +103,7 @@
                 <Button
                     android:id="@+id/id_bt_login"
                     android:layout_width="170dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_margin="@dimen/dimen_10_dp"
                     android:background="@drawable/capsule_button"
                     android:foreground="?android:attr/selectableItemBackground"

@@ -82,13 +82,12 @@
 
                 <EditText
                     android:id="@+id/id_et_userotp"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="@dimen/dimen_20_dp"
-                    android:layout_marginRight="@dimen/dimen_20_dp"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="@dimen/dimen_10_dp"
                     android:background="@drawable/done_corner_round"
                     android:gravity="center"
+                    android:layout_gravity="center"
                     android:hint="Enter OTP Code"
                     android:imeOptions="actionNext"
                     android:maxLength="10"
@@ -102,12 +101,12 @@
 
                 <TextView
                     android:id="@+id/id_et_submit"
-                    android:layout_width="180dp"
-                    android:layout_height="50dp"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_margin="@dimen/dimen_10_dp"
                     android:background="@drawable/capsule_button"
                     android:gravity="center"
+                    android:layout_marginTop="@dimen/dimen_20_dp"
                     android:imeOptions="actionNext"
                     android:maxLength="30"
                     android:maxLines="1"
