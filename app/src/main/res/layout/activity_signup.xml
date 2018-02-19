@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sonali.emergencydatadetails.SignupActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/id_ll_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".activity.MainActivity">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin20"
+                android:gravity="center">
+
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/logo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/id_et_userName"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/margin20"
+                        android:layout_marginRight="@dimen/margin20"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:background="@drawable/done_corner_round"
+                        android:gravity="center|left"
+                        android:hint="Name"
+                        android:imeOptions="actionNext"
+                        android:maxLength="30"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color0E0E0F"
+                        android:textColorHint="@color/color595c63"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textSize16" />
+
+
+                    <EditText
+                        android:id="@+id/id_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/margin20"
+                        android:layout_marginRight="@dimen/margin20"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:background="@drawable/done_corner_round"
+                        android:gravity="center|left"
+                        android:hint="Mobile"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color0E0E0F"
+                        android:textColorHint="@color/color595c63"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textSize16" />
+
+
+                    <EditText
+                        android:id="@+id/id_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/margin20"
+                        android:layout_marginRight="@dimen/margin20"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:background="@drawable/done_corner_round"
+                        android:gravity="center|left"
+                        android:hint="Email"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color0E0E0F"
+                        android:textColorHint="@color/color595c63"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textSize16" />
+
+                    <EditText
+                        android:id="@+id/id_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/margin20"
+                        android:layout_marginRight="@dimen/margin20"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:background="@drawable/done_corner_round"
+                        android:gravity="center|left"
+                        android:hint="Addess"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color0E0E0F"
+                        android:textColorHint="@color/color595c63"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textSize16" />
+
+                    <EditText
+                        android:id="@+id/id_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/margin20"
+                        android:layout_marginRight="@dimen/margin20"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:background="@drawable/done_corner_round"
+                        android:gravity="center|left"
+                        android:hint="Password"
+                        android:imeOptions="actionNext"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color0E0E0F"
+                        android:textColorHint="@color/color595c63"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textSize16" />
+
+                    <Button
+                        android:id="@+id/id_bt_signup"
+                        android:layout_width="170dp"
+                        android:layout_gravity="center"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="@dimen/margin20"
+                        android:layout_marginRight="@dimen/margin20"
+                        android:layout_marginTop="@dimen/margin20"
+                        android:background="@drawable/capsule_button"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:text="SIGN UP"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textSize16" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sonali.emergencydatadetails.LoginActivity">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/id_ll_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".activity.MainActivity">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin20"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/logo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin20"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/id_et_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin40"
+                    android:layout_margin="@dimen/dimen_15_dp"
+                    android:background="@drawable/done_corner_round"
+                    android:drawablePadding="10dp"
+                    android:hint="UserName"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingLeft="@dimen/dimen_10_dp"
+                    android:singleLine="true"
+                    android:textColor="@color/color0E0E0F"
+                    android:textColorHint="@color/color595c63"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/textSize16" />
+
+
+                <EditText
+                    android:id="@+id/id_et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin40"
+                    android:layout_marginLeft="@dimen/dimen_15_dp"
+                    android:layout_marginRight="@dimen/dimen_15_dp"
+                    android:background="@drawable/done_corner_round"
+                    android:hint="Userpassword"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:maxLength="30"
+                    android:paddingLeft="@dimen/dimen_10_dp"
+                    android:singleLine="true"
+                    android:textColor="@color/color0E0E0F"
+                    android:textColorHint="@color/color595c63"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/textSize16" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_15_dp"
+                    android:visibility="gone"
+                    android:layout_marginRight="@dimen/dimen_15_dp"
+                    android:layout_marginTop="@dimen/dimen_10_dp">
+
+                    <TextView
+                        android:id="@+id/forgot_password"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10_dp"
+                        android:layout_weight=".5"
+                        android:text="Forgot Password"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/show_password"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:text="Show Password" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/id_bt_login"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="@dimen/dimen_10_dp"
+                    android:background="@drawable/capsule_button"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="LOGIN"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize16" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin10"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/dont_have_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don't have account?"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textSize16" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/signUpText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_5_dp"
+                        android:text="SIGN UP"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/textSize16"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="55dp"
+                        android:layout_height="@dimen/dimen_1_dp"
+                        android:layout_gravity="center"
+                        android:background="@color/ligh_blue" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
