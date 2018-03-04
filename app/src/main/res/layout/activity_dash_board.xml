@@ -18,8 +18,78 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_dash_board"
-        app:menu="@menu/activity_dash_board_drawer" />
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/nav_header_dash_board"></include>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/lyout_suraksha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/icon_suraksha"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".2"
+                        android:gravity="center"
+                        android:text="Icon"
+                        android:textColor="@color/item_selected_background_color"
+                        android:textSize="@dimen/textSize20" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:layout_weight=".8"
+                        android:gravity="center|left"
+                        android:text="Suraksha Kavach"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSize14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lyout_barCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/icon_barcode"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".2"
+                        android:gravity="center"
+                        android:text="Icon"
+                        android:textColor="@color/item_selected_background_color"
+                        android:textSize="@dimen/textSize20" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:layout_weight=".8"
+                        android:gravity="center|left"
+                        android:text="QR Code Scanner"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSize14" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
+
