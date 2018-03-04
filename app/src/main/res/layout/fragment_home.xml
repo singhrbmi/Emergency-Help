@@ -28,19 +28,15 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin16"
+                            android:layout_margin="@dimen/margin14"
                             android:gravity="center"
                             android:text="Address:-h-12 near matro station Sector 16 noida up."
                             android:textColor="@color/black"
                             android:textSize="@dimen/margin14" />
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -50,14 +46,14 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight=".2"
+                            android:layout_weight=".25"
                             android:orientation="horizontal">
 
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -66,7 +62,7 @@
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/dimen_2_dp"
+                                    android:layout_marginTop="@dimen/margin5"
                                     android:src="@drawable/hospital" />
 
                                 <TextView
@@ -75,14 +71,14 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Near Hospitals"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -90,7 +86,7 @@
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/dimen_2_dp"
+                                    android:layout_marginTop="@dimen/margin5"
                                     android:src="@drawable/station" />
 
 
@@ -100,7 +96,7 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Near Police "
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
 
                             </LinearLayout>
@@ -108,7 +104,7 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -117,7 +113,7 @@
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/dimen_2_dp"
+                                    android:layout_marginTop="@dimen/margin5"
                                     android:src="@drawable/ebolence" />
 
                                 <TextView
@@ -126,7 +122,7 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Near Ambulance"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
 
                             </LinearLayout>
@@ -135,14 +131,14 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight=".2"
+                            android:layout_weight=".25"
                             android:orientation="horizontal">
 
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -151,7 +147,7 @@
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/dimen_2_dp"
+                                    android:layout_marginTop="@dimen/margin5"
                                     android:src="@drawable/ebolence" />
 
                                 <TextView
@@ -160,14 +156,14 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text=" Call Ambulance"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -175,7 +171,7 @@
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/dimen_2_dp"
+                                    android:layout_marginTop="@dimen/margin5"
                                     android:src="@drawable/police" />
 
 
@@ -185,7 +181,7 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Call Police"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
 
                             </LinearLayout>
@@ -193,7 +189,7 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -202,7 +198,7 @@
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/dimen_2_dp"
+                                    android:layout_marginTop="@dimen/margin5"
                                     android:src="@drawable/fire" />
 
 
@@ -212,7 +208,7 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Call Fire"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
 
                             </LinearLayout>
@@ -221,13 +217,13 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight=".2"
+                            android:layout_weight=".25"
                             android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -246,14 +242,14 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Call Women Help"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -272,7 +268,7 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Contacts"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
 
                             </LinearLayout>
@@ -280,7 +276,7 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -299,7 +295,7 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Photo mail"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -308,14 +304,14 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight=".2"
+                            android:layout_weight=".25"
                             android:orientation="horizontal">
 
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -334,14 +330,14 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Whistle"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -360,93 +356,7 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Police Siren"
-                                    android:textSize="@dimen/margin14" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".3"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/share" />
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Share"
-                                    android:textSize="@dimen/margin14" />
-
-                            </LinearLayout>
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight=".2"
-                            android:orientation="horizontal">
-
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".3"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/dimen_5_dp"
-                                    android:src="@drawable/account" />
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Account"
-                                    android:textSize="@dimen/margin14" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".3"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/dimen_5_dp"
-                                    android:src="@drawable/settings" />
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Settings"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
 
                             </LinearLayout>
@@ -455,7 +365,7 @@
                                 android:id="@+id/lyout_flash"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".3"
+                                android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
@@ -473,11 +383,10 @@
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
                                     android:text="Flash Light"
-                                    android:textSize="@dimen/margin14" />
+                                    android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>
                         </LinearLayout>
-
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>

@@ -1,6 +1,7 @@
 package hacker.l.emergency_help.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,23 +89,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void runFlashLight() {
         hasFlash = context.getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
         if (!hasFlash) {
-//            AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
-//            alert.setTitle("Error");
-//            alert.setMessage("Sorry, your device doesn't support flash light!");
-//            alert.setButton("OK", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    finish();
-//                }
-//            });
-//            alert.show();
-//            return;
+           AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            builder1.setMessage("Sorry, your device doesn't support flash light!");
+            builder1.setCancelable(true);
+            builder1.setTitle("Error");
+            builder1.setPositiveButton(
+                    "ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
         }
         getCamera();
         if (isFlashOn) {
             turnOffFlash();
+            Toast.makeText(context, "Off", Toast.LENGTH_SHORT).show();
         } else {
             turnOnFlash();
+            Toast.makeText(context, "On", Toast.LENGTH_SHORT).show();
         }
     }
 
