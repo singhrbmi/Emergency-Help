@@ -1,9 +1,15 @@
 package hacker.l.emergency_help.adapter;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +31,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     private Typeface materialdesignicons_font, ProximaNovaRegular, ProximaNovaLight;
     private Context mContext;
     private List<Result> dataList;
+    String cutPhone;
 
     public ContactsAdapter(Context mContext, List<Result> dataList) {
         this.mContext = mContext;
@@ -45,21 +52,80 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     @Override
     public void onBindViewHolder(ContactsAdapter.MyViewHolder holder, final int position) {
         String name = dataList.get(position).getName();
-        String phone = dataList.get(position).getPhone();
         holder.name.setText(name);
-        holder.phone.setText(phone);
+        holder.phone.setText(dataList.get(position).getPhone());
         holder.sms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final String phone = dataList.get(position).getPhone();
+                cutPhoneFun(phone);
+                try {
+                    String msg = "test message";
+                    if (cutPhone != null) {
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage(cutPhone, null, msg, null, null);
+                        Toast.makeText(mContext, "SMS sent." + cutPhone,
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage(phone, null, msg, null, null);
+                        Toast.makeText(mContext, "SMS sent." + cutPhone,
+                                Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(mContext,
+                            "SMS faild, Please try Again.",
+                            Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
             }
         });
         holder.call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, ""+dataList.get(position).getName(), Toast.LENGTH_SHORT).show();
+                final String phone = dataList.get(position).getPhone();
+                cutPhoneFun(phone);
+                if (cutPhone != null) {
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + cutPhone));//change the number
+                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    mContext.startActivity(callIntent);
+
+                } else {
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + phone));//change the number
+                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    mContext.startActivity(callIntent);
+                }
             }
         });
+    }
+
+    public void cutPhoneFun(String phone) {
+        if (phone.startsWith("+91")) {
+            cutPhone = phone.substring(3);
+        }
+        if (phone.startsWith("0")) {
+            cutPhone = phone.substring(1);
+        }
     }
 
     @Override
