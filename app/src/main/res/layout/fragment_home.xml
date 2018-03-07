@@ -247,6 +247,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/layout_contacts"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"
@@ -309,6 +310,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/layout_whistle"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"
@@ -335,6 +337,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/layout_pilicesire"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"

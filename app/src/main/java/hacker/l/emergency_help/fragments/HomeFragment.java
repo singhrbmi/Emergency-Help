@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -51,12 +52,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     View view;
     Context context;
-    LinearLayout lyout_flash;
+    LinearLayout lyout_flash, layout_contacts, layout_pilicesire, layout_whistle;
     private Camera camera;
     private boolean isFlashOn;
     private boolean hasFlash;
     Camera.Parameters params;
     private CameraManager camManager;
+    MediaPlayer police, whistle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,7 +72,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void init() {
         lyout_flash = view.findViewById(R.id.lyout_flash);
+        layout_contacts = view.findViewById(R.id.layout_contacts);
+        layout_pilicesire = view.findViewById(R.id.layout_pilicesire);
+        layout_whistle = view.findViewById(R.id.layout_whistle);
         lyout_flash.setOnClickListener(this);
+        layout_contacts.setOnClickListener(this);
+        layout_pilicesire.setOnClickListener(this);
+        layout_whistle.setOnClickListener(this);
+        whistle = MediaPlayer.create(context, R.raw.killbill);
+        police = MediaPlayer.create(context, R.raw.pilice);
     }
 
     @Override
@@ -83,13 +93,53 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.lyout_flash:
                 runFlashLight();
                 break;
+            case R.id.layout_contacts:
+                GetContactsFragment fragmentContacts = GetContactsFragment.newInstance("", "");
+                moveFragment(fragmentContacts);
+                break;
+            case R.id.layout_pilicesire:
+                piliceSiren();
+                break;
+            case R.id.layout_whistle:
+                whisilePlay();
+                break;
+        }
+    }
+
+    public void piliceSiren() {
+
+        if (!whistle.isPlaying()) {
+            if (police.isPlaying()) {
+                police.stop();
+            } else {
+                police.start();
+                police.isPlaying();
+            }
+        } else {
+            whistle.stop();
+            piliceSiren();
+        }
+
+    }
+
+    public void whisilePlay() {
+        if (!police.isPlaying()) {
+            if (whistle.isPlaying()) {
+                whistle.stop();
+            } else {
+                whistle.start();
+                whistle.isPlaying();
+            }
+        } else {
+            police.stop();
+            whisilePlay();
         }
     }
 
     private void runFlashLight() {
         hasFlash = context.getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
         if (!hasFlash) {
-           AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
             builder1.setMessage("Sorry, your device doesn't support flash light!");
             builder1.setCancelable(true);
             builder1.setTitle("Error");

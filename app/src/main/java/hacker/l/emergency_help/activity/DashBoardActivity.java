@@ -16,12 +16,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.fragments.AboutFragment;
+import hacker.l.emergency_help.fragments.AccountFragment;
+import hacker.l.emergency_help.fragments.HelpFragment;
 import hacker.l.emergency_help.fragments.HomeFragment;
+import hacker.l.emergency_help.fragments.QRScannerFragment;
+import hacker.l.emergency_help.fragments.SettingsFragment;
+import hacker.l.emergency_help.fragments.ShareFragment;
 import hacker.l.emergency_help.fragments.SurakshaCavachFragment;
 
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    LinearLayout lyout_suraksha;
+    LinearLayout lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
     DrawerLayout drawer;
 
     @Override
@@ -30,16 +36,6 @@ public class DashBoardActivity extends AppCompatActivity
         setContentView(R.layout.activity_dash_board);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,7 +49,19 @@ public class DashBoardActivity extends AppCompatActivity
 
     private void init() {
         lyout_suraksha = findViewById(R.id.lyout_suraksha);
+        lyout_help = findViewById(R.id.lyout_help);
+        lyout_about = findViewById(R.id.lyout_about);
+        lyout_account = findViewById(R.id.lyout_account);
+        lyout_barCode = findViewById(R.id.lyout_barCode);
+        lyout_share = findViewById(R.id.lyout_share);
+        lyout_setting = findViewById(R.id.lyout_setting);
         lyout_suraksha.setOnClickListener(this);
+        lyout_help.setOnClickListener(this);
+        lyout_about.setOnClickListener(this);
+        lyout_account.setOnClickListener(this);
+        lyout_barCode.setOnClickListener(this);
+        lyout_share.setOnClickListener(this);
+        lyout_setting.setOnClickListener(this);
         HomeFragment fragment = HomeFragment.newInstance("", "");
         moveFragment(fragment);
     }
@@ -126,6 +134,36 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.lyout_suraksha:
                 SurakshaCavachFragment fragment = SurakshaCavachFragment.newInstance("", "");
                 moveFragment(fragment);
+                navHide();
+                break;
+            case R.id.lyout_help:
+                HelpFragment fragmentHelp = HelpFragment.newInstance("", "");
+                moveFragment(fragmentHelp);
+                navHide();
+                break;
+            case R.id.lyout_about:
+                AboutFragment fragmentAbout = AboutFragment.newInstance("", "");
+                moveFragment(fragmentAbout);
+                navHide();
+                break;
+            case R.id.lyout_account:
+                AccountFragment fragmentAccount = AccountFragment.newInstance("", "");
+                moveFragment(fragmentAccount);
+                navHide();
+                break;
+            case R.id.lyout_barCode:
+                QRScannerFragment fragmentqr = QRScannerFragment.newInstance("", "");
+                moveFragment(fragmentqr);
+                navHide();
+                break;
+            case R.id.lyout_share:
+                ShareFragment fragmentShre = ShareFragment.newInstance("", "");
+                moveFragment(fragmentShre);
+                navHide();
+                break;
+            case R.id.lyout_setting:
+                SettingsFragment fragmentSetting = SettingsFragment.newInstance("", "");
+                moveFragment(fragmentSetting);
                 navHide();
                 break;
         }
