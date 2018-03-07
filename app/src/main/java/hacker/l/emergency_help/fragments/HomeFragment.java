@@ -107,7 +107,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void piliceSiren() {
-
         if (!whistle.isPlaying()) {
             if (police.isPlaying()) {
                 police.stop();
