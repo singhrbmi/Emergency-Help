@@ -1,5 +1,6 @@
 package hacker.l.emergency_help.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.fragments.AboutFragment;
 import hacker.l.emergency_help.fragments.AccountFragment;
 import hacker.l.emergency_help.fragments.HelpFragment;
@@ -91,7 +93,12 @@ public class DashBoardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout) {
+            DbHelper dbHelper = new DbHelper(this);
+            dbHelper.deleteUserData();
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
             return true;
         }
 

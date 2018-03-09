@@ -8,6 +8,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.database.DbHelper;
+import hacker.l.emergency_help.models.Result;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -22,10 +24,18 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                SplashActivity.this.startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                SplashActivity.this.finish();
+                DbHelper dbHelper = new DbHelper(SplashActivity.this);
+                Result result = dbHelper.getUserData();
+                if (result == null) {
+                    SplashActivity.this.startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    SplashActivity.this.finish();
+                } else {
+                    SplashActivity.this.startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+                    SplashActivity.this.finish();
+                }
             }
         }, SPLASH_TIME_OUT);
     }
+
     private static int SPLASH_TIME_OUT = 3000;
 }
