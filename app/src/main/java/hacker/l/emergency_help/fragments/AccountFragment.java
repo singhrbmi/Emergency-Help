@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
@@ -108,6 +109,36 @@ public class AccountFragment extends Fragment {
         layoutAddress = view.findViewById(R.id.layoutAddress);
         layoutCity = view.findViewById(R.id.layoutCity);
         layoutPincode = view.findViewById(R.id.layoutPincode);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getsurakshacavach,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        if (myPojo != null) {
+                            for (Result result : myPojo.getResult()) {
+                                if (result != null) {
+                                    new DbHelper(context).upsertsurakshaData(result);
+                                }
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                final DbHelper dbHelper = new DbHelper(context);
+                final Result userdata = dbHelper.getUserData();
+                params.put("loginId", String.valueOf(userdata.getLoginId()));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
         setSurakshaCavachData();
     }
 
@@ -155,12 +186,15 @@ public class AccountFragment extends Fragment {
 
     private void getBarCode(ProgressDialog pd) {
         try {
-            bitmap = TextToImageEncode(barcode);
-            barCodeImage.setImageBitmap(bitmap);
-            pd.dismiss();
+            if (barcode != null) {
+                bitmap = TextToImageEncode(barcode);
+                barCodeImage.setImageBitmap(bitmap);
+
+            }
         } catch (WriterException e) {
             e.printStackTrace();
         }
+        pd.dismiss();
     }
 
     Bitmap TextToImageEncode(String Value) throws WriterException {
