@@ -1,16 +1,32 @@
 package hacker.l.emergency_help.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.zxing.Result;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import hacker.l.emergency_help.R;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class QRScannerFragment extends Fragment {
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
+
+public class QRScannerFragment extends Fragment implements ZXingScannerView.ResultHandler {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,6 +56,8 @@ public class QRScannerFragment extends Fragment {
 
     View view;
     Context context;
+    TextView tv_data;
+    private ZXingScannerView mScannerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,5 +70,29 @@ public class QRScannerFragment extends Fragment {
     }
 
     private void init() {
+        tv_data = view.findViewById(R.id.tv_data);
+        mScannerView = new ZXingScannerView(context);   // Programmatically initialize the scanner view
+        getActivity().setContentView(mScannerView);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+        mScannerView.startCamera();          // Start camera on resume
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mScannerView.stopCamera();           // Stop camera on pause
+    }
+
+    @Override
+    public void handleResult(Result result) {
+        mScannerView.resumeCameraPreview(this);
+        Toast.makeText(context, "" + result, Toast.LENGTH_SHORT).show();
+        mScannerView.stopCamera();
+        tv_data.setText(result.toString());
     }
 }

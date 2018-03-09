@@ -15,6 +15,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.database.DbHelper;
@@ -26,6 +39,9 @@ import hacker.l.emergency_help.fragments.QRScannerFragment;
 import hacker.l.emergency_help.fragments.SettingsFragment;
 import hacker.l.emergency_help.fragments.ShareFragment;
 import hacker.l.emergency_help.fragments.SurakshaCavachFragment;
+import hacker.l.emergency_help.models.MyPojo;
+import hacker.l.emergency_help.models.Result;
+import hacker.l.emergency_help.utility.Contants;
 
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -66,11 +82,40 @@ public class DashBoardActivity extends AppCompatActivity
         lyout_setting.setOnClickListener(this);
         HomeFragment fragment = HomeFragment.newInstance("", "");
         moveFragment(fragment);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getsurakshacavach,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        if (myPojo != null) {
+                            for (Result result : myPojo.getResult()) {
+                                if (result != null) {
+                                    new DbHelper(DashBoardActivity.this).upsertsurakshaData(result);
+                                }
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                final DbHelper dbHelper = new DbHelper(DashBoardActivity.this);
+                final Result userdata = dbHelper.getUserData();
+                params.put("loginId", String.valueOf(userdata.getLoginId()));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(DashBoardActivity.this);
+        requestQueue.add(stringRequest);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -180,7 +225,7 @@ public class DashBoardActivity extends AppCompatActivity
         FragmentManager fragmentManager = ((FragmentActivity) this).getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
-                .addToBackStack(null)
+                // .addToBackStack(null)
                 .commit();
     }
 }

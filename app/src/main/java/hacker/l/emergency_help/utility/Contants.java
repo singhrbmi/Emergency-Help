@@ -42,4 +42,6 @@ public class Contants {
     public static final String usersingup = "usersingup.php";
     public static final String login = "login.php";
     public static final String forgetpassword = "forgetpassword.php";
+    public static final String getsurakshacavach = "getsurakshacavach.php";
+    public static final String surakshacavach = "surakshacavach.php";
 }
