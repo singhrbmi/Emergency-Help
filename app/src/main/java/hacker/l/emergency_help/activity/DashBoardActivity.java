@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,9 +43,12 @@ import hacker.l.emergency_help.fragments.SurakshaCavachFragment;
 import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+import static android.content.ContentValues.TAG;
 
 public class DashBoardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
     LinearLayout lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
     DrawerLayout drawer;
 
@@ -82,15 +86,20 @@ public class DashBoardActivity extends AppCompatActivity
         lyout_setting.setOnClickListener(this);
         HomeFragment fragment = HomeFragment.newInstance("", "");
         moveFragment(fragment);
+
     }
+
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            try {
+                super.onBackPressed();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -177,6 +186,7 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.lyout_barCode:
                 QRScannerFragment fragmentqr = QRScannerFragment.newInstance("", "");
                 moveFragment(fragmentqr);
+//                goSacne();
                 navHide();
                 break;
             case R.id.lyout_share:
@@ -192,11 +202,12 @@ public class DashBoardActivity extends AppCompatActivity
         }
     }
 
+
     private void moveFragment(Fragment fragment) {
         FragmentManager fragmentManager = ((FragmentActivity) this).getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
-                 .addToBackStack(null)
+                .addToBackStack(null)
                 .commit();
     }
 }

@@ -64,8 +64,6 @@ public class GetContactsFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     // Request code for READ_CONTACTS. It can be any number > 0.
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
-    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 200;
-    private static final int MY_PERMISSIONS_REQUEST_Call = 300;
     Result result;
 
     @Override
@@ -83,28 +81,6 @@ public class GetContactsFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         lstNames.setLayoutManager(linearLayoutManager);
         showContacts();
-        if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                    Manifest.permission.SEND_SMS)) {
-            } else {
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.SEND_SMS},
-                        MY_PERMISSIONS_REQUEST_SEND_SMS);
-            }
-        }
-        if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                    Manifest.permission.CALL_PHONE)) {
-            } else {
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.CALL_PHONE},
-                        MY_PERMISSIONS_REQUEST_Call);
-            }
-        }
     }
 
     /**
@@ -120,7 +96,6 @@ public class GetContactsFragment extends Fragment {
             List<Result> contacts = getContactNames();
             ContactsAdapter adapter = new ContactsAdapter(context, contacts);
             lstNames.setAdapter(adapter);
-            //Log.d("ss", "llcontacts" + contacts);
         }
     }
 
@@ -132,21 +107,7 @@ public class GetContactsFragment extends Fragment {
                 // Permission is granted
                 showContacts();
             } else {
-                Toast.makeText(context, "Until you grant the permission, we canot display the names", Toast.LENGTH_SHORT).show();
-            }
-        }
-        if (requestCode == MY_PERMISSIONS_REQUEST_SEND_SMS) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showContacts();
-            } else {
-                Toast.makeText(context, "Until you grant the permission, we canot display the names", Toast.LENGTH_SHORT).show();
-            }
-        }
-        if (requestCode == MY_PERMISSIONS_REQUEST_Call) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showContacts();
-            } else {
-                Toast.makeText(context, "Until you grant the permission, we canot display the names", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Allow Contacts Permisstion, we canot display the names", Toast.LENGTH_SHORT).show();
             }
         }
     }

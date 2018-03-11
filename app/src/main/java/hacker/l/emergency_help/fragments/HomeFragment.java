@@ -1,5 +1,6 @@
 package hacker.l.emergency_help.fragments;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -10,9 +11,11 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,6 +62,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Camera.Parameters params;
     private CameraManager camManager;
     MediaPlayer police, whistle;
+    private int CAMERA_PERM = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,7 +95,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 moveFragment(fragment);
                 break;
             case R.id.lyout_flash:
+//                if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA_PERM);
                 runFlashLight();
+//                } else {
+//                    Toast.makeText(context, "Allow Camera Permisstion", Toast.LENGTH_SHORT).show();
+//                }
                 break;
             case R.id.layout_contacts:
                 GetContactsFragment fragmentContacts = GetContactsFragment.newInstance("", "");
@@ -105,6 +114,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//        if (requestCode == CAMERA_PERM) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                runFlashLight();
+//            } else {
+//                Toast.makeText(context, "Permission was not Granted", Toast.LENGTH_SHORT).show();
+//            }
+//        } else {
+//            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        }
+//    }
 
     public void piliceSiren() {
         if (!whistle.isPlaying()) {

@@ -19,6 +19,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.AfterSacnActivity;
+import hacker.l.emergency_help.activity.DashBoardActivity;
+import hacker.l.emergency_help.activity.LoginActivity;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.app.Activity.RESULT_CANCELED;
@@ -89,10 +92,16 @@ public class QRScannerFragment extends Fragment implements ZXingScannerView.Resu
     }
 
     @Override
-    public void handleResult(Result result) {
+    public void handleResult(Result rawResult) {
+        // Do something with the result here
+        Log.v(TAG, rawResult.getText()); // Prints scan results
+        Log.v(TAG, rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
+        // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
-        Toast.makeText(context, "" + result, Toast.LENGTH_SHORT).show();
-        mScannerView.stopCamera();
-        tv_data.setText(result.toString());
+        Intent intent = new Intent(context, AfterSacnActivity.class);
+        intent.putExtra("data", rawResult.toString());
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        tv_data.setText(rawResult.toString());
     }
 }

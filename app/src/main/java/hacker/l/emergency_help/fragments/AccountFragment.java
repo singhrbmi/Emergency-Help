@@ -1,11 +1,18 @@
 package hacker.l.emergency_help.fragments;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -74,7 +81,7 @@ public class AccountFragment extends Fragment {
 
     View view;
     Context context;
-    TextView tv_name, tv_phone, tv_email, tv_address, tv_city, tv_pincode, tv_emergency, tv_emergency2, tv_emergency3, tv_barcode;
+    TextView tv_name, tv_phone, tv_email, tv_address, tv_city, tv_pincode, tv_emergency, tv_emergency2, tv_emergency3, tv_barcode, share;
     LinearLayout layoutone, layouttwo, layoutthree, layoutAddress, layoutCity, layoutPincode;
     ImageView barCodeImage;
     public final static int QRcodeWidth = 500;
@@ -109,6 +116,7 @@ public class AccountFragment extends Fragment {
         layoutAddress = view.findViewById(R.id.layoutAddress);
         layoutCity = view.findViewById(R.id.layoutCity);
         layoutPincode = view.findViewById(R.id.layoutPincode);
+        share = view.findViewById(R.id.share);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getsurakshacavach,
                 new Response.Listener<String>() {
                     @Override
@@ -140,8 +148,41 @@ public class AccountFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
         setSurakshaCavachData();
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isStoragePermissionGranted()) {
+                    String bitmapPath = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Share Code", null);
+                    Uri bitmapUri = Uri.parse(bitmapPath);
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("image/*");
+                    intent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
+                    startActivity(Intent.createChooser(intent, "Share Image"));
+                }
+            }
+        });
     }
 
+    public boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (context.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            //resume tasks needing this permission
+        }
+    }
     private void setSurakshaCavachData() {
         final DbHelper dbHelper = new DbHelper(context);
         final Result userdata = dbHelper.getUserData();
@@ -172,6 +213,7 @@ public class AccountFragment extends Fragment {
             layoutPincode.setVisibility(View.GONE);
             tv_barcode.setVisibility(View.GONE);
             barCodeImage.setVisibility(View.GONE);
+            share.setVisibility(View.GONE);
         }
         new Handler().postDelayed(new Runnable() {
             @Override
