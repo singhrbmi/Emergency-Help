@@ -80,11 +80,11 @@ public class GetContactsFragment extends Fragment {
         lstNames = view.findViewById(R.id.lstNames);
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         lstNames.setLayoutManager(linearLayoutManager);
-        if (isStoragePermissionGranted()) {
-            showContacts();
-        }else {
-            Toast.makeText(context, "Allow Contacts Permission", Toast.LENGTH_SHORT).show();
-        }
+//        isStoragePermissionGranted();
+//        if (isStoragePermissionGranted()) {
+        showContacts();
+
+//        }
     }
 
     public boolean isStoragePermissionGranted() {
@@ -105,17 +105,16 @@ public class GetContactsFragment extends Fragment {
      * Show the contacts in the ListView.
      */
     private void showContacts() {
-            // Android version is lesser than 6.0 or the permission is already granted.
-            List<Result> contacts = getContactNames();
-            ContactsAdapter adapter = new ContactsAdapter(context, contacts);
-            lstNames.setAdapter(adapter);
+        // Android version is lesser than 6.0 or the permission is already granted.
+        List<Result> contacts = getContactNames();
+        ContactsAdapter adapter = new ContactsAdapter(context, contacts);
+        lstNames.setAdapter(adapter);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            //resume tasks needing this permission
             showContacts();
         }
     }

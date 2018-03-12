@@ -32,7 +32,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.drive.Contents;
 import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -126,6 +125,7 @@ public class AccountFragment extends Fragment {
                             for (Result result : myPojo.getResult()) {
                                 if (result != null) {
                                     new DbHelper(context).upsertsurakshaData(result);
+                                    setSurakshaCavachData();
                                 }
                             }
                         }
@@ -151,14 +151,14 @@ public class AccountFragment extends Fragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isStoragePermissionGranted()) {
-                    String bitmapPath = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Share Code", null);
-                    Uri bitmapUri = Uri.parse(bitmapPath);
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("image/*");
-                    intent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
-                    startActivity(Intent.createChooser(intent, "Share Image"));
-                }
+//                if(isStoragePermissionGranted()){
+                String bitmapPath = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Share Code", null);
+                Uri bitmapUri = Uri.parse(bitmapPath);
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
+                startActivity(Intent.createChooser(intent, "Share Image"));
+//            }
             }
         });
     }
@@ -176,13 +176,21 @@ public class AccountFragment extends Fragment {
             return true;
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             //resume tasks needing this permission
+            String bitmapPath = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Share Code", null);
+            Uri bitmapUri = Uri.parse(bitmapPath);
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("image/*");
+            intent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
+            startActivity(Intent.createChooser(intent, "Share Image"));
         }
     }
+
     private void setSurakshaCavachData() {
         final DbHelper dbHelper = new DbHelper(context);
         final Result userdata = dbHelper.getUserData();

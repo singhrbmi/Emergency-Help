@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "hacker.l.emergency_help"
-        minSdkVersion 19
+        minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -32,13 +32,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support.test.espresso:espresso-core:3.0.2-alpha1'
     //noinspection GradleCompatible,GradleCompatible
-    implementation 'com.google.firebase:firebase-core:9.8.0'
-    implementation 'com.google.firebase:firebase-auth:9.8.0'
-    implementation 'com.google.android.gms:play-services-auth:9.8.0'
-    implementation 'com.google.android.gms:play-services-maps:9.8.0'
-    implementation 'com.google.android.gms:play-services:9.8.0'
-    //noinspection GradleCompatible
-    implementation 'com.google.firebase:firebase-messaging:9.8.0'
+//    implementation 'com.google.firebase:firebase-core:9.8.0'
+//    implementation 'com.google.firebase:firebase-auth:9.8.0'
+//    implementation 'com.google.android.gms:play-services-auth:9.8.0'
+//    implementation 'com.google.android.gms:play-services-maps:9.8.0'
+//    implementation 'com.google.android.gms:play-services:9.8.0'
+//    //noinspection GradleCompatible
+//    implementation 'com.google.firebase:firebase-messaging:9.8.0'
     implementation 'com.google.code.gson:gson:2.2.pre_info'
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     // JSON Parsing

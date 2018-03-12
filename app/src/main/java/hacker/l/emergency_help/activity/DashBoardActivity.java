@@ -1,8 +1,14 @@
 package hacker.l.emergency_help.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -48,7 +54,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import static android.content.ContentValues.TAG;
 
 public class DashBoardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     LinearLayout lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
     DrawerLayout drawer;
 
@@ -86,6 +92,8 @@ public class DashBoardActivity extends AppCompatActivity
         lyout_setting.setOnClickListener(this);
         HomeFragment fragment = HomeFragment.newInstance("", "");
         moveFragment(fragment);
+        isStoragePermissionGranted();
+        isConteactPermissionGranted();
 
     }
 
@@ -186,7 +194,6 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.lyout_barCode:
                 QRScannerFragment fragmentqr = QRScannerFragment.newInstance("", "");
                 moveFragment(fragmentqr);
-//                goSacne();
                 navHide();
                 break;
             case R.id.lyout_share:
@@ -202,6 +209,48 @@ public class DashBoardActivity extends AppCompatActivity
         }
     }
 
+    public boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+
+    public boolean isConteactPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.READ_CONTACTS)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 2);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            }
+        }
+        if (requestCode == 2) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            }
+    }
+    }
 
     private void moveFragment(Fragment fragment) {
         FragmentManager fragmentManager = ((FragmentActivity) this).getSupportFragmentManager();
