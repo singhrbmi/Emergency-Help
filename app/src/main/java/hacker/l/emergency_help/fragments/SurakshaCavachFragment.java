@@ -2,9 +2,11 @@ package hacker.l.emergency_help.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +26,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +44,8 @@ import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.Utility;
+
+import static hacker.l.emergency_help.fragments.AccountFragment.QRcodeWidth;
 
 
 public class SurakshaCavachFragment extends Fragment {
@@ -71,7 +79,8 @@ public class SurakshaCavachFragment extends Fragment {
     Button id_btproced;
     ProgressDialog pd;
     int loginID;
-    String name, phone, email, city, address, pincode, no1, no2, no3, socialUs;
+    String name, phone, email, city, address, pincode, no1, no2, no3, socialUs, temp;
+    Bitmap bitmap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -238,7 +247,16 @@ public class SurakshaCavachFragment extends Fragment {
                         params.put("EmergencyTwo", no2);
                         params.put("EmergencyThree", no3);
                         String barCode = name + "," + phone + "," + email + "," + address + "," + city + "," + pincode + "," + no1 + "," + no2 + "," + no3;
-                        params.put("barCode", barCode);
+                        try {
+                            bitmap = TextToImageEncode(barCode);
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                            byte[] arr = baos.toByteArray();
+                            temp = Base64.encodeToString(arr, Base64.DEFAULT);
+                        } catch (WriterException e) {
+                            e.printStackTrace();
+                        }
+                        params.put("barCode", temp);
                         params.put("socialUs", socialUs);
                         return params;
                     }
@@ -251,4 +269,37 @@ public class SurakshaCavachFragment extends Fragment {
         }
     }
 
+    Bitmap TextToImageEncode(String Value) throws WriterException {
+        BitMatrix bitMatrix;
+        try {
+            bitMatrix = new MultiFormatWriter().encode(
+                    Value,
+                    BarcodeFormat.DATA_MATRIX.QR_CODE,
+                    QRcodeWidth, QRcodeWidth, null
+            );
+
+        } catch (IllegalArgumentException Illegalargumentexception) {
+
+            return null;
+        }
+        int bitMatrixWidth = bitMatrix.getWidth();
+
+        int bitMatrixHeight = bitMatrix.getHeight();
+
+        int[] pixels = new int[bitMatrixWidth * bitMatrixHeight];
+
+        for (int y = 0; y < bitMatrixHeight; y++) {
+            int offset = y * bitMatrixWidth;
+
+            for (int x = 0; x < bitMatrixWidth; x++) {
+
+                pixels[offset + x] = bitMatrix.get(x, y) ?
+                        getResources().getColor(R.color.black) : getResources().getColor(R.color.grey_bg);
+            }
+        }
+        Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444);
+
+        bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight);
+        return bitmap;
+    }
 }

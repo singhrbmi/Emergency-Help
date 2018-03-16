@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +40,10 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import hacker.l.emergency_help.R;
@@ -115,6 +120,9 @@ public class AccountFragment extends Fragment {
         layoutCity = view.findViewById(R.id.layoutCity);
         layoutPincode = view.findViewById(R.id.layoutPincode);
         share = view.findViewById(R.id.share);
+        final ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Waiting");
+        progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getsurakshacavach,
                 new Response.Listener<String>() {
                     @Override
@@ -128,7 +136,9 @@ public class AccountFragment extends Fragment {
                                 }
                             }
                         }
+                        progressDialog.dismiss();
                     }
+
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -151,7 +161,8 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                if(isStoragePermissionGranted()){
-                String bitmapPath = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Share Code", null);
+                String bitmapPath = null;
+                bitmapPath = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Share Code", null);
                 Uri bitmapUri = Uri.parse(bitmapPath);
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("image/*");
@@ -181,7 +192,8 @@ public class AccountFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             //resume tasks needing this permission
-            String bitmapPath = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Share Code", null);
+            String bitmapPath = null;
+            bitmapPath = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Share Code", null);
             Uri bitmapUri = Uri.parse(bitmapPath);
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("image/*");
@@ -199,18 +211,24 @@ public class AccountFragment extends Fragment {
             tv_phone.setText(userdata.getUserPhone());
         }
         //set cavach data...
-        Result data = dbHelper.getsurakshaData();
-        if (data != null) {
-            tv_name.setText(data.getUsername());
-            tv_email.setText(data.getEmailId());
-            tv_phone.setText(data.getUserPhone());
-            tv_address.setText(data.getAddress());
-            tv_city.setText(data.getCity());
-            tv_pincode.setText(data.getPinCode());
-            tv_emergency.setText(data.getEmergencyOne());
-            tv_emergency2.setText(data.getEmergencyTwo());
-            tv_emergency3.setText(data.getEmergencyThree());
-            barcode = data.getBarCode();
+        List<Result> data = dbHelper.getAllsurakshaData();
+        if (data != null && data.size() != 0) {
+            for (int i = 0; i < data.size(); i++) {
+                int l = data.size() - 1;
+                tv_name.setText(data.get(l).getUsername());
+                tv_email.setText(data.get(l).getEmailId());
+                tv_phone.setText(data.get(l).getUserPhone());
+                tv_address.setText(data.get(l).getAddress());
+                tv_city.setText(data.get(l).getCity());
+                tv_pincode.setText(data.get(l).getPinCode());
+                tv_emergency.setText(data.get(l).getEmergencyOne());
+                tv_emergency2.setText(data.get(l).getEmergencyTwo());
+                tv_emergency3.setText(data.get(l).getEmergencyThree());
+                barcode = data.get(l).getBarCode();
+                byte[] encodeByte = Base64.decode(barcode, Base64.DEFAULT);
+                bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                barCodeImage.setImageBitmap(bitmap);
+            }
         } else {
             layoutAddress.setVisibility(View.GONE);
             layoutone.setVisibility(View.GONE);
@@ -222,62 +240,6 @@ public class AccountFragment extends Fragment {
             barCodeImage.setVisibility(View.GONE);
             share.setVisibility(View.GONE);
         }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ProgressDialog pd = new ProgressDialog(context);
-                pd.show();
-                getBarCode(pd);
-            }
-        }, 1000);
-    }
-
-
-    private void getBarCode(ProgressDialog pd) {
-        try {
-            if (barcode != null) {
-                bitmap = TextToImageEncode(barcode);
-                barCodeImage.setImageBitmap(bitmap);
-
-            }
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
-        pd.dismiss();
-    }
-
-    Bitmap TextToImageEncode(String Value) throws WriterException {
-        BitMatrix bitMatrix;
-        try {
-            bitMatrix = new MultiFormatWriter().encode(
-                    Value,
-                    BarcodeFormat.DATA_MATRIX.QR_CODE,
-                    QRcodeWidth, QRcodeWidth, null
-            );
-
-        } catch (IllegalArgumentException Illegalargumentexception) {
-
-            return null;
-        }
-        int bitMatrixWidth = bitMatrix.getWidth();
-
-        int bitMatrixHeight = bitMatrix.getHeight();
-
-        int[] pixels = new int[bitMatrixWidth * bitMatrixHeight];
-
-        for (int y = 0; y < bitMatrixHeight; y++) {
-            int offset = y * bitMatrixWidth;
-
-            for (int x = 0; x < bitMatrixWidth; x++) {
-
-                pixels[offset + x] = bitMatrix.get(x, y) ?
-                        getResources().getColor(R.color.black) : getResources().getColor(R.color.grey_bg);
-            }
-        }
-        Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444);
-
-        bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight);
-        return bitmap;
     }
 }
 
