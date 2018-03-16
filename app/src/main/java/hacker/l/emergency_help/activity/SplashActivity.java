@@ -39,8 +39,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void checkExpired() {
-        String android_id = Settings.Secure.getString(getContext().getContentResolver(),
-                Settings.Secure.ANDROID_ID);
         PackageManager pm = getPackageManager();
         PackageInfo pi = null;
         try {

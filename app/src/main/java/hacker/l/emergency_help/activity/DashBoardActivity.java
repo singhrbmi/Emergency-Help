@@ -3,10 +3,8 @@ package hacker.l.emergency_help.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -17,24 +15,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.database.DbHelper;
@@ -42,20 +26,13 @@ import hacker.l.emergency_help.fragments.AboutFragment;
 import hacker.l.emergency_help.fragments.AccountFragment;
 import hacker.l.emergency_help.fragments.HelpFragment;
 import hacker.l.emergency_help.fragments.HomeFragment;
-import hacker.l.emergency_help.fragments.QRScannerFragment;
 import hacker.l.emergency_help.fragments.SettingsFragment;
 import hacker.l.emergency_help.fragments.ShareFragment;
 import hacker.l.emergency_help.fragments.SurakshaCavachFragment;
-import hacker.l.emergency_help.models.MyPojo;
-import hacker.l.emergency_help.models.Result;
-import hacker.l.emergency_help.utility.Contants;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
-
-import static android.content.ContentValues.TAG;
 
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    LinearLayout lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
+    LinearLayout lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting,lyout_home;
     DrawerLayout drawer;
 
     @Override
@@ -83,6 +60,7 @@ public class DashBoardActivity extends AppCompatActivity
         lyout_barCode = findViewById(R.id.lyout_barCode);
         lyout_share = findViewById(R.id.lyout_share);
         lyout_setting = findViewById(R.id.lyout_setting);
+        lyout_home = findViewById(R.id.lyout_home);
         lyout_suraksha.setOnClickListener(this);
         lyout_help.setOnClickListener(this);
         lyout_about.setOnClickListener(this);
@@ -90,6 +68,7 @@ public class DashBoardActivity extends AppCompatActivity
         lyout_barCode.setOnClickListener(this);
         lyout_share.setOnClickListener(this);
         lyout_setting.setOnClickListener(this);
+        lyout_home.setOnClickListener(this);
         HomeFragment fragment = HomeFragment.newInstance("", "");
         moveHomeFragment(fragment);
         isStoragePermissionGranted();
@@ -171,6 +150,10 @@ public class DashBoardActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.lyout_home:
+                this.init();
+                navHide();
+                break;
             case R.id.lyout_suraksha:
                 SurakshaCavachFragment fragment = SurakshaCavachFragment.newInstance("", "");
                 moveFragment(fragment);
@@ -192,9 +175,8 @@ public class DashBoardActivity extends AppCompatActivity
                 navHide();
                 break;
             case R.id.lyout_barCode:
-                QRScannerFragment fragmentqr = QRScannerFragment.newInstance("", "");
-                moveFragment(fragmentqr);
-                navHide();
+                startActivity(new Intent(this, QrcodeScannerActivity.class));
+//                navHide();
                 break;
             case R.id.lyout_share:
                 ShareFragment fragmentShre = ShareFragment.newInstance("", "");
@@ -249,7 +231,7 @@ public class DashBoardActivity extends AppCompatActivity
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
             }
-    }
+        }
     }
 
     private void moveFragment(Fragment fragment) {
@@ -259,11 +241,12 @@ public class DashBoardActivity extends AppCompatActivity
                 .addToBackStack(null)
                 .commit();
     }
+
     private void moveHomeFragment(Fragment fragment) {
         FragmentManager fragmentManager = ((FragmentActivity) this).getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
-               // .addToBackStack(null)
+                // .addToBackStack(null)
                 .commit();
     }
 }

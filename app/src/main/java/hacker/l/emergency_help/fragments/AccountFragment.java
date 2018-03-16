@@ -123,6 +123,7 @@ public class AccountFragment extends Fragment {
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Waiting");
         progressDialog.show();
+        progressDialog.setCancelable(false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getsurakshacavach,
                 new Response.Listener<String>() {
                     @Override

@@ -68,12 +68,12 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
                     if (cutPhone != null) {
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(cutPhone, null, msg, null, null);
-                        Toast.makeText(mContext, "SMS sent." + cutPhone,
+                        Toast.makeText(mContext, "SMS sent.On" + cutPhone,
                                 Toast.LENGTH_LONG).show();
                     } else {
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(phone, null, msg, null, null);
-                        Toast.makeText(mContext, "SMS sent." + cutPhone,
+                        Toast.makeText(mContext, "SMS sent. On" + cutPhone,
                                 Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
