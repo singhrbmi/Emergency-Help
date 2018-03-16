@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,8 @@ public class GetContactsFragment extends Fragment {
     // Request code for READ_CONTACTS. It can be any number > 0.
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     Result result;
+    SearchView search_barUser;
+    ContactsAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +85,23 @@ public class GetContactsFragment extends Fragment {
         lstNames.setLayoutManager(linearLayoutManager);
 //        isStoragePermissionGranted();
 //        if (isStoragePermissionGranted()) {
+        search_barUser = (SearchView) view.findViewById(R.id.search_barUser);
+        search_barUser.setIconified(false);
+        search_barUser.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // filter recycler view when query submitted
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                // filter recycler view when text is changed
+                adapter.getFilter().filter(query);
+                return false;
+            }
+        });
         showContacts();
 
 //        }
@@ -107,7 +127,7 @@ public class GetContactsFragment extends Fragment {
     private void showContacts() {
         // Android version is lesser than 6.0 or the permission is already granted.
         List<Result> contacts = getContactNames();
-        ContactsAdapter adapter = new ContactsAdapter(context, contacts);
+        adapter = new ContactsAdapter(context, contacts);
         lstNames.setAdapter(adapter);
     }
 

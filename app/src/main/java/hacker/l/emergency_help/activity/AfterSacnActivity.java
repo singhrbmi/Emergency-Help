@@ -17,7 +17,11 @@ public class AfterSacnActivity extends AppCompatActivity {
         String data = intent.getStringExtra("data");
         TextView textView = findViewById(R.id.show);
         String[] newStr = data.split(",");
-        textView.setText(newStr[0] + "\n" + newStr[1] + "\n" + newStr[2] + "\n" + newStr[3] + "\n" + newStr[4] + "\n" + newStr[5] + "\n" + newStr[6] + "\n" + newStr[7] + "\n" + newStr[8]);
+        if (data.contains(",")) {
+            textView.setText(newStr[0] + "\n" + newStr[1] + "\n" + newStr[2] + "\n" + newStr[3] + "\n" + newStr[4] + "\n" + newStr[5] + "\n" + newStr[6] + "\n" + newStr[7] + "\n" + newStr[8]);
+        }else {
+            textView.setText(data);
+        }
     }
 
     @Override

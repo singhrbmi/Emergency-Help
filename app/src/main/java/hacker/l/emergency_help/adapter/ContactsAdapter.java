@@ -13,10 +13,13 @@ import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,15 +30,16 @@ import hacker.l.emergency_help.models.Result;
  * Created by lalitsingh on 05/03/18.
  */
 
-public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder> {
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder> implements Filterable {
     private Typeface materialdesignicons_font, ProximaNovaRegular, ProximaNovaLight;
     private Context mContext;
-    private List<Result> dataList;
+    private List<Result> dataList, FilteruserList;
     String cutPhone;
 
     public ContactsAdapter(Context mContext, List<Result> dataList) {
         this.mContext = mContext;
         this.dataList = dataList;
+        this.FilteruserList = dataList;
 //        this.ProximaNovaRegular = FontManager.getFontTypeface(mContext, "fonts/ProximaNova-Regular.otf");
 //        this.ProximaNovaLight = FontManager.getFontTypeface(mContext, "fonts/ProximaNova-Light.otf");
 //        this.materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(mContext, "fonts/materialdesignicons-webfont.otf");
@@ -51,13 +55,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
 
     @Override
     public void onBindViewHolder(ContactsAdapter.MyViewHolder holder, final int position) {
-        String name = dataList.get(position).getName();
+        String name = FilteruserList.get(position).getName();
         holder.name.setText(name);
-        holder.phone.setText(dataList.get(position).getPhone());
+        holder.phone.setText(FilteruserList.get(position).getPhone());
         holder.sms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String phone = dataList.get(position).getPhone();
+                final String phone = FilteruserList.get(position).getPhone();
                 cutPhoneFun(phone);
                 try {
                     String msg = "test message";
@@ -83,7 +87,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
         holder.call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String phone = dataList.get(position).getPhone();
+                final String phone = FilteruserList.get(position).getPhone();
                 cutPhoneFun(phone);
                 if (cutPhone != null) {
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
@@ -129,8 +133,48 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     }
 
     @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString().trim();
+                // name match condition. this might differ depending on your requirement
+                // here we are looking for name or phone number match
+                if (charString.isEmpty()) {
+                    FilteruserList = dataList;
+                } else {
+                    List<Result> filteredList = new ArrayList<>();
+                    for (Result row : dataList) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row.getName().toLowerCase().trim().contains(charString.toLowerCase()) | row.getPhone().toLowerCase().trim().contains(charString.toLowerCase())) {
+                            filteredList.add(row);
+                        }
+                    }
+
+
+                    FilteruserList = filteredList;
+                }
+
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = FilteruserList;
+                return filterResults;
+            }
+
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                FilteruserList = (ArrayList<Result>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    @Override
     public int getItemCount() {
-        return dataList.size();
+        return FilteruserList.size();
     }
 
 

@@ -91,7 +91,7 @@ public class DashBoardActivity extends AppCompatActivity
         lyout_share.setOnClickListener(this);
         lyout_setting.setOnClickListener(this);
         HomeFragment fragment = HomeFragment.newInstance("", "");
-        moveFragment(fragment);
+        moveHomeFragment(fragment);
         isStoragePermissionGranted();
         isConteactPermissionGranted();
 
@@ -257,6 +257,13 @@ public class DashBoardActivity extends AppCompatActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
+                .commit();
+    }
+    private void moveHomeFragment(Fragment fragment) {
+        FragmentManager fragmentManager = ((FragmentActivity) this).getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+               // .addToBackStack(null)
                 .commit();
     }
 }

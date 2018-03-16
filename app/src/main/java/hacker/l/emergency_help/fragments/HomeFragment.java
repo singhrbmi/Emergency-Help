@@ -61,7 +61,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private boolean hasFlash;
     Camera.Parameters params;
     private CameraManager camManager;
-    MediaPlayer police, whistle;
     private int CAMERA_PERM = 0;
 
     @Override
@@ -83,8 +82,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         layout_contacts.setOnClickListener(this);
         layout_pilicesire.setOnClickListener(this);
         layout_whistle.setOnClickListener(this);
-        whistle = MediaPlayer.create(context, R.raw.killbill);
-        police = MediaPlayer.create(context, R.raw.pilice);
     }
 
     @Override
@@ -107,10 +104,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 moveFragment(fragmentContacts);
                 break;
             case R.id.layout_pilicesire:
-                piliceSiren();
+                //piliceSiren();
                 break;
             case R.id.layout_whistle:
-                whisilePlay();
+                //whisilePlay();
                 break;
         }
     }
@@ -129,31 +126,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //    }
 
     public void piliceSiren() {
-        if (!whistle.isPlaying()) {
-            if (police.isPlaying()) {
-                police.stop();
-            } else {
-                police.start();
-                police.isPlaying();
-            }
+        MediaPlayer ring = MediaPlayer.create(context, R.raw.pilice);
+        if (ring.isPlaying()) {
+            ring.pause();
         } else {
-            whistle.stop();
-            piliceSiren();
+            ring.start();
+            ring.isPlaying();
+            ring.isLooping();
         }
-
     }
 
     public void whisilePlay() {
-        if (!police.isPlaying()) {
-            if (whistle.isPlaying()) {
-                whistle.stop();
-            } else {
-                whistle.start();
-                whistle.isPlaying();
-            }
+        MediaPlayer ring = MediaPlayer.create(context, R.raw.killbill);
+        if (ring.isPlaying()) {
+            ring.pause();
         } else {
-            police.stop();
-            whisilePlay();
+            ring.start();
+            ring.isPlaying();
+            ring.isLooping();
         }
     }
 
@@ -177,10 +167,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         getCamera();
         if (isFlashOn) {
             turnOffFlash();
-            Toast.makeText(context, "Off", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Off", Toast.LENGTH_SHORT).show();
         } else {
             turnOnFlash();
-            Toast.makeText(context, "On", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "On", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -249,4 +239,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 .addToBackStack(null)
                 .commit();
     }
+
 }
