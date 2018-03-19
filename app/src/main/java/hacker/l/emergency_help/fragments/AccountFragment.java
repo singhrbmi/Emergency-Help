@@ -120,10 +120,10 @@ public class AccountFragment extends Fragment {
         layoutCity = view.findViewById(R.id.layoutCity);
         layoutPincode = view.findViewById(R.id.layoutPincode);
         share = view.findViewById(R.id.share);
-        final ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Waiting");
-        progressDialog.show();
-        progressDialog.setCancelable(false);
+//        final ProgressDialog progressDialog = new ProgressDialog(context);
+//        progressDialog.setMessage("Waiting");
+//        progressDialog.show();
+//        progressDialog.setCancelable(false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getsurakshacavach,
                 new Response.Listener<String>() {
                     @Override
@@ -137,7 +137,7 @@ public class AccountFragment extends Fragment {
                                 }
                             }
                         }
-                        progressDialog.dismiss();
+//                        progressDialog.dismiss();
                     }
 
                 },

@@ -1,30 +1,26 @@
 package hacker.l.emergency_help.fragments;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.QrcodeScannerActivity;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -55,7 +51,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     View view;
     Context context;
-    LinearLayout lyout_flash, layout_contacts, layout_pilicesire, layout_whistle;
+    LinearLayout lyout_flash, layout_contacts, layout_pilicesire, layout_social, layout_hospital, layout_police, layout_ambulance, lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
     private Camera camera;
     private boolean isFlashOn;
     private boolean hasFlash;
@@ -77,20 +73,51 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lyout_flash = view.findViewById(R.id.lyout_flash);
         layout_contacts = view.findViewById(R.id.layout_contacts);
         layout_pilicesire = view.findViewById(R.id.layout_pilicesire);
-        layout_whistle = view.findViewById(R.id.layout_whistle);
+        layout_social = view.findViewById(R.id.layout_social);
+        layout_hospital = view.findViewById(R.id.layout_hospital);
+        layout_ambulance = view.findViewById(R.id.layout_ambulance);
+        layout_police = view.findViewById(R.id.layout_police);
+        lyout_suraksha = view.findViewById(R.id.lyout_suraksha);
+//        lyout_help = view.findViewById(R.id.lyout_help);
+        lyout_about = view.findViewById(R.id.lyout_about);
+        lyout_account = view.findViewById(R.id.lyout_account);
+        lyout_barCode = view.findViewById(R.id.lyout_barCode);
+//        lyout_share = view.findViewById(R.id.lyout_share);
+//        lyout_setting = view.findViewById(R.id.lyout_setting);
         lyout_flash.setOnClickListener(this);
         layout_contacts.setOnClickListener(this);
         layout_pilicesire.setOnClickListener(this);
-        layout_whistle.setOnClickListener(this);
+        layout_social.setOnClickListener(this);
+        layout_hospital.setOnClickListener(this);
+        layout_ambulance.setOnClickListener(this);
+        layout_police.setOnClickListener(this);
+        lyout_suraksha.setOnClickListener(this);
+//        lyout_help.setOnClickListener(this);
+        lyout_about.setOnClickListener(this);
+        lyout_account.setOnClickListener(this);
+        lyout_barCode.setOnClickListener(this);
+//        lyout_share.setOnClickListener(this);
+//        lyout_setting.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.lyout_suraksha:
-                SurakshaCavachFragment fragment = SurakshaCavachFragment.newInstance("", "");
-                moveFragment(fragment);
-                break;
+//            case R.id.layout_hospital:
+//                Intent intent = new Intent(context, MapsActivity.class);
+//                intent.putExtra("key", "hospital");
+//                startActivity(intent);
+//                break;
+//            case R.id.layout_police:
+//                Intent intentPolice = new Intent(context, MapsActivity.class);
+//                intentPolice.putExtra("key", "police");
+//                startActivity(intentPolice);
+//                break;
+//            case R.id.layout_ambulance:
+//                Intent intentaa = new Intent(context, MapsActivity.class);
+//                intentaa.putExtra("key", "ambulance");
+//                startActivity(intentaa);
+//                break;
             case R.id.lyout_flash:
 //                if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 //                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA_PERM);
@@ -106,8 +133,36 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.layout_pilicesire:
                 //piliceSiren();
                 break;
-            case R.id.layout_whistle:
-                //whisilePlay();
+            case R.id.layout_social:
+                SocialFragment fragmentS = SocialFragment.newInstance("", "");
+                moveFragment(fragmentS);
+                break;
+            case R.id.lyout_suraksha:
+                SurakshaCavachFragment fragment = SurakshaCavachFragment.newInstance("", "");
+                moveFragment(fragment);
+                break;
+            case R.id.lyout_help:
+                HelpFragment fragmentHelp = HelpFragment.newInstance("", "");
+                moveFragment(fragmentHelp);
+                break;
+            case R.id.lyout_about:
+                AboutFragment fragmentAbout = AboutFragment.newInstance("", "");
+                moveFragment(fragmentAbout);
+                break;
+            case R.id.lyout_account:
+                AccountFragment fragmentAccount = AccountFragment.newInstance("", "");
+                moveFragment(fragmentAccount);
+                break;
+            case R.id.lyout_barCode:
+                startActivity(new Intent(context, QrcodeScannerActivity.class));
+                break;
+            case R.id.lyout_share:
+                ShareFragment fragmentShre = ShareFragment.newInstance("", "");
+                moveFragment(fragmentShre);
+                break;
+            case R.id.lyout_setting:
+                SettingsFragment fragmentSetting = SettingsFragment.newInstance("", "");
+                moveFragment(fragmentSetting);
                 break;
         }
     }

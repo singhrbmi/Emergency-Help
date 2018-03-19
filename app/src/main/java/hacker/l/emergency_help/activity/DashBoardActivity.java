@@ -31,9 +31,9 @@ import hacker.l.emergency_help.fragments.ShareFragment;
 import hacker.l.emergency_help.fragments.SurakshaCavachFragment;
 
 public class DashBoardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    LinearLayout lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting,lyout_home;
-    DrawerLayout drawer;
+        implements View.OnClickListener {
+    LinearLayout lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting, lyout_home;
+//    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +41,11 @@ public class DashBoardActivity extends AppCompatActivity
         setContentView(R.layout.activity_dash_board);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
         init();
     }
 
@@ -58,17 +55,17 @@ public class DashBoardActivity extends AppCompatActivity
         lyout_about = findViewById(R.id.lyout_about);
         lyout_account = findViewById(R.id.lyout_account);
         lyout_barCode = findViewById(R.id.lyout_barCode);
-        lyout_share = findViewById(R.id.lyout_share);
-        lyout_setting = findViewById(R.id.lyout_setting);
-        lyout_home = findViewById(R.id.lyout_home);
+//        lyout_share = findViewById(R.id.lyout_share);
+//        lyout_setting = findViewById(R.id.lyout_setting);
+//        lyout_home = findViewById(R.id.lyout_home);
         lyout_suraksha.setOnClickListener(this);
         lyout_help.setOnClickListener(this);
         lyout_about.setOnClickListener(this);
         lyout_account.setOnClickListener(this);
         lyout_barCode.setOnClickListener(this);
-        lyout_share.setOnClickListener(this);
-        lyout_setting.setOnClickListener(this);
-        lyout_home.setOnClickListener(this);
+//        lyout_share.setOnClickListener(this);
+//        lyout_setting.setOnClickListener(this);
+//        lyout_home.setOnClickListener(this);
         HomeFragment fragment = HomeFragment.newInstance("", "");
         moveHomeFragment(fragment);
         isStoragePermissionGranted();
@@ -79,15 +76,15 @@ public class DashBoardActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            try {
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            try {
                 super.onBackPressed();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     @Override
@@ -117,34 +114,9 @@ public class DashBoardActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
     public void navHide() {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+//        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
     }
 
     @Override

@@ -1,0 +1,62 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="hacker.l.emergency_help.fragments.SocialFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/btn_police"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:background="@drawable/done_corner_round"
+            android:text="POLICE STATION NO."
+            android:textSize="@dimen/textSize16" />
+        <Button
+            android:id="@+id/btn_sakticomd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:background="@drawable/done_corner_round"
+            android:text="Shakti Commando"
+            android:textSize="@dimen/textSize16" />
+
+        <Button
+            android:id="@+id/btn_tiger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:background="@drawable/done_corner_round"
+            android:text="Tiger Mobile"
+            android:textSize="@dimen/textSize16" />
+
+        <Button
+            android:id="@+id/btn_pcr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:background="@drawable/done_corner_round"
+            android:text="PCR VAN NO"
+            android:textSize="@dimen/textSize16" />
+
+        <Button
+            android:id="@+id/btn_highway"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:background="@drawable/done_corner_round"
+            android:text="HIGHWAY PATROL NO."
+            android:textSize="@dimen/textSize16" />
+    </LinearLayout>
+</FrameLayout>

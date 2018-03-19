@@ -29,14 +29,14 @@
                     android:orientation="vertical">
 
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin14"
-                            android:gravity="center"
-                            android:text="Address:-h-12 near matro station Sector 16 noida up."
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/margin14" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin14"
+                        android:gravity="center"
+                        android:text="Address:-h-12 near matro station Sector 16 noida up."
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/margin14" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -45,12 +45,12 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight=".25"
+                            android:layout_height="120dp"
                             android:orientation="horizontal">
 
 
                             <LinearLayout
+                                android:id="@+id/layout_hospital"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"
@@ -76,6 +76,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/layout_police"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"
@@ -102,6 +103,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/layout_ambulance"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"
@@ -128,10 +130,10 @@
                             </LinearLayout>
                         </LinearLayout>
 
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight=".25"
+                            android:layout_height="120dp"
                             android:orientation="horizontal">
 
 
@@ -216,8 +218,94 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight=".25"
+                            android:layout_height="120dp"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:id="@+id/lyout_barCode"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".33"
+                                android:background="@drawable/done_corner_round"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/margin5"
+                                    android:src="@drawable/sacnner" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="@dimen/margin10"
+                                    android:gravity="center"
+                                    android:text="QR Code Scanner"
+                                    android:textSize="@dimen/textSize14" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/lyout_suraksha"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".33"
+                                android:background="@drawable/done_corner_round"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/margin5"
+                                    android:src="@drawable/suraksha" />
+
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="@dimen/margin10"
+                                    android:gravity="center"
+                                    android:text="Suraksha Kavach"
+                                    android:textSize="@dimen/textSize14" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/lyout_account"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".33"
+                                android:background="@drawable/done_corner_round"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/margin5"
+                                    android:src="@drawable/account" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="@dimen/margin10"
+                                    android:gravity="center"
+                                    android:text="Account"
+                                    android:textSize="@dimen/textSize14" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -275,6 +363,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/layout_social"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"
@@ -287,7 +376,7 @@
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/phptomail" />
+                                    android:src="@drawable/ic_menu_send" />
 
 
                                 <TextView
@@ -295,22 +384,22 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Photo mail"
+                                    android:text="Social"
                                     android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>
+
                         </LinearLayout>
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight=".25"
+                            android:layout_height="120dp"
                             android:orientation="horizontal">
 
 
                             <LinearLayout
-                                android:id="@+id/layout_whistle"
+                                android:id="@+id/lyout_about"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"
@@ -323,7 +412,7 @@
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/whistle" />
+                                    android:src="@drawable/about" />
 
 
                                 <TextView
@@ -331,7 +420,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Whistle"
+                                    android:text="About Us"
                                     android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>
