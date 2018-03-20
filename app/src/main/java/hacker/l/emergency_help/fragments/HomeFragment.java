@@ -1,5 +1,6 @@
 package hacker.l.emergency_help.fragments;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,14 +11,19 @@ import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import org.w3c.dom.Node;
 
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.activity.QrcodeScannerActivity;
@@ -119,12 +125,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //                startActivity(intentaa);
 //                break;
             case R.id.lyout_flash:
-//                if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA_PERM);
                 runFlashLight();
-//                } else {
-//                    Toast.makeText(context, "Allow Camera Permisstion", Toast.LENGTH_SHORT).show();
-//                }
                 break;
             case R.id.layout_contacts:
                 GetContactsFragment fragmentContacts = GetContactsFragment.newInstance("", "");
@@ -165,6 +166,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 moveFragment(fragmentSetting);
                 break;
         }
+
     }
 
 //    @Override

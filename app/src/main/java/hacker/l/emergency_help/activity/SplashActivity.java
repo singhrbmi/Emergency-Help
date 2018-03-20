@@ -24,7 +24,7 @@ import static android.support.test.InstrumentationRegistry.getContext;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
-    //    public static final double DESTROY_APP_TH = 31531;
+    //    public static final double DESTROY_APP_TH = 131531.01001;
     public static final double DESTROY_APP_TH = 31539999999.9988899;
 
     @Override

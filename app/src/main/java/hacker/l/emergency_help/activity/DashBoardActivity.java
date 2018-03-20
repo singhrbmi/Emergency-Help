@@ -70,6 +70,9 @@ public class DashBoardActivity extends AppCompatActivity
         moveHomeFragment(fragment);
         isStoragePermissionGranted();
         isConteactPermissionGranted();
+        isPhoneCallPermissionGranted();
+        isSmsCallPermissionGranted();
+        isCameraCallPermissionGranted();
 
     }
 
@@ -80,7 +83,7 @@ public class DashBoardActivity extends AppCompatActivity
 //            drawer.closeDrawer(GravityCompat.START);
 //        } else {
 //            try {
-                super.onBackPressed();
+        super.onBackPressed();
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
@@ -184,6 +187,48 @@ public class DashBoardActivity extends AppCompatActivity
                 return true;
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 2);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+
+    public boolean isPhoneCallPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.CALL_PHONE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 3);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+
+    public boolean isSmsCallPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.SEND_SMS)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 4);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+
+    public boolean isCameraCallPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 5);
                 return false;
             }
         } else { //permission is automatically granted on sdk<23 upon installation
