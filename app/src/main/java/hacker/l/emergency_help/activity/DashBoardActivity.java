@@ -73,6 +73,7 @@ public class DashBoardActivity extends AppCompatActivity
         isPhoneCallPermissionGranted();
         isSmsCallPermissionGranted();
         isCameraCallPermissionGranted();
+        isLocationPermissionGranted();
 
     }
 
@@ -187,6 +188,20 @@ public class DashBoardActivity extends AppCompatActivity
                 return true;
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 2);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true;
+        }
+    }
+
+    public boolean isLocationPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 6);
                 return false;
             }
         } else { //permission is automatically granted on sdk<23 upon installation

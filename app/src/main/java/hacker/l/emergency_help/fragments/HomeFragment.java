@@ -8,9 +8,14 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -21,12 +26,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Node;
 
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.activity.QrcodeScannerActivity;
+import hacker.l.emergency_help.utility.AppLocationService;
+import hacker.l.emergency_help.utility.LocationAddress;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -59,11 +67,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Context context;
     LinearLayout lyout_flash, layout_contacts, layout_pilicesire, layout_social, layout_hospital, layout_police, layout_ambulance, lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
     private Camera camera;
+    TextView tv_address;
     private boolean isFlashOn;
     private boolean hasFlash;
     Camera.Parameters params;
     private CameraManager camManager;
     private int CAMERA_PERM = 0;
+    AppLocationService appLocationService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,6 +98,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lyout_about = view.findViewById(R.id.lyout_about);
         lyout_account = view.findViewById(R.id.lyout_account);
         lyout_barCode = view.findViewById(R.id.lyout_barCode);
+        tv_address = view.findViewById(R.id.tv_address);
 //        lyout_share = view.findViewById(R.id.lyout_share);
 //        lyout_setting = view.findViewById(R.id.lyout_setting);
         lyout_flash.setOnClickListener(this);
@@ -104,6 +115,60 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lyout_barCode.setOnClickListener(this);
 //        lyout_share.setOnClickListener(this);
 //        lyout_setting.setOnClickListener(this);
+        appLocationService = new AppLocationService(context);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Location location = appLocationService
+                .getLocation(LocationManager.GPS_PROVIDER);
+        if (location != null) {
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            LocationAddress locationAddress = new LocationAddress();
+            locationAddress.getAddressFromLocation(latitude, longitude, context.getApplicationContext(), new GeocoderHandler());
+        } else {
+            showSettingsAlert();
+        }
+    }
+
+    public void showSettingsAlert() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                context);
+        alertDialog.setTitle("SETTINGS");
+        alertDialog.setMessage("Enable Location Provider! Go to settings menu?");
+        alertDialog.setPositiveButton("Settings",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(
+                                Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        context.startActivity(intent);
+                    }
+                });
+        alertDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+            String locationAddress;
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    locationAddress = bundle.getString("address");
+                    break;
+                default:
+                    locationAddress = null;
+            }
+            tv_address.setText(locationAddress);
+        }
     }
 
     @Override
