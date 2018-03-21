@@ -32,6 +32,7 @@ import android.widget.Toast;
 import org.w3c.dom.Node;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.GooglePlacesActivity;
 import hacker.l.emergency_help.activity.QrcodeScannerActivity;
 import hacker.l.emergency_help.utility.AppLocationService;
 import hacker.l.emergency_help.utility.LocationAddress;
@@ -134,7 +135,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void showSettingsAlert() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(
                 context);
         alertDialog.setTitle("SETTINGS");
         alertDialog.setMessage("Enable Location Provider! Go to settings menu?");
@@ -144,6 +145,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Intent intent = new Intent(
                                 Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         context.startActivity(intent);
+                        dialog.dismiss();
                     }
                 });
         alertDialog.setNegativeButton("Cancel",
@@ -174,21 +176,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.layout_hospital:
-//                Intent intent = new Intent(context, MapsActivity.class);
-//                intent.putExtra("key", "hospital");
-//                startActivity(intent);
-//                break;
-//            case R.id.layout_police:
-//                Intent intentPolice = new Intent(context, MapsActivity.class);
-//                intentPolice.putExtra("key", "police");
-//                startActivity(intentPolice);
-//                break;
-//            case R.id.layout_ambulance:
-//                Intent intentaa = new Intent(context, MapsActivity.class);
-//                intentaa.putExtra("key", "ambulance");
-//                startActivity(intentaa);
-//                break;
+            case R.id.layout_hospital:
+                Intent intent = new Intent(context, GooglePlacesActivity.class);
+                intent.putExtra("key", "hospital");
+                startActivity(intent);
+                break;
+            case R.id.layout_police:
+                Intent intentPolice = new Intent(context, GooglePlacesActivity.class);
+                intentPolice.putExtra("key", "police");
+                startActivity(intentPolice);
+                break;
+            case R.id.layout_ambulance:
+                Intent intentaa = new Intent(context, GooglePlacesActivity.class);
+                intentaa.putExtra("key", "ambulance");
+                startActivity(intentaa);
+                break;
             case R.id.lyout_flash:
                 runFlashLight();
                 break;

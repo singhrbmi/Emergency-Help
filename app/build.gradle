@@ -8,6 +8,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -34,9 +35,12 @@ dependencies {
     //noinspection GradleCompatible,GradleCompatible
 //    implementation 'com.google.firebase:firebase-core:9.8.0'
 //    implementation 'com.google.firebase:firebase-auth:9.8.0'
-    implementation 'com.google.android.gms:play-services-auth:9.8.0'
-    implementation 'com.google.android.gms:play-services-maps:9.8.0'
-    implementation 'com.google.android.gms:play-services:9.8.0'
+//    implementation 'com.google.android.gms:play-services-auth:9.8.0'
+//    implementation 'com.google.android.gms:play-services-maps:9.8.0'
+//    implementation 'com.google.android.gms:play-services:9.8.0'
+
+    compile 'com.google.android.gms:play-services:6.1.+'
+
 //    //noinspection GradleCompatible
 //    implementation 'com.google.firebase:firebase-messaging:9.8.0'
     implementation 'com.google.code.gson:gson:2.2.pre_info'
