@@ -169,7 +169,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 default:
                     locationAddress = null;
             }
-            tv_address.setText(locationAddress);
+            int index = locationAddress.indexOf("A");
+            String dd = locationAddress.substring(index, locationAddress.length());
+            tv_address.setText(dd.trim());
         }
     }
 
