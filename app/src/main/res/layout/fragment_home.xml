@@ -35,7 +35,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin14"
                         android:gravity="center"
-                        android:text="Address:-h-12 near matro station Sector 16 noida up."
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/margin14" />
 
@@ -455,7 +455,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/lyout_flash"
+                                android:id="@+id/lyout_whistle"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"
@@ -467,7 +467,7 @@
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/dimen_5_dp"
-                                    android:src="@drawable/flash" />
+                                    android:src="@drawable/whistle" />
 
 
                                 <TextView
@@ -475,7 +475,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Flash Light"
+                                    android:text="Whistle"
                                     android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>

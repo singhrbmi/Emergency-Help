@@ -33,10 +33,11 @@ public class LocationAddress {
                         Address address = addressList.get(0);
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
-                            sb.append(address.getAddressLine(i)).append("\n");
+                            sb.append(address.getAddressLine(i)).append(",");
                         }
-                        sb.append(address.getLocality()).append("\n");
-                        sb.append(address.getPostalCode()).append("\n");
+                        sb.append(address.getLocality()).append(",");
+                        sb.append(address.getPostalCode()).append(",");
+                        sb.append(address.getLocale()).append(",");
                         sb.append(address.getCountryName());
                         result = sb.toString();
                     }
@@ -48,15 +49,13 @@ public class LocationAddress {
                     if (result != null) {
                         message.what = 1;
                         Bundle bundle = new Bundle();
-                        result = "Latitude: " + latitude + " Longitude: " + longitude +
-                                "\n\nAddress:\n" + result;
+                        result = "Address:" + result;
                         bundle.putString("address", result);
                         message.setData(bundle);
                     } else {
                         message.what = 1;
                         Bundle bundle = new Bundle();
-                        result = "Latitude: " + latitude + " Longitude: " + longitude +
-                                "\n Unable to get address for this lat-long.";
+                        result = "Unable to get address for this location .Some Problem with Internet connection.";
                         bundle.putString("address", result);
                         message.setData(bundle);
                     }

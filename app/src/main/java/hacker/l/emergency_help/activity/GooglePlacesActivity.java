@@ -29,7 +29,7 @@ import hacker.l.emergency_help.utility.GooglePlacesReadTask;
  */
 
 public class GooglePlacesActivity extends FragmentActivity implements LocationListener {
-    private static final String GOOGLE_API_KEY = "AIzaSyB4UqmbgKvhCE9BDekqSLRVJ1JY48VQlcM";
+    private static final String GOOGLE_API_KEY = "AIzaSyDOd4IO-urWf-EyfFxfbWS9E7b1jw-g77c";
     GoogleMap googleMap;
     EditText placeText;
     double latitude = 0;

@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     View view;
     Context context;
-    LinearLayout lyout_flash, layout_contacts, layout_pilicesire, layout_social, layout_hospital, layout_police, layout_ambulance, lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
+    LinearLayout layout_contacts, layout_pilicesire, layout_social, layout_hospital, lyout_whistle, layout_police, layout_ambulance, lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
     private Camera camera;
     TextView tv_address;
     private boolean isFlashOn;
@@ -75,6 +75,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private CameraManager camManager;
     private int CAMERA_PERM = 0;
     AppLocationService appLocationService;
+    MediaPlayer police, weshile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,7 +88,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init() {
-        lyout_flash = view.findViewById(R.id.lyout_flash);
+        police = MediaPlayer.create(context, R.raw.pilice);
+        weshile = MediaPlayer.create(context, R.raw.killbill);
+//        lyout_flash = view.findViewById(R.id.lyout_flash);
         layout_contacts = view.findViewById(R.id.layout_contacts);
         layout_pilicesire = view.findViewById(R.id.layout_pilicesire);
         layout_social = view.findViewById(R.id.layout_social);
@@ -100,9 +103,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lyout_account = view.findViewById(R.id.lyout_account);
         lyout_barCode = view.findViewById(R.id.lyout_barCode);
         tv_address = view.findViewById(R.id.tv_address);
+        lyout_whistle = view.findViewById(R.id.lyout_whistle);
 //        lyout_share = view.findViewById(R.id.lyout_share);
 //        lyout_setting = view.findViewById(R.id.lyout_setting);
-        lyout_flash.setOnClickListener(this);
+//        lyout_flash.setOnClickListener(this);
         layout_contacts.setOnClickListener(this);
         layout_pilicesire.setOnClickListener(this);
         layout_social.setOnClickListener(this);
@@ -114,6 +118,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         lyout_about.setOnClickListener(this);
         lyout_account.setOnClickListener(this);
         lyout_barCode.setOnClickListener(this);
+        lyout_whistle.setOnClickListener(this);
 //        lyout_share.setOnClickListener(this);
 //        lyout_setting.setOnClickListener(this);
         appLocationService = new AppLocationService(context);
@@ -169,9 +174,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 default:
                     locationAddress = null;
             }
-            int index = locationAddress.indexOf("A");
-            String dd = locationAddress.substring(index, locationAddress.length());
-            tv_address.setText(dd.trim());
+            tv_address.setText(locationAddress);
         }
     }
 
@@ -193,15 +196,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 intentaa.putExtra("key", "ambulance");
                 startActivity(intentaa);
                 break;
-            case R.id.lyout_flash:
-                runFlashLight();
-                break;
+//            case R.id.lyout_flash:
+//                runFlashLight();
+//                break;
             case R.id.layout_contacts:
                 GetContactsFragment fragmentContacts = GetContactsFragment.newInstance("", "");
                 moveFragment(fragmentContacts);
                 break;
             case R.id.layout_pilicesire:
-                //piliceSiren();
+                piliceSiren();
+                break;
+            case R.id.lyout_whistle:
+                whisilePlay();
                 break;
             case R.id.layout_social:
                 SocialFragment fragmentS = SocialFragment.newInstance("", "");
@@ -252,24 +258,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //    }
 
     public void piliceSiren() {
-        MediaPlayer ring = MediaPlayer.create(context, R.raw.pilice);
-        if (ring.isPlaying()) {
-            ring.pause();
+        if (!police.isPlaying()) {
+            police.start();
+            police.isLooping();
         } else {
-            ring.start();
-            ring.isPlaying();
-            ring.isLooping();
+            police.pause();
         }
     }
 
     public void whisilePlay() {
-        MediaPlayer ring = MediaPlayer.create(context, R.raw.killbill);
-        if (ring.isPlaying()) {
-            ring.pause();
+        if (!weshile.isPlaying()) {
+            weshile.start();
+            weshile.isLooping();
         } else {
-            ring.start();
-            ring.isPlaying();
-            ring.isLooping();
+            weshile.pause();
         }
     }
 
