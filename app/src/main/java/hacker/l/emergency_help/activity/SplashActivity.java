@@ -20,10 +20,9 @@ import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.models.Result;
 
-import static android.support.test.InstrumentationRegistry.getContext;
 
 public class SplashActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 1000;
+    private static int SPLASH_TIME_OUT = 3000;
     //    public static final double DESTROY_APP_TH = 131531.01001;
     public static final double DESTROY_APP_TH = 31539999999.9988899;
 
@@ -39,36 +38,36 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void checkExpired() {
-        PackageManager pm = getPackageManager();
-        PackageInfo pi = null;
-        try {
-            pi = pm.getPackageInfo(this.getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        long publishTimeInMilli = pi.firstInstallTime;
-        // upload device id and publishTimeInMilli in api...............
-        long now = System.currentTimeMillis();
-        if ((now - publishTimeInMilli) > DESTROY_APP_TH) {
-            //just finish the the activity (and thus the app) or do something else
-            finish();
-            Toast.makeText(this, "Trial period expired!!", Toast.LENGTH_SHORT).show();
-
-        } else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    DbHelper dbHelper = new DbHelper(SplashActivity.this);
-                    Result result = dbHelper.getUserData();
-                    if (result == null) {
-                        SplashActivity.this.startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                        SplashActivity.this.finish();
-                    } else {
-                        SplashActivity.this.startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
-                        SplashActivity.this.finish();
-                    }
+//        PackageManager pm = getPackageManager();
+//        PackageInfo pi = null;
+//        try {
+//            pi = pm.getPackageInfo(this.getPackageName(), 0);
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        long publishTimeInMilli = pi.firstInstallTime;
+//         upload device id and publishTimeInMilli in api...............
+//        long now = System.currentTimeMillis();
+//        if ((now - publishTimeInMilli) > DESTROY_APP_TH) {
+//            just finish the the activity (and thus the app) or do something else
+//            finish();
+//            Toast.makeText(this, "Trial period expired!!", Toast.LENGTH_SHORT).show();
+//
+//        } else {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                DbHelper dbHelper = new DbHelper(SplashActivity.this);
+                Result result = dbHelper.getUserData();
+                if (result == null) {
+                    SplashActivity.this.startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    SplashActivity.this.finish();
+                } else {
+                    SplashActivity.this.startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+                    SplashActivity.this.finish();
                 }
-            }, SPLASH_TIME_OUT);
-        }
+            }
+        }, SPLASH_TIME_OUT);
+//        }
     }
 }

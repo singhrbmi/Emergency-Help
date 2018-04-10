@@ -86,7 +86,7 @@ public class GetContactsFragment extends Fragment {
 //        isStoragePermissionGranted();
 //        if (isStoragePermissionGranted()) {
         search_barUser = (SearchView) view.findViewById(R.id.search_barUser);
-        search_barUser.setIconified(false);
+        search_barUser.setIconified(true);
         search_barUser.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

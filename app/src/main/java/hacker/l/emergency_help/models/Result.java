@@ -7,6 +7,25 @@ package hacker.l.emergency_help.models;
 public class Result {
     private String name;
     private String phone;
+    private String nameOff;
+
+    public String getNameOff() {
+        return nameOff;
+    }
+
+    public void setNameOff(String nameOff) {
+        this.nameOff = nameOff;
+    }
+
+    public String getOffPhone() {
+        return offPhone;
+    }
+
+    public void setOffPhone(String offPhone) {
+        this.offPhone = offPhone;
+    }
+
+    private String offPhone;
     private String Username;
     private String UserPhone;
 
@@ -141,6 +160,13 @@ public class Result {
     public Result(String name, String phone) {
         this.name = name;
         this.phone = phone;
+    }
+
+    public Result(String name, String phone, String offName, String offPhone) {
+        this.name = name;
+        this.phone = phone;
+        this.offPhone = offPhone;
+        this.nameOff = offName;
     }
 
     public Result() {

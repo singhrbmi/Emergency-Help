@@ -94,8 +94,13 @@ public class SocialNoViewFragment extends Fragment {
             socialContactsAdapter = new SocialContactsAdapter(context, highwaylist);
             recycleView.setAdapter(socialContactsAdapter);
         }
+        if (type.equalsIgnoreCase("policeNo")) {
+            List<Result> policeNoList = getPoliceNoListContact();
+            socialContactsAdapter = new SocialContactsAdapter(context, policeNoList);
+            recycleView.setAdapter(socialContactsAdapter);
+        }
         search_barUser = (SearchView) view.findViewById(R.id.search_barUser);
-        search_barUser.setIconified(false);
+        search_barUser.setIconified(true);
         search_barUser.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -111,6 +116,13 @@ public class SocialNoViewFragment extends Fragment {
                 return false;
             }
         });
+    }
+
+    private List<Result> getPoliceNoListContact() {
+        List<Result> PoliceNoContacts = new ArrayList<>();
+        result = new Result("A V Homkar,IPS", "9431706180","DIG,SC RANGE,RANCHI","2481876");
+        PoliceNoContacts.add(result);
+        return PoliceNoContacts;
     }
 
     public List<Result> getPoliceContact() {

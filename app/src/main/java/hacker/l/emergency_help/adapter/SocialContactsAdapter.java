@@ -55,41 +55,43 @@ public class SocialContactsAdapter extends RecyclerView.Adapter<SocialContactsAd
         String name = FilteruserList.get(position).getName();
         holder.name.setText(name);
         holder.phone.setText(FilteruserList.get(position).getPhone());
+        holder.offPhone.setText(FilteruserList.get(position).getOffPhone());
+        holder.nameOff.setText(FilteruserList.get(position).getNameOff());
         holder.sms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String phone = FilteruserList.get(position).getPhone();
-                try {
-                    String msg = "test message";
-                        SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage(phone, null, msg, null, null);
-                        Toast.makeText(mContext, "SMS sent.On" + phone,
-                                Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    Toast.makeText(mContext,
-                            "SMS faild, Please try Again.",
-                            Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
+//                final String phone = FilteruserList.get(position).getPhone();
+//                try {
+//                    String msg = "test message";
+//                    SmsManager smsManager = SmsManager.getDefault();
+//                    smsManager.sendTextMessage(phone, null, msg, null, null);
+//                    Toast.makeText(mContext, "SMS sent.On" + phone,
+//                            Toast.LENGTH_LONG).show();
+//                } catch (Exception e) {
+//                    Toast.makeText(mContext,
+//                            "SMS faild, Please try Again.",
+//                            Toast.LENGTH_LONG).show();
+//                    e.printStackTrace();
+//                }
             }
         });
         holder.call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String phone = FilteruserList.get(position).getPhone();
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:" + phone));//change the number
-                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
-                    mContext.startActivity(callIntent);
+//                final String phone = FilteruserList.get(position).getPhone();
+//                Intent callIntent = new Intent(Intent.ACTION_CALL);
+//                callIntent.setData(Uri.parse("tel:" + phone));//change the number
+//                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                     TODO: Consider calling
+//                        ActivityCompat#requestPermissions
+//                     here to request the missing permissions, and then overriding
+//                       public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                                                              int[] grantResults)
+//                     to handle the case where the user grants the permission. See the documentation
+//                     for ActivityCompat#requestPermissions for more details.
+//                    return;
+//                }
+//                mContext.startActivity(callIntent);
 
             }
         });
@@ -142,13 +144,15 @@ public class SocialContactsAdapter extends RecyclerView.Adapter<SocialContactsAd
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name, phone;
+        TextView name, phone, offPhone, nameOff;
         ImageView sms, call;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
             phone = (TextView) itemView.findViewById(R.id.phone);
+            offPhone = (TextView) itemView.findViewById(R.id.offPhone);
+            nameOff = (TextView) itemView.findViewById(R.id.nameOff);
             sms = (ImageView) itemView.findViewById(R.id.sms);
             call = (ImageView) itemView.findViewById(R.id.call);
         }

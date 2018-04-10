@@ -43,7 +43,7 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
 
     View view;
     Context context;
-    Button btn_police, btn_sakticomd, btn_tiger, btn_pcr, btn_highway;
+    Button btn_police, btn_sakticomd, btn_tiger, btn_pcr, btn_policeNo, btn_highway;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,11 +62,13 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
         btn_tiger = view.findViewById(R.id.btn_tiger);
         btn_pcr = view.findViewById(R.id.btn_pcr);
         btn_highway = view.findViewById(R.id.btn_highway);
+        btn_policeNo = view.findViewById(R.id.btn_policeNo);
         btn_police.setOnClickListener(this);
         btn_sakticomd.setOnClickListener(this);
         btn_tiger.setOnClickListener(this);
         btn_pcr.setOnClickListener(this);
         btn_highway.setOnClickListener(this);
+        btn_policeNo.setOnClickListener(this);
     }
 
     @Override
@@ -91,6 +93,10 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_highway:
                 SocialNoViewFragment fragmenthighway = SocialNoViewFragment.newInstance("highway", "");
                 moveFragment(fragmenthighway);
+                break;
+            case R.id.btn_policeNo:
+                SocialNoViewFragment fragmentPolice = SocialNoViewFragment.newInstance("policeNo", "");
+                moveFragment(fragmentPolice);
                 break;
         }
     }

@@ -37,7 +37,6 @@ public class LocationAddress {
                         }
                         sb.append(address.getLocality()).append(",");
                         sb.append(address.getPostalCode()).append(",");
-                        sb.append(address.getLocale()).append(",");
                         sb.append(address.getCountryName());
                         result = sb.toString();
                     }

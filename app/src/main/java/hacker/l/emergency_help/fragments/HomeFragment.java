@@ -1,6 +1,5 @@
 package hacker.l.emergency_help.fragments;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,23 +15,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Node;
 
 import hacker.l.emergency_help.R;
-import hacker.l.emergency_help.activity.GooglePlacesActivity;
+import hacker.l.emergency_help.activity.PlaceActivity;
 import hacker.l.emergency_help.activity.QrcodeScannerActivity;
 import hacker.l.emergency_help.utility.AppLocationService;
 import hacker.l.emergency_help.utility.LocationAddress;
@@ -135,7 +129,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             LocationAddress locationAddress = new LocationAddress();
             locationAddress.getAddressFromLocation(latitude, longitude, context.getApplicationContext(), new GeocoderHandler());
         } else {
-            showSettingsAlert();
+            //showSettingsAlert();
         }
     }
 
@@ -174,6 +168,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 default:
                     locationAddress = null;
             }
+            tv_address.setVisibility(View.VISIBLE);
             tv_address.setText(locationAddress);
         }
     }
@@ -182,19 +177,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.layout_hospital:
-                Intent intent = new Intent(context, GooglePlacesActivity.class);
-                intent.putExtra("key", "hospital");
+                Intent intent = new Intent(context, PlaceActivity.class);
+//                intent.putExtra("key", "hospital");
                 startActivity(intent);
                 break;
             case R.id.layout_police:
-                Intent intentPolice = new Intent(context, GooglePlacesActivity.class);
-                intentPolice.putExtra("key", "police");
-                startActivity(intentPolice);
+//                Intent intentPolice = new Intent(context, PlaceActivity.class);
+//                intentPolice.putExtra("key", "police");
+//                startActivity(intentPolice);
                 break;
             case R.id.layout_ambulance:
-                Intent intentaa = new Intent(context, GooglePlacesActivity.class);
-                intentaa.putExtra("key", "ambulance");
-                startActivity(intentaa);
+//                Intent intentaa = new Intent(context, PlaceActivity.class);
+//                intentaa.putExtra("key", "ambulance");
+//                startActivity(intentaa);
                 break;
 //            case R.id.lyout_flash:
 //                runFlashLight();

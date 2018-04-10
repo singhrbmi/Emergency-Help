@@ -36,6 +36,7 @@
                         android:layout_margin="@dimen/margin14"
                         android:gravity="center"
                         android:text=""
+                        android:visibility="gone"
                         android:textColor="@color/black"
                         android:textSize="@dimen/margin14" />
 
@@ -71,7 +72,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Near Hospitals"
+                                    android:text="Near Place"
                                     android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>
@@ -97,7 +98,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Near Police "
+                                    android:text="Help "
                                     android:textSize="@dimen/textSize14" />
 
 
@@ -124,7 +125,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Near Ambulance"
+                                    android:text="Sujhao"
                                     android:textSize="@dimen/textSize14" />
 
 
