@@ -44,4 +44,8 @@ public class Contants {
     public static final String forgetpassword = "forgetpassword.php";
     public static final String getsurakshacavach = "getsurakshacavach.php";
     public static final String surakshacavach = "surakshacavach.php";
+    public static final String getSocial = "getSocial.php";
+    public static final String deleteSocial = "deleteSocial.php";
+    public static final String updateSocial = "updateSocial.php";
+    public static final String AddSocial = "AddSocial.php";
 }

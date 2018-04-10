@@ -10,6 +10,7 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class SocialNoViewFragment extends Fragment {
     Context context;
     LinearLayoutManager linearLayoutManager;
     Result result;
+    TextView tv_type;
     SearchView search_barUser;
     SocialContactsAdapter socialContactsAdapter;
 
@@ -67,37 +69,44 @@ public class SocialNoViewFragment extends Fragment {
 
     private void init() {
         recycleView = view.findViewById(R.id.recycleView);
+        tv_type = view.findViewById(R.id.type);
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
         if (type.equalsIgnoreCase("police")) {
             List<Result> policelist = getPoliceContact();
             socialContactsAdapter = new SocialContactsAdapter(context, policelist);
             recycleView.setAdapter(socialContactsAdapter);
+            tv_type.setText("Police Station List");
         }
         if (type.equalsIgnoreCase("sakti")) {
             List<Result> saktilist = getSaktiContact();
             socialContactsAdapter = new SocialContactsAdapter(context, saktilist);
             recycleView.setAdapter(socialContactsAdapter);
+            tv_type.setText("Sakti Commando List");
         }
         if (type.equalsIgnoreCase("tiger")) {
             List<Result> tigerlist = getTigerContact();
             socialContactsAdapter = new SocialContactsAdapter(context, tigerlist);
             recycleView.setAdapter(socialContactsAdapter);
+            tv_type.setText("Tiger Mobile List");
         }
         if (type.equalsIgnoreCase("pcr")) {
             List<Result> pcrlist = getPerContact();
             socialContactsAdapter = new SocialContactsAdapter(context, pcrlist);
             recycleView.setAdapter(socialContactsAdapter);
+            tv_type.setText("PCR Number List");
         }
         if (type.equalsIgnoreCase("highway")) {
             List<Result> highwaylist = getHighwayContact();
             socialContactsAdapter = new SocialContactsAdapter(context, highwaylist);
             recycleView.setAdapter(socialContactsAdapter);
+            tv_type.setText("Highway Number List");
         }
         if (type.equalsIgnoreCase("policeNo")) {
             List<Result> policeNoList = getPoliceNoListContact();
             socialContactsAdapter = new SocialContactsAdapter(context, policeNoList);
             recycleView.setAdapter(socialContactsAdapter);
+            tv_type.setText("Police Number List");
         }
         search_barUser = (SearchView) view.findViewById(R.id.search_barUser);
         search_barUser.setIconified(true);
@@ -120,7 +129,19 @@ public class SocialNoViewFragment extends Fragment {
 
     private List<Result> getPoliceNoListContact() {
         List<Result> PoliceNoContacts = new ArrayList<>();
-        result = new Result("A V Homkar,IPS", "9431706180","DIG,SC RANGE,RANCHI","2481876");
+        result = new Result("A V Homkar,IPS", "9431706118", "DIG,SC RANGE,RANCHI", "2481876");
+        PoliceNoContacts.add(result);
+        result = new Result("KULDEEP DWIVEDI,IPS", "9431706136", "SR.S.P,RANCHI", "2200237");
+        PoliceNoContacts.add(result);
+        result = new Result("AMAN KUMAR,IPS", "9431706137", "CITY .S.P,RANCHI", "2200898");
+        PoliceNoContacts.add(result);
+        result = new Result("AJIT PETER DUNGDUNG", "9431706138", "RURAL SP,RANCHI", "2200238");
+        PoliceNoContacts.add(result);
+        result = new Result("SANJAY RANJAN SINGH,IPS", "9431706140", "TRAFFIC S.P,RANCHI", "2206266");
+        PoliceNoContacts.add(result);
+        result = new Result("BHOLA PRASAD SINGH", "9431770077", "DSP,KOTWALI", "2212680");
+        PoliceNoContacts.add(result);
+        result = new Result("BHOLA PRASAD SINGH", "9431375451", "DSP,KOTWALI", "2212680");
         PoliceNoContacts.add(result);
         return PoliceNoContacts;
     }

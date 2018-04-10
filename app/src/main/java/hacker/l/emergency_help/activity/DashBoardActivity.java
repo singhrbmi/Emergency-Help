@@ -1,8 +1,10 @@
 package hacker.l.emergency_help.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,13 +19,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.fragments.AboutFragment;
 import hacker.l.emergency_help.fragments.AccountFragment;
+import hacker.l.emergency_help.fragments.AdminLoginFragment;
 import hacker.l.emergency_help.fragments.HelpFragment;
 import hacker.l.emergency_help.fragments.HomeFragment;
 import hacker.l.emergency_help.fragments.SettingsFragment;
@@ -33,7 +41,8 @@ import hacker.l.emergency_help.fragments.SurakshaCavachFragment;
 public class DashBoardActivity extends AppCompatActivity
         implements View.OnClickListener {
     LinearLayout lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting, lyout_home;
-//    DrawerLayout drawer;
+    //    DrawerLayout drawer;
+    TextView tv_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,7 @@ public class DashBoardActivity extends AppCompatActivity
     private void init() {
         lyout_suraksha = findViewById(R.id.lyout_suraksha);
         lyout_help = findViewById(R.id.lyout_help);
+        tv_title = findViewById(R.id.tv_title);
         lyout_about = findViewById(R.id.lyout_about);
         lyout_account = findViewById(R.id.lyout_account);
         lyout_barCode = findViewById(R.id.lyout_barCode);
@@ -74,9 +84,11 @@ public class DashBoardActivity extends AppCompatActivity
         isSmsCallPermissionGranted();
         isCameraCallPermissionGranted();
         isLocationPermissionGranted();
-
     }
 
+    public void setTitle(String title) {
+        tv_title.setText(title);
+    }
 
     @Override
     public void onBackPressed() {
@@ -112,6 +124,11 @@ public class DashBoardActivity extends AppCompatActivity
             Intent intent = new Intent(this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            return true;
+        }
+        if (id == R.id.admin) {
+            AdminLoginFragment adminLoginFragment=AdminLoginFragment.newInstance("","");
+            moveFragment(adminLoginFragment);
             return true;
         }
 
@@ -280,5 +297,29 @@ public class DashBoardActivity extends AppCompatActivity
                 .replace(R.id.container, fragment)
                 // .addToBackStack(null)
                 .commit();
+    }
+
+    //for hid keyboard when tab outside edittext box
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 }

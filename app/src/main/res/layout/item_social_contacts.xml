@@ -30,13 +30,15 @@
                     android:textSize="@dimen/textSize14" />
 
                 <TextView
+                    android:id="@+id/tv_nameOff"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
                     android:singleLine="true"
-                    android:text="Name of the Off."
+                    android:text="Name of the Office"
                     android:textColor="@color/grey_hard"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
@@ -60,7 +62,8 @@
                     android:layout_weight=".5"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
@@ -79,13 +82,15 @@
                     android:textSize="@dimen/textSize14" />
 
                 <TextView
+                    android:id="@+id/tv_offPhone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
                     android:singleLine="true"
                     android:text="Office No."
                     android:textColor="@color/grey_hard"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
@@ -109,7 +114,8 @@
                     android:layout_weight=".5"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/textSize14" />
+                    android:textSize="@dimen/textSize14"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
 

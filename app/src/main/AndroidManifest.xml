@@ -42,7 +42,6 @@
         <activity android:name=".activity.SignupActivity" />
         <activity
             android:name=".activity.DashBoardActivity"
-            android:label="@string/title_activity_dash_board"
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.ForgetPasswordActivity" />
         <activity android:name=".activity.AfterSacnActivity" />

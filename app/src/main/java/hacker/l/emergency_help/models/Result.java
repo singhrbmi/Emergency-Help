@@ -8,6 +8,7 @@ public class Result {
     private String name;
     private String phone;
     private String nameOff;
+    private String offPhone;
 
     public String getNameOff() {
         return nameOff;
@@ -25,7 +26,7 @@ public class Result {
         this.offPhone = offPhone;
     }
 
-    private String offPhone;
+
     private String Username;
     private String UserPhone;
 
@@ -145,6 +146,24 @@ public class Result {
     }
 
     private String socialUs;
+
+    public String getSocialName() {
+        return socialName;
+    }
+
+    public void setSocialName(String socialName) {
+        this.socialName = socialName;
+    }
+
+    public int getSocialNoId() {
+        return socialNoId;
+    }
+
+    public void setSocialNoId(int socialNoId) {
+        this.socialNoId = socialNoId;
+    }
+
+    private String socialName;
     private int loginId;
 
     public int getScid() {
@@ -156,6 +175,7 @@ public class Result {
     }
 
     private int scid;
+    private int socialNoId;
 
     public Result(String name, String phone) {
         this.name = name;

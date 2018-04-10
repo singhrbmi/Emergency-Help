@@ -18,6 +18,15 @@
             android:textColor="@color/red"
             android:textSize="@dimen/textSize18" />
 
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/purple"
+            android:textSize="@dimen/textSize16" />
+
         <android.support.v7.widget.SearchView
             android:id="@+id/search_barUser"
             android:layout_width="match_parent"

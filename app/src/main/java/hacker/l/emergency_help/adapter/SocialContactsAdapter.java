@@ -55,8 +55,16 @@ public class SocialContactsAdapter extends RecyclerView.Adapter<SocialContactsAd
         String name = FilteruserList.get(position).getName();
         holder.name.setText(name);
         holder.phone.setText(FilteruserList.get(position).getPhone());
-        holder.offPhone.setText(FilteruserList.get(position).getOffPhone());
-        holder.nameOff.setText(FilteruserList.get(position).getNameOff());
+        if (FilteruserList.get(position).getOffPhone() != null && !FilteruserList.get(position).getOffPhone().equalsIgnoreCase("")) {
+            holder.offPhone.setVisibility(View.VISIBLE);
+            holder.tv_offPhone.setVisibility(View.VISIBLE);
+            holder.offPhone.setText(FilteruserList.get(position).getOffPhone());
+        }
+        if (FilteruserList.get(position).getNameOff() != null && !FilteruserList.get(position).getNameOff().equalsIgnoreCase("")) {
+            holder.nameOff.setVisibility(View.VISIBLE);
+            holder.tv_nameOff.setVisibility(View.VISIBLE);
+            holder.nameOff.setText(FilteruserList.get(position).getNameOff());
+        }
         holder.sms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +152,7 @@ public class SocialContactsAdapter extends RecyclerView.Adapter<SocialContactsAd
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name, phone, offPhone, nameOff;
+        TextView name, phone, offPhone, nameOff, tv_offPhone, tv_nameOff;
         ImageView sms, call;
 
         public MyViewHolder(View itemView) {
@@ -153,6 +161,8 @@ public class SocialContactsAdapter extends RecyclerView.Adapter<SocialContactsAd
             phone = (TextView) itemView.findViewById(R.id.phone);
             offPhone = (TextView) itemView.findViewById(R.id.offPhone);
             nameOff = (TextView) itemView.findViewById(R.id.nameOff);
+            tv_offPhone = (TextView) itemView.findViewById(R.id.tv_offPhone);
+            tv_nameOff = (TextView) itemView.findViewById(R.id.tv_nameOff);
             sms = (ImageView) itemView.findViewById(R.id.sms);
             call = (ImageView) itemView.findViewById(R.id.call);
         }

@@ -36,9 +36,9 @@
                         android:layout_margin="@dimen/margin14"
                         android:gravity="center"
                         android:text=""
-                        android:visibility="gone"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/margin14" />
+                        android:textSize="@dimen/margin14"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Help "
+                                    android:text="Complent "
                                     android:textSize="@dimen/textSize14" />
 
 
@@ -125,7 +125,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Sujhao"
+                                    android:text="Advise"
                                     android:textSize="@dimen/textSize14" />
 
 

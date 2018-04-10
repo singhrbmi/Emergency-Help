@@ -20,7 +20,7 @@ import hacker.l.emergency_help.utility.Contants;
 public class DbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = Contants.DATABASE_NAME;
 
     public DbHelper(Context context) {
@@ -31,6 +31,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS userData");
         db.execSQL("DROP TABLE IF EXISTS surakshacavach");
+        db.execSQL("DROP TABLE IF EXISTS socialData");
         onCreate(db);
 
     }
@@ -43,7 +44,9 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_UserData_TABLE = "CREATE TABLE userData(loginId INTEGER,Username TEXT,UserPhone TEXT,EmailId TEXT,Password TEXT)";
         String CREATE_surakshacavach_TABLE = "CREATE TABLE surakshacavach(scid INTEGER,loginId INTEGER,Username TEXT,UserPhone TEXT,EmailId TEXT,Address TEXT,City TEXT ,PinCode TEXT, EmergencyOne TEXT, EmergencyTwo TEXT, EmergencyThree TEXT,barCode TEXT, socialUs TEXT)";
+        String CREATE_socialData_TABLE = "CREATE TABLE socialData(socialNoId INTEGER,socialName TEXT)";
         db.execSQL(CREATE_UserData_TABLE);
+        db.execSQL(CREATE_socialData_TABLE);
         db.execSQL(CREATE_surakshacavach_TABLE);
     }
 
@@ -328,6 +331,106 @@ public class DbHelper extends SQLiteOpenHelper {
         boolean result = false;
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("surakshacavach", null, null);
+        db.close();
+        return result;
+    }
+
+
+    //    // --------------------------Social Data---------------
+    public boolean upsertSocialData(Result ob) {
+        boolean done = false;
+        Result data = null;
+        if (ob.getSocialNoId() != 0) {
+            data = getSocialDataByScId(ob.getSocialNoId());
+            if (data == null) {
+                done = insertSocialData(ob);
+            } else {
+                done = updateSocialData(ob);
+            }
+        }
+        return done;
+    }
+
+
+    //    // for Social data..........
+    private void populateSocialData(Cursor cursor, Result ob) {
+        ob.setSocialNoId(cursor.getInt(0));
+        ob.setSocialName(cursor.getString(1));
+    }
+
+    // insert Social data.............
+    public boolean insertSocialData(Result ob) {
+        ContentValues values = new ContentValues();
+        values.put("socialNoId", ob.getSocialNoId());
+        values.put("socialName", ob.getSocialName());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long i = db.insert("socialData", null, values);
+        db.close();
+        return i > 0;
+    }
+
+    //    //show  Social list data
+    public List<Result> getAllSocialData() {
+        ArrayList list = new ArrayList<>();
+        String query = "Select * FROM socialData";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+
+            while (cursor.isAfterLast() == false) {
+                Result ob = new Result();
+                populateSocialData(cursor, ob);
+                list.add(ob);
+                cursor.moveToNext();
+            }
+        }
+        db.close();
+        return list;
+    }
+
+
+    //  get Social data
+    public Result getSocialDataByScId(int id) {
+
+        String query = "Select * FROM socialData WHERE socialNoId = " + id + " ";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Result data = new Result();
+
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            populateSocialData(cursor, data);
+
+            cursor.close();
+        } else {
+            data = null;
+        }
+        db.close();
+        return data;
+    }
+
+    //    update Social  data
+    public boolean updateSocialData(Result ob) {
+        ContentValues values = new ContentValues();
+        values.put("socialNoId", ob.getSocialNoId());
+        values.put("socialName", ob.getSocialName());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        long i = 0;
+        i = db.update("socialData", values, "socialNoId = " + ob.getSocialNoId() + " ", null);
+
+        db.close();
+        return i > 0;
+    }
+
+    // delete Social Data
+    public boolean deleteSocialData() {
+        boolean result = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("socialData", null, null);
         db.close();
         return result;
     }

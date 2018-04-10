@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.activity.PlaceActivity;
 import hacker.l.emergency_help.activity.QrcodeScannerActivity;
 import hacker.l.emergency_help.utility.AppLocationService;
@@ -82,6 +83,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init() {
+//        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+//        dashBoardActivity.setTitle("Home");
         police = MediaPlayer.create(context, R.raw.pilice);
         weshile = MediaPlayer.create(context, R.raw.killbill);
 //        lyout_flash = view.findViewById(R.id.lyout_flash);
