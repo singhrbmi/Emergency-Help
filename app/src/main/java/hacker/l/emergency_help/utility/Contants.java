@@ -41,11 +41,19 @@ public class Contants {
 
     public static final String usersingup = "usersingup.php";
     public static final String login = "login.php";
+    public static final String adminLogin = "adminLogin.php";
     public static final String forgetpassword = "forgetpassword.php";
     public static final String getsurakshacavach = "getsurakshacavach.php";
     public static final String surakshacavach = "surakshacavach.php";
-    public static final String getSocial = "getSocial.php";
-    public static final String deleteSocial = "deleteSocial.php";
-    public static final String updateSocial = "updateSocial.php";
-    public static final String AddSocial = "AddSocial.php";
+
+
+    public static final String addCategory = "addCategory.php";
+    public static final String getAllCategory = "getAllCategory.php";
+    public static final String updateCategory = "updateCategory.php";
+    public static final String deleteCategory = "deleteCategory.php";
+
+    public static final String addPhone = "addPhone.php";
+    public static final String getAllPhone = "getAllPhone.php";
+    public static final String updatePhone = "updatePhone.php";
+    public static final String deletePhone = "deletePhone.php";
 }

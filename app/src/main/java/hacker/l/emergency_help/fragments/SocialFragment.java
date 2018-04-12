@@ -99,7 +99,7 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getDataFromServer() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getSocial,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllCategory,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

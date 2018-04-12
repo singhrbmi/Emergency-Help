@@ -1,0 +1,154 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="hacker.l.emergency_help.fragments.AddPhoneNoFragment">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin10"
+                android:layout_marginTop="@dimen/margin10"
+                android:text="Select Category"
+                android:textColor="@color/grey_hard"
+                android:textSize="@dimen/textSize14" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40_dp"
+                android:layout_margin="@dimen/margin10"
+                android:spinnerMode="dropdown"></Spinner>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin10"
+                android:text="Person Name"
+                android:textColor="@color/grey_hard"
+                android:textSize="@dimen/textSize14" />
+
+            <EditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40_dp"
+                android:layout_margin="@dimen/margin10"
+                android:background="@drawable/done_corner_round"
+                android:hint="Enter Name"
+                android:paddingLeft="@dimen/margin10"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin10"
+                android:text="Phone Number"
+                android:textColor="@color/grey_hard"
+                android:textSize="@dimen/textSize14" />
+
+            <EditText
+                android:id="@+id/edt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40_dp"
+                android:layout_margin="@dimen/margin10"
+                android:background="@drawable/done_corner_round"
+                android:hint="Enter Phone"
+                android:inputType="number"
+                android:maxLength="10"
+                android:paddingLeft="@dimen/margin10"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin10"
+                android:text="Office Name"
+                android:textColor="@color/grey_hard"
+                android:textSize="@dimen/textSize14" />
+
+            <EditText
+                android:id="@+id/edt_offName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40_dp"
+                android:layout_margin="@dimen/margin10"
+                android:background="@drawable/done_corner_round"
+                android:hint="Enter Office Name"
+                android:paddingLeft="@dimen/margin10"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin10"
+                android:text="Office Number"
+                android:textColor="@color/grey_hard"
+                android:textSize="@dimen/textSize14" />
+
+            <EditText
+                android:id="@+id/edt_offNo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40_dp"
+                android:layout_margin="@dimen/margin10"
+                android:background="@drawable/done_corner_round"
+                android:hint="Enter Office Number"
+                android:inputType="number"
+                android:paddingLeft="@dimen/margin10"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="@dimen/margin10"
+                android:layout_weight=".2"
+                android:background="@drawable/capsule_button"
+                android:text="Add"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.SearchView
+                    android:id="@+id/search_barUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:queryHint="Search Users here" />
+
+                <!-- TODO: Update blank fragment layout -->
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin10" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</FrameLayout>

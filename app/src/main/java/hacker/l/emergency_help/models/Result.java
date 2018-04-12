@@ -7,23 +7,23 @@ package hacker.l.emergency_help.models;
 public class Result {
     private String name;
     private String phone;
-    private String nameOff;
-    private String offPhone;
+    private String offName;
+    private String offNumber;
 
     public String getNameOff() {
-        return nameOff;
+        return offName;
     }
 
-    public void setNameOff(String nameOff) {
-        this.nameOff = nameOff;
+    public void setNameOff(String offName) {
+        this.offName = offName;
     }
 
     public String getOffPhone() {
-        return offPhone;
+        return offNumber;
     }
 
-    public void setOffPhone(String offPhone) {
-        this.offPhone = offPhone;
+    public void setOffPhone(String offNumber) {
+        this.offNumber = offNumber;
     }
 
 
@@ -165,6 +165,7 @@ public class Result {
 
     private String socialName;
     private int loginId;
+    private int phoneId;
 
     public int getScid() {
         return scid;
@@ -182,11 +183,11 @@ public class Result {
         this.phone = phone;
     }
 
-    public Result(String name, String phone, String offName, String offPhone) {
+    public Result(String name, String phone, String offName, String offNumber) {
         this.name = name;
         this.phone = phone;
-        this.offPhone = offPhone;
-        this.nameOff = offName;
+        this.offNumber = offNumber;
+        this.offName = offName;
     }
 
     public Result() {
@@ -210,4 +211,11 @@ public class Result {
     }
 
 
+    public int getPhoneId() {
+        return phoneId;
+    }
+
+    public void setPhoneId(int phoneId) {
+        this.phoneId = phoneId;
+    }
 }
