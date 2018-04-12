@@ -1,8 +1,10 @@
 package hacker.l.emergency_help.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
@@ -22,14 +24,35 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.activity.PlaceActivity;
 import hacker.l.emergency_help.activity.QrcodeScannerActivity;
+import hacker.l.emergency_help.adapter.AdviseAdapter;
+import hacker.l.emergency_help.models.MyPojo;
+import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.AppLocationService;
+import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.LocationAddress;
 
 
@@ -83,6 +106,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init() {
+        showAdvise();
 //        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
 //        dashBoardActivity.setTitle("Home");
         police = MediaPlayer.create(context, R.raw.pilice);
@@ -185,14 +209,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.layout_police:
-//                Intent intentPolice = new Intent(context, PlaceActivity.class);
-//                intentPolice.putExtra("key", "police");
-//                startActivity(intentPolice);
+                UserComplentFragment userComplentFragment = UserComplentFragment.newInstance("", "");
+                moveFragment(userComplentFragment);
                 break;
             case R.id.layout_ambulance:
-//                Intent intentaa = new Intent(context, PlaceActivity.class);
-//                intentaa.putExtra("key", "ambulance");
-//                startActivity(intentaa);
+                UserAdviseFragment userAdviseFragment = UserAdviseFragment.newInstance("", "");
+                moveFragment(userAdviseFragment);
                 break;
 //            case R.id.lyout_flash:
 //                runFlashLight();
@@ -364,6 +386,60 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    void showAdvise() {
+        final List<Result> resultList = new ArrayList<>();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAdvise,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        resultList.addAll(Arrays.asList(myPojo.getResult()));
+                        final Dialog dialog = new Dialog(context);
+                        dialog.setCancelable(false);
+                        dialog.setCanceledOnTouchOutside(false);
+                        dialog.setContentView(R.layout.custom_advise_dialog);
+                        Window window = dialog.getWindow();
+                        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                        dialog.show();
+                        TextView date = dialog.findViewById(R.id.tv_date);
+                        TextView advise = dialog.findViewById(R.id.tv_advise);
+                        TextView ok = dialog.findViewById(R.id.tv_ok);
+                        date.setText(resultList.get(resultList.size() - 1).getDate());
+                        advise.setText(resultList.get(resultList.size() - 1).getAdvise());
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("advise", Context.MODE_PRIVATE);
+                        String data = sharedPreferences.getString("key", "");
+                        if (data.isEmpty() || !resultList.get(resultList.size() - 1).getAdvise().equalsIgnoreCase(data)) {
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("key", resultList.get(resultList.size() - 1).getAdvise());
+                            editor.apply();
+                            dialog.show();
+                        } else {
+                            dialog.dismiss();
+                        }
+                        ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
     }
 
 }

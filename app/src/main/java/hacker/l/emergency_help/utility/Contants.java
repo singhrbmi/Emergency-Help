@@ -56,4 +56,12 @@ public class Contants {
     public static final String getAllPhone = "getAllPhone.php";
     public static final String updatePhone = "updatePhone.php";
     public static final String deletePhone = "deletePhone.php";
+
+    public static final String addAdvise = "addAdvise.php";
+    public static final String getAdvise = "getAdvise.php";
+    public static final String updateAdvise = "updateAdvise.php";
+    public static final String deleteAdvise = "deleteAdvise.php";
+
+    public static final String getAllComplents = "getAllComplents.php";
+    public static final String AddComplents = "AddComplents.php";
 }

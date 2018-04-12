@@ -81,8 +81,7 @@ public class AddContactsAdapter extends RecyclerView.Adapter<AddContactsAdapter.
         holder.tv_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Update Pending", Toast.LENGTH_SHORT).show();
-//                varietyFragment.updateCategoryData(true, FilteruserList.get(position).getSocialName(), FilteruserList.get(position).getSocialNoId());
+                fragment.updateShowData(true, FilteruserList.get(position).getPhoneId(), FilteruserList.get(position).getName(), FilteruserList.get(position).getPhone(), FilteruserList.get(position).getNameOff(), FilteruserList.get(position).getOffPhone());
 //                varietyFragment.setVarietyAdapter();
             }
         });

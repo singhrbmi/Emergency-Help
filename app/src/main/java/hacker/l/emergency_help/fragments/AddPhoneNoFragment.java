@@ -80,7 +80,7 @@ public class AddPhoneNoFragment extends Fragment {
     List<String> stringList;
     String category, offNumber, offName, phone, name;
     Button btn_add;
-    Boolean aBoolean=false;
+    Boolean aBoolean = false;
     EditText edt_offNo, edt_offName, edt_phone, edt_name;
     LinearLayoutManager linearLayoutManager;
     Result result;
@@ -88,6 +88,7 @@ public class AddPhoneNoFragment extends Fragment {
     AddContactsAdapter socialContactsAdapter;
     RecyclerView recycleView;
     ProgressDialog pd;
+    int phoneId;
 
     @Override
 
@@ -229,8 +230,55 @@ public class AddPhoneNoFragment extends Fragment {
     }
 
     private void updatePhoneData() {
+        if (Utility.isOnline(context)) {
+            pd = new ProgressDialog(context);
+            pd.setMessage("Updating wait...");
+            pd.show();
+            pd.setCancelable(false);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.updatePhone,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            pd.dismiss();
+                            Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
+                            btn_add.setText("Add");
+                            setPhoneAdapter();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            pd.dismiss();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("phoneId", String.valueOf(phoneId));
+                    params.put("name", name);
+                    params.put("phone", phone);
+                    params.put("offName", offName);
+                    params.put("offNumber", offNumber);
+                    params.put("category", category);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+            requestQueue.add(stringRequest);
+        } else {
+            Toast.makeText(context, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
+        }
 
+    }
 
+    public void updateShowData(boolean aBoolean, int phoneId, String name, String phone, String offName, String offNumber) {
+        this.aBoolean = aBoolean;
+        this.phoneId = phoneId;
+        edt_name.setText(name);
+        edt_phone.setText(phone);
+        edt_offName.setText(offName);
+        edt_offNo.setText(offNumber);
+        btn_add.setText("Update");
     }
 
     boolean validation() {
@@ -275,6 +323,7 @@ public class AddPhoneNoFragment extends Fragment {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     category = parent.getSelectedItem().toString();
+                                    setPhoneAdapter();
                                 }
 
                                 @Override

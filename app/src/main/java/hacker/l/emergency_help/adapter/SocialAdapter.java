@@ -2,6 +2,9 @@ package hacker.l.emergency_help.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.fragments.SocialNoViewFragment;
 import hacker.l.emergency_help.models.Result;
 
 /**
@@ -45,8 +49,23 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(SocialAdapter.MyViewHolder holder, final int position) {
-        String name = FilteruserList.get(position).getSocialName();
+        final String name = FilteruserList.get(position).getSocialName();
         holder.tv_socialName.setText(name);
+        holder.tv_socialName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SocialNoViewFragment fragment = SocialNoViewFragment.newInstance(FilteruserList.get(position).getSocialName(), "");
+                moveFragment(fragment);
+            }
+        });
+    }
+
+    private void moveFragment(Fragment fragment) {
+        FragmentManager fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override

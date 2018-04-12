@@ -1,5 +1,6 @@
 package hacker.l.emergency_help.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,12 +14,29 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.adapter.AddContactsAdapter;
 import hacker.l.emergency_help.adapter.SocialContactsAdapter;
+import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
+import hacker.l.emergency_help.utility.Contants;
+import hacker.l.emergency_help.utility.Utility;
 
 public class SocialNoViewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -56,6 +74,8 @@ public class SocialNoViewFragment extends Fragment {
     TextView tv_type;
     SearchView search_barUser;
     SocialContactsAdapter socialContactsAdapter;
+    ProgressDialog pd;
+    List<Result> resultList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,45 +88,47 @@ public class SocialNoViewFragment extends Fragment {
     }
 
     private void init() {
+        resultList = new ArrayList<>();
         recycleView = view.findViewById(R.id.recycleView);
         tv_type = view.findViewById(R.id.type);
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
-        if (type.equalsIgnoreCase("police")) {
-            List<Result> policelist = getPoliceContact();
-            socialContactsAdapter = new SocialContactsAdapter(context, policelist);
-            recycleView.setAdapter(socialContactsAdapter);
-            tv_type.setText("Police Station List");
-        }
-        if (type.equalsIgnoreCase("sakti")) {
-            List<Result> saktilist = getSaktiContact();
-            socialContactsAdapter = new SocialContactsAdapter(context, saktilist);
-            recycleView.setAdapter(socialContactsAdapter);
-            tv_type.setText("Sakti Commando List");
-        }
-        if (type.equalsIgnoreCase("tiger")) {
-            List<Result> tigerlist = getTigerContact();
-            socialContactsAdapter = new SocialContactsAdapter(context, tigerlist);
-            recycleView.setAdapter(socialContactsAdapter);
-            tv_type.setText("Tiger Mobile List");
-        }
-        if (type.equalsIgnoreCase("pcr")) {
-            List<Result> pcrlist = getPerContact();
-            socialContactsAdapter = new SocialContactsAdapter(context, pcrlist);
-            recycleView.setAdapter(socialContactsAdapter);
-            tv_type.setText("PCR Number List");
-        }
-        if (type.equalsIgnoreCase("highway")) {
-            List<Result> highwaylist = getHighwayContact();
-            socialContactsAdapter = new SocialContactsAdapter(context, highwaylist);
-            recycleView.setAdapter(socialContactsAdapter);
-            tv_type.setText("Highway Number List");
-        }
-        if (type.equalsIgnoreCase("policeNo")) {
-            List<Result> policeNoList = getPoliceNoListContact();
-            socialContactsAdapter = new SocialContactsAdapter(context, policeNoList);
-            recycleView.setAdapter(socialContactsAdapter);
-            tv_type.setText("Police Number List");
+        if (Utility.isOnline(context)) {
+            pd = new ProgressDialog(context);
+            pd.setMessage("Getting  wait...");
+            pd.show();
+            pd.setCancelable(false);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllPhone,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            pd.dismiss();
+                            MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                            resultList.addAll(Arrays.asList(myPojo.getResult()));
+                            if (resultList != null) {
+                                Collections.reverse(resultList);
+                                socialContactsAdapter = new SocialContactsAdapter(context, resultList);
+                                recycleView.setAdapter(socialContactsAdapter);
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            pd.dismiss();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("category", type);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+            requestQueue.add(stringRequest);
+        } else {
+            Toast.makeText(context, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
         }
         search_barUser = (SearchView) view.findViewById(R.id.search_barUser);
         search_barUser.setIconified(true);

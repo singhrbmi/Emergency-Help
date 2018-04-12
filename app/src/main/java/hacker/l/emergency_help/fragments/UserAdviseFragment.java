@@ -2,6 +2,7 @@ package hacker.l.emergency_help.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,13 +29,11 @@ import java.util.Map;
 
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.adapter.AdviseAdapter;
-import hacker.l.emergency_help.adapter.ComplentAdapter;
 import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
 
-
-public class AdminComplentMgmtFragment extends Fragment {
+public class UserAdviseFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,8 +44,8 @@ public class AdminComplentMgmtFragment extends Fragment {
     private String mParam2;
 
     // TODO: Rename and change types and number of parameters
-    public static AdminComplentMgmtFragment newInstance(String param1, String param2) {
-        AdminComplentMgmtFragment fragment = new AdminComplentMgmtFragment();
+    public static UserAdviseFragment newInstance(String param1, String param2) {
+        UserAdviseFragment fragment = new UserAdviseFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,16 +65,17 @@ public class AdminComplentMgmtFragment extends Fragment {
     Context context;
     View view;
     RecyclerView recycleView;
-    List<Result> resultList;
     ProgressDialog pd;
+    List<Result> resultList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         context = getActivity();
-        view = inflater.inflate(R.layout.fragment_admin_complent_mgmt, container, false);
+        view = inflater.inflate(R.layout.fragment_user_advise, container, false);
         init();
         return view;
+
     }
 
     private void init() {
@@ -87,15 +87,16 @@ public class AdminComplentMgmtFragment extends Fragment {
         pd.setMessage("Getting  wait...");
         pd.show();
         pd.setCancelable(false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllComplents,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAdvise,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         pd.dismiss();
                         MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        resultList.clear();
                         resultList.addAll(Arrays.asList(myPojo.getResult()));
                         Collections.reverse(resultList);
-                        ComplentAdapter adapter = new ComplentAdapter(context, resultList);
+                        AdviseAdapter adapter = new AdviseAdapter(context, resultList, true);
                         recycleView.setAdapter(adapter);
                     }
                 },

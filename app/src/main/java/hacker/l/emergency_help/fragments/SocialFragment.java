@@ -105,9 +105,11 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
                     public void onResponse(String response) {
                         MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
                         if (myPojo != null) {
+                            DbHelper dbHelper = new DbHelper(context);
+                            dbHelper.deleteSocialData();
                             for (Result result : myPojo.getResult()) {
                                 if (result != null) {
-                                    new DbHelper(context).upsertSocialData(result);
+                                    dbHelper.upsertSocialData(result);
                                     setAdapter();
                                 }
                             }

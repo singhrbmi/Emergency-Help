@@ -24,11 +24,11 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize16" />
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="@dimen/margin2"
-                android:src="@drawable/launch" />
+            <!--<ImageView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_margin="@dimen/margin2"-->
+                <!--android:src="@drawable/launch" />-->
         </android.support.v7.widget.Toolbar>
 
 

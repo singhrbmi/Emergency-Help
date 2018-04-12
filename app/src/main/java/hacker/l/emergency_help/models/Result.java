@@ -164,8 +164,47 @@ public class Result {
     }
 
     private String socialName;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    private String date;
     private int loginId;
     private int phoneId;
+
+    public int getAdviseId() {
+        return adviseId;
+    }
+
+    public void setAdviseId(int adviseId) {
+        this.adviseId = adviseId;
+    }
+
+    public String getAdvise() {
+        return advise;
+    }
+
+    public void setAdvise(String advise) {
+        this.advise = advise;
+    }
+
+    private int adviseId;
+    private String advise;
+
+    public String getComplent() {
+        return complent;
+    }
+
+    public void setComplent(String complent) {
+        this.complent = complent;
+    }
+
+    private String complent;
 
     public int getScid() {
         return scid;
