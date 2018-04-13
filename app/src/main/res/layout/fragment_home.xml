@@ -78,19 +78,20 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/layout_police"
+                                android:id="@+id/layout_social"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
+
                                 <ImageView
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/station" />
+                                    android:src="@drawable/help" />
 
 
                                 <TextView
@@ -98,9 +99,8 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Complent "
+                                    android:text="Emergency Help"
                                     android:textSize="@dimen/textSize14" />
-
 
                             </LinearLayout>
 
@@ -118,14 +118,14 @@
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/ebolence" />
+                                    android:src="@drawable/call" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Advise"
+                                    android:text="Govt No"
                                     android:textSize="@dimen/textSize14" />
 
 
@@ -223,6 +223,31 @@
                             android:layout_height="120dp"
                             android:orientation="horizontal">
 
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".33"
+                                android:background="@drawable/done_corner_round"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/margin5"
+                                    android:src="@drawable/womenhelp" />
+
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="@dimen/margin10"
+                                    android:gravity="center"
+                                    android:text="Call Women Help"
+                                    android:textSize="@dimen/textSize14" />
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/lyout_barCode"
@@ -277,6 +302,13 @@
 
                             </LinearLayout>
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:orientation="horizontal">
+
                             <LinearLayout
                                 android:id="@+id/lyout_account"
                                 android:layout_width="0dp"
@@ -303,27 +335,21 @@
 
 
                             </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:orientation="horizontal">
 
                             <LinearLayout
+                                android:id="@+id/layout_police"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight=".33"
                                 android:background="@drawable/done_corner_round"
                                 android:orientation="vertical">
 
-
                                 <ImageView
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/womenhelp" />
+                                    android:src="@drawable/station" />
 
 
                                 <TextView
@@ -331,10 +357,12 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="@dimen/margin10"
                                     android:gravity="center"
-                                    android:text="Call Women Help"
+                                    android:text="Suggestion/Complent "
                                     android:textSize="@dimen/textSize14" />
 
+
                             </LinearLayout>
+
 
                             <LinearLayout
                                 android:id="@+id/layout_contacts"
@@ -361,33 +389,6 @@
                                     android:text="Contacts"
                                     android:textSize="@dimen/textSize14" />
 
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layout_social"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/ic_menu_send" />
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Social"
-                                    android:textSize="@dimen/textSize14" />
 
                             </LinearLayout>
 
@@ -436,20 +437,19 @@
                                 android:orientation="vertical">
 
 
-                                <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/siren" />
+                                <!--<ImageView-->
+                                <!--android:layout_width="80dp"-->
+                                <!--android:layout_height="60dp"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--android:scaleType="fitCenter"-->
+                                <!--android:src="@drawable/logo" />-->
 
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
+                                    android:background="@drawable/znmgd"
                                     android:gravity="center"
-                                    android:text="Police Siren"
                                     android:textSize="@dimen/textSize14" />
 
 

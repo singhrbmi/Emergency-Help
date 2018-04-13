@@ -91,6 +91,7 @@ public class SocialNoViewFragment extends Fragment {
         resultList = new ArrayList<>();
         recycleView = view.findViewById(R.id.recycleView);
         tv_type = view.findViewById(R.id.type);
+        tv_type.setText(type);
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
         if (Utility.isOnline(context)) {

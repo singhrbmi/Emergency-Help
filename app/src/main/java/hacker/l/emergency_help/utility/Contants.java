@@ -62,6 +62,8 @@ public class Contants {
     public static final String updateAdvise = "updateAdvise.php";
     public static final String deleteAdvise = "deleteAdvise.php";
 
+    public static final String getAllLogin = "getAllLogin.php";
+
     public static final String getAllComplents = "getAllComplents.php";
     public static final String AddComplents = "AddComplents.php";
 }

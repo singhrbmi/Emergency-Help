@@ -87,7 +87,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
         if (!gps_enabled && !network_enabled) {
             // notify user
             AlertDialog.Builder dialog = new AlertDialog.Builder(PlaceActivity.this);
-            dialog.setMessage("Location");
+            dialog.setMessage("On Location");
             dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface paramDialogInterface, int paramInt) {

@@ -52,6 +52,17 @@
             android:text="Complent Management"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize16" />
+
+        <TextView
+            android:id="@+id/tv_allLogin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/margin10"
+            android:background="@drawable/capsule_button"
+            android:gravity="center"
+            android:text="All Login Users"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize16" />
     </LinearLayout>
 
 </FrameLayout>

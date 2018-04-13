@@ -213,8 +213,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 moveFragment(userComplentFragment);
                 break;
             case R.id.layout_ambulance:
-                UserAdviseFragment userAdviseFragment = UserAdviseFragment.newInstance("", "");
-                moveFragment(userAdviseFragment);
+//                UserAdviseFragment userAdviseFragment = UserAdviseFragment.newInstance("", "");
+//                moveFragment(userAdviseFragment);
                 break;
 //            case R.id.lyout_flash:
 //                runFlashLight();
@@ -224,10 +224,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 moveFragment(fragmentContacts);
                 break;
             case R.id.layout_pilicesire:
-                piliceSiren();
+//                piliceSiren();
                 break;
             case R.id.lyout_whistle:
-                whisilePlay();
+//                whisilePlay();
                 break;
             case R.id.layout_social:
                 SocialFragment fragmentS = SocialFragment.newInstance("", "");
@@ -402,22 +402,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         dialog.setContentView(R.layout.custom_advise_dialog);
                         Window window = dialog.getWindow();
                         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//                        dialog.show();
+                        dialog.show();
                         TextView date = dialog.findViewById(R.id.tv_date);
                         TextView advise = dialog.findViewById(R.id.tv_advise);
                         TextView ok = dialog.findViewById(R.id.tv_ok);
                         date.setText(resultList.get(resultList.size() - 1).getDate());
                         advise.setText(resultList.get(resultList.size() - 1).getAdvise());
-                        SharedPreferences sharedPreferences = context.getSharedPreferences("advise", Context.MODE_PRIVATE);
-                        String data = sharedPreferences.getString("key", "");
-                        if (data.isEmpty() || !resultList.get(resultList.size() - 1).getAdvise().equalsIgnoreCase(data)) {
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("key", resultList.get(resultList.size() - 1).getAdvise());
-                            editor.apply();
-                            dialog.show();
-                        } else {
-                            dialog.dismiss();
-                        }
+//                        SharedPreferences sharedPreferences = context.getSharedPreferences("advise", Context.MODE_PRIVATE);
+//                        String data = sharedPreferences.getString("key", "");
+//                        if (data.isEmpty() || !resultList.get(resultList.size() - 1).getAdvise().equalsIgnoreCase(data)) {
+//                            SharedPreferences.Editor editor = sharedPreferences.edit();
+//                            editor.putString("key", resultList.get(resultList.size() - 1).getAdvise());
+//                            editor.apply();
+//                            dialog.show();
+//                        } else {
+//                            dialog.dismiss();
+//                        }
                         ok.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

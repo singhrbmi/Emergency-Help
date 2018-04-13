@@ -44,7 +44,7 @@ public class AdminDasboardFragment extends Fragment {
 
     Context context;
     View view;
-    TextView tv_phone, tv_advise, tv_complent;
+    TextView tv_phone, tv_advise, tv_complent, tv_allLogin;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +60,7 @@ public class AdminDasboardFragment extends Fragment {
         tv_phone = view.findViewById(R.id.tv_phone);
         tv_advise = view.findViewById(R.id.tv_advise);
         tv_complent = view.findViewById(R.id.tv_complent);
+        tv_allLogin = view.findViewById(R.id.tv_allLogin);
         tv_phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +79,13 @@ public class AdminDasboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AdminComplentMgmtFragment adminAdviseMgmtFragment = AdminComplentMgmtFragment.newInstance("", "");
+                moveFragment(adminAdviseMgmtFragment);
+            }
+        });
+        tv_allLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AdminAllLoginDataFragment adminAdviseMgmtFragment = AdminAllLoginDataFragment.newInstance("", "");
                 moveFragment(adminAdviseMgmtFragment);
             }
         });
