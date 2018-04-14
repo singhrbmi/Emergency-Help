@@ -78,6 +78,16 @@ public class Result {
     private String EmergencyTwo;
     private String EmergencyThree;
 
+    public String getLocality() {
+        return locality;
+    }
+
+    public void setLocality(String locality) {
+        this.locality = locality;
+    }
+
+    private String locality;
+
     public String getAddress() {
         return Address;
     }
@@ -146,6 +156,35 @@ public class Result {
     }
 
     private String socialUs;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    private String image;
+    private String district;
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public int getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(int districtId) {
+        this.districtId = districtId;
+    }
+
+    private int districtId;
 
     public String getSocialName() {
         return socialName;

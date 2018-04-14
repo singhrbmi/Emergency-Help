@@ -54,7 +54,7 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.MyViewHold
         holder.tv_socialName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SocialNoViewFragment fragment = SocialNoViewFragment.newInstance(FilteruserList.get(position).getSocialName(), "");
+                SocialNoViewFragment fragment = SocialNoViewFragment.newInstance(FilteruserList.get(position).getSocialName(), FilteruserList.get(position).getDistrict());
                 moveFragment(fragment);
             }
         });

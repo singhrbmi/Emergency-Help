@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -396,34 +398,42 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     public void onResponse(String response) {
                         MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
                         resultList.addAll(Arrays.asList(myPojo.getResult()));
-                        final Dialog dialog = new Dialog(context);
-                        dialog.setCancelable(false);
-                        dialog.setCanceledOnTouchOutside(false);
-                        dialog.setContentView(R.layout.custom_advise_dialog);
-                        Window window = dialog.getWindow();
-                        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                        dialog.show();
-                        TextView date = dialog.findViewById(R.id.tv_date);
-                        TextView advise = dialog.findViewById(R.id.tv_advise);
-                        TextView ok = dialog.findViewById(R.id.tv_ok);
-                        date.setText(resultList.get(resultList.size() - 1).getDate());
-                        advise.setText(resultList.get(resultList.size() - 1).getAdvise());
-//                        SharedPreferences sharedPreferences = context.getSharedPreferences("advise", Context.MODE_PRIVATE);
-//                        String data = sharedPreferences.getString("key", "");
-//                        if (data.isEmpty() || !resultList.get(resultList.size() - 1).getAdvise().equalsIgnoreCase(data)) {
-//                            SharedPreferences.Editor editor = sharedPreferences.edit();
-//                            editor.putString("key", resultList.get(resultList.size() - 1).getAdvise());
-//                            editor.apply();
+                        if (resultList != null && resultList.size() != 0) {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.setCancelable(false);
+                            dialog.setCanceledOnTouchOutside(false);
+                            dialog.setContentView(R.layout.custom_advise_dialog);
+                            Window window = dialog.getWindow();
+                            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 //                            dialog.show();
-//                        } else {
-//                            dialog.dismiss();
-//                        }
-                        ok.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                            TextView date = dialog.findViewById(R.id.tv_date);
+                            TextView advise = dialog.findViewById(R.id.tv_advise);
+                            TextView ok = dialog.findViewById(R.id.tv_ok);
+                            ImageView image = dialog.findViewById(R.id.image);
+                            date.setText(resultList.get(resultList.size() - 1).getDate());
+                            advise.setText(resultList.get(resultList.size() - 1).getAdvise());
+                            if (resultList.get(resultList.size() - 1).getImage() != null && !resultList.get(resultList.size() - 1).getImage().equalsIgnoreCase("") && !resultList.get(resultList.size() - 1).getImage().equalsIgnoreCase("no")) {
+                                Picasso.with(context).load(resultList.get(resultList.size() - 1).getImage()).into(image);
+                            } else {
+                                image.setImageDrawable(getResources().getDrawable(R.drawable.logo));
+                            }
+                            SharedPreferences sharedPreferences = context.getSharedPreferences("advise", Context.MODE_PRIVATE);
+                            String data = sharedPreferences.getString("key", "");
+                            if (data.isEmpty() || !resultList.get(resultList.size() - 1).getAdvise().equalsIgnoreCase(data)) {
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("key", resultList.get(resultList.size() - 1).getAdvise());
+                                editor.apply();
+                                dialog.show();
+                            } else {
                                 dialog.dismiss();
                             }
-                        });
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
                     }
                 },
                 new Response.ErrorListener() {

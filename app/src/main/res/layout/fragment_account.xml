@@ -226,6 +226,30 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutLocality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:text="Locality:-"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSize16" />
+
+                    <TextView
+                        android:id="@+id/tv_locality"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSize14" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/layoutPincode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

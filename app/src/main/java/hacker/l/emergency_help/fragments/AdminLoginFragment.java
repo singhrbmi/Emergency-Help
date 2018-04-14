@@ -96,9 +96,9 @@ public class AdminLoginFragment extends Fragment {
         id_bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AdminDasboardFragment adminDasboardFragment = AdminDasboardFragment.newInstance("", "");
-                moveFragment(adminDasboardFragment);
-//                loginFunction();
+//                AdminDasboardFragment adminDasboardFragment = AdminDasboardFragment.newInstance("", "");
+//                moveFragment(adminDasboardFragment);
+                loginFunction();
             }
         });
         showCheck.setOnClickListener(new View.OnClickListener() {

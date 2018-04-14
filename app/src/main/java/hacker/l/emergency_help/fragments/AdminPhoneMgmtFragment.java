@@ -45,7 +45,7 @@ public class AdminPhoneMgmtFragment extends Fragment {
 
     Context context;
     View view;
-    TextView tv_category, tv_phone;
+    TextView tv_category, tv_phone, tv_District;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +59,7 @@ public class AdminPhoneMgmtFragment extends Fragment {
     private void init() {
         tv_category = view.findViewById(R.id.tv_category);
         tv_phone = view.findViewById(R.id.tv_phone);
+        tv_District = view.findViewById(R.id.tv_District);
         tv_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +72,13 @@ public class AdminPhoneMgmtFragment extends Fragment {
             public void onClick(View v) {
                 AddPhoneNoFragment addPhoneNoFragment = AddPhoneNoFragment.newInstance("", "");
                 moveFragment(addPhoneNoFragment);
+            }
+        });
+        tv_District.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddPhoneDistrictFragment fragment = AddPhoneDistrictFragment.newInstance("", "");
+                moveFragment(fragment);
             }
         });
     }

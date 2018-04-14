@@ -75,11 +75,11 @@ public class SurakshaCavachFragment extends Fragment {
     Context context;
     List<String> spinnerList;
     Spinner spinner;
-    EditText id_et_userName, id_phone, id_email, id_address, id_no1, id_no2, id_no3, id_city, id_pincode;
+    EditText id_et_userName, id_phone, id_email, id_address, id_no1, id_no2, id_no3, id_city, id_pincode, id_locality;
     Button id_btproced;
     ProgressDialog pd;
     int loginID;
-    String name, phone, email, city, address, pincode, no1, no2, no3, socialUs, temp;
+    String name, phone, email, city, address, pincode, no1, no2, no3, socialUs, temp, locality;
     Bitmap bitmap;
 
     @Override
@@ -118,6 +118,7 @@ public class SurakshaCavachFragment extends Fragment {
         id_no2 = view.findViewById(R.id.id_no2);
         id_no3 = view.findViewById(R.id.id_no3);
         id_city = view.findViewById(R.id.id_city);
+        id_locality = view.findViewById(R.id.id_locality);
         id_pincode = view.findViewById(R.id.id_pincode);
         id_btproced = view.findViewById(R.id.id_btproced);
         DbHelper dbHelper = new DbHelper(context);
@@ -160,6 +161,7 @@ public class SurakshaCavachFragment extends Fragment {
         email = id_email.getText().toString();
         pincode = id_pincode.getText().toString();
         city = id_city.getText().toString();
+        locality = id_locality.getText().toString();
         address = id_address.getText().toString();
         no1 = id_no1.getText().toString();
         no2 = id_no2.getText().toString();
@@ -197,6 +199,9 @@ public class SurakshaCavachFragment extends Fragment {
         } else if (pincode.length() == 0) {
             id_pincode.setError("Enter Pincode");
             return false;
+        } else if (locality.length() == 0) {
+            id_locality.setError("Enter Locality");
+            return false;
         } else {
             return true;
         }
@@ -224,6 +229,7 @@ public class SurakshaCavachFragment extends Fragment {
                                 id_no3.setText("");
                                 id_city.setText("");
                                 id_pincode.setText("");
+                                id_locality.setText("");
                                 spinner.setSelection(0);
                             }
                         },
@@ -246,6 +252,7 @@ public class SurakshaCavachFragment extends Fragment {
                         params.put("EmergencyOne", no1);
                         params.put("EmergencyTwo", no2);
                         params.put("EmergencyThree", no3);
+                        params.put("locality", locality);
                         String barCode = name + "," + phone + "," + email + "," + address + "," + city + "," + pincode + "," + no1 + "," + no2 + "," + no3;
                         try {
                             bitmap = TextToImageEncode(barCode);

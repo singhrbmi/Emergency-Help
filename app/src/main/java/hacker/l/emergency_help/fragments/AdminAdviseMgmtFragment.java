@@ -1,8 +1,14 @@
 package hacker.l.emergency_help.fragments;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +42,9 @@ import hacker.l.emergency_help.adapter.AdviseAdapter;
 import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
+import hacker.l.emergency_help.utility.FilePath;
 import hacker.l.emergency_help.utility.Utility;
+import hacker.l.emergency_help.utility.myUploadImage;
 
 
 public class AdminAdviseMgmtFragment extends Fragment {
@@ -74,7 +84,9 @@ public class AdminAdviseMgmtFragment extends Fragment {
     ProgressDialog pd;
     List<Result> resultList;
     boolean aBoolean = false;
+    ImageView imageView, image_camera;
     int id;
+    String selectedPath, imageUrl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,19 +102,51 @@ public class AdminAdviseMgmtFragment extends Fragment {
         edt_message = view.findViewById(R.id.edt_message);
         tv_submit = view.findViewById(R.id.tv_submit);
         recycleView = view.findViewById(R.id.recycleView);
+        imageView = view.findViewById(R.id.imageView);
+        image_camera = view.findViewById(R.id.image_camera);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
-        setAdapter();
+//        setAdapter();
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (aBoolean) {
                     updateAdvise();
                 } else {
-                    addAdviseData();
+                    uploadData();
                 }
             }
         });
+        image_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImageChooser();
+            }
+        });
+    }
+
+    private void showImageChooser() {
+        Intent intent = new Intent();
+        //sets the select file to all types of files
+        intent.setType("image/*");
+        //allows to select data and return it
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        //starts new activity to select file and return data
+        startActivityForResult(Intent.createChooser(intent, "Choose File to Upload.."), 1);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == 1) {
+                Uri selectedFileUri = data.getData();
+                selectedPath = FilePath.getPath(context, selectedFileUri);
+                //chat_list_view.setVisibility(View.GONE);
+                Picasso.with(context).load(selectedFileUri).into(imageView);
+            }
+        }
     }
 
     private void updateAdvise() {
@@ -119,7 +163,7 @@ public class AdminAdviseMgmtFragment extends Fragment {
                             public void onResponse(String response) {
                                 pd.dismiss();
                                 Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
-                                setAdapter();
+//                                setAdapter();
                                 tv_submit.setText("Submit");
                             }
                         },
@@ -147,6 +191,59 @@ public class AdminAdviseMgmtFragment extends Fragment {
         }
     }
 
+    private void uploadData() {
+        class UploadData extends AsyncTask<Void, Integer, String> {
+            ProgressDialog uploading;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                uploading = new ProgressDialog(context);
+                uploading.setMessage("Please Wait..");
+                uploading.setCancelable(false);
+                uploading.setProgress(0);
+                try {
+                    if (uploading.isShowing()) {
+                        uploading.dismiss();
+                    } else {
+                        uploading.show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected void onProgressUpdate(Integer... progress) {
+                uploading.setProgress(progress[0]);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                uploading.dismiss();
+                imageUrl = s;
+                addAdviseData();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                String msg = null;
+                myUploadImage myUploadImage = new myUploadImage();
+                if (selectedPath != null) {
+                    msg = myUploadImage.uploadImageData(selectedPath);
+                } else {
+                    Toast.makeText(context, "Select Image Please", Toast.LENGTH_SHORT).show();
+                }
+                return msg;
+            }
+        }
+
+
+        UploadData uv = new UploadData();
+        uv.execute();
+    }
+
     private void addAdviseData() {
         final String message = edt_message.getText().toString();
         if (message.length() != 0) {
@@ -161,7 +258,9 @@ public class AdminAdviseMgmtFragment extends Fragment {
                             public void onResponse(String response) {
                                 pd.dismiss();
                                 Toast.makeText(context, "Send Successfully", Toast.LENGTH_SHORT).show();
-                                setAdapter();
+                                edt_message.setText("");
+                                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_file_upload_black_24dp));
+//                                setAdapter();
                             }
                         },
                         new Response.ErrorListener() {
@@ -174,6 +273,7 @@ public class AdminAdviseMgmtFragment extends Fragment {
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("advise", message);
+                        params.put("image", imageUrl);
                         return params;
                     }
                 };

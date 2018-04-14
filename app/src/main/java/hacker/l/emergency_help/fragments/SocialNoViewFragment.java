@@ -42,17 +42,16 @@ public class SocialNoViewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TYPE = "type";
-    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String type;
-    private String mParam2;
+    private String district;
 
-    public static SocialNoViewFragment newInstance(String type, String param2) {
+    public static SocialNoViewFragment newInstance(String type, String district) {
         SocialNoViewFragment fragment = new SocialNoViewFragment();
         Bundle args = new Bundle();
         args.putString(TYPE, type);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("district", district);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,7 +61,7 @@ public class SocialNoViewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             type = getArguments().getString(TYPE);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            district = getArguments().getString("district");
         }
     }
 
@@ -71,7 +70,7 @@ public class SocialNoViewFragment extends Fragment {
     Context context;
     LinearLayoutManager linearLayoutManager;
     Result result;
-    TextView tv_type;
+    TextView tv_type,tv_District;
     SearchView search_barUser;
     SocialContactsAdapter socialContactsAdapter;
     ProgressDialog pd;
@@ -91,7 +90,9 @@ public class SocialNoViewFragment extends Fragment {
         resultList = new ArrayList<>();
         recycleView = view.findViewById(R.id.recycleView);
         tv_type = view.findViewById(R.id.type);
+        tv_District = view.findViewById(R.id.tv_District);
         tv_type.setText(type);
+        tv_District.setText(district);
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
         if (Utility.isOnline(context)) {
@@ -122,6 +123,7 @@ public class SocialNoViewFragment extends Fragment {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
+                    params.put("district", district);
                     params.put("category", type);
                     return params;
                 }

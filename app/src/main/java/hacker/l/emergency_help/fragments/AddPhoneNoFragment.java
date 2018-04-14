@@ -75,10 +75,10 @@ public class AddPhoneNoFragment extends Fragment {
 
     Context context;
     View view;
-    Spinner spinner;
+    Spinner spinner, spinnerDist;
     List<Result> resultList;
-    List<String> stringList;
-    String category, offNumber, offName, phone, name;
+    List<String> stringList, districtList;
+    String district, category, offNumber, offName, phone, name;
     Button btn_add;
     Boolean aBoolean = false;
     EditText edt_offNo, edt_offName, edt_phone, edt_name;
@@ -102,6 +102,7 @@ public class AddPhoneNoFragment extends Fragment {
 
     private void init() {
         spinner = view.findViewById(R.id.spinner);
+        spinnerDist = view.findViewById(R.id.spinnerDist);
         btn_add = view.findViewById(R.id.btn_add);
         edt_offNo = view.findViewById(R.id.edt_offNo);
         edt_offName = view.findViewById(R.id.edt_offName);
@@ -109,7 +110,8 @@ public class AddPhoneNoFragment extends Fragment {
         edt_name = view.findViewById(R.id.edt_name);
         resultList = new ArrayList<>();
         stringList = new ArrayList<>();
-        setSpinnerAdapter();
+        districtList = new ArrayList<>();
+        setSpinnerDistAdapter();
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,6 +145,50 @@ public class AddPhoneNoFragment extends Fragment {
             }
         });
         setPhoneAdapter();
+    }
+
+    private void setSpinnerDistAdapter() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllDistrict,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        districtList.clear();
+                        for (Result result : myPojo.getResult()) {
+                            districtList.addAll(Arrays.asList(result.getDistrict()));
+                        }
+                        if (districtList != null) {
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, districtList);
+                            spinnerDist.setAdapter(adapter);
+                            spinnerDist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    district = parent.getSelectedItem().toString();
+                                    setSpinnerAdapter();
+                                    setPhoneAdapter();
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
     }
 
     public void setPhoneAdapter() {
@@ -180,6 +226,7 @@ public class AddPhoneNoFragment extends Fragment {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("category", category);
+                    params.put("district", district);
                     return params;
                 }
             };
@@ -219,6 +266,7 @@ public class AddPhoneNoFragment extends Fragment {
                     params.put("offName", offName);
                     params.put("offNumber", offNumber);
                     params.put("category", category);
+                    params.put("district", district);
                     return params;
                 }
             };
@@ -260,6 +308,7 @@ public class AddPhoneNoFragment extends Fragment {
                     params.put("offName", offName);
                     params.put("offNumber", offNumber);
                     params.put("category", category);
+                    params.put("district", district);
                     return params;
                 }
             };
@@ -313,6 +362,7 @@ public class AddPhoneNoFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        stringList.clear();
                         for (Result result : myPojo.getResult()) {
                             stringList.addAll(Arrays.asList(result.getSocialName()));
                         }
@@ -342,6 +392,7 @@ public class AddPhoneNoFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("district", district);
                 return params;
             }
         };

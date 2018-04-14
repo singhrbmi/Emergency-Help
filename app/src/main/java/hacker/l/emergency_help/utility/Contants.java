@@ -52,6 +52,11 @@ public class Contants {
     public static final String updateCategory = "updateCategory.php";
     public static final String deleteCategory = "deleteCategory.php";
 
+    public static final String addDistrict = "addDistrict.php";
+    public static final String getAllDistrict = "getAllDistrict.php";
+    public static final String updateDistrict = "updateDistrict.php";
+    public static final String deleteDistrict = "deleteDistrict.php";
+
     public static final String addPhone = "addPhone.php";
     public static final String getAllPhone = "getAllPhone.php";
     public static final String updatePhone = "updatePhone.php";
@@ -63,6 +68,7 @@ public class Contants {
     public static final String deleteAdvise = "deleteAdvise.php";
 
     public static final String getAllLogin = "getAllLogin.php";
+    public static final String uploadimage = "uploadimage.php";
 
     public static final String getAllComplents = "getAllComplents.php";
     public static final String AddComplents = "AddComplents.php";

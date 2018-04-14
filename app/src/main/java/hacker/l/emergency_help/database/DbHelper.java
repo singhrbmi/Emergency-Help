@@ -20,7 +20,7 @@ import hacker.l.emergency_help.utility.Contants;
 public class DbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = Contants.DATABASE_NAME;
 
     public DbHelper(Context context) {
@@ -43,8 +43,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
         String CREATE_UserData_TABLE = "CREATE TABLE userData(loginId INTEGER,Username TEXT,UserPhone TEXT,EmailId TEXT,Password TEXT)";
-        String CREATE_surakshacavach_TABLE = "CREATE TABLE surakshacavach(scid INTEGER,loginId INTEGER,Username TEXT,UserPhone TEXT,EmailId TEXT,Address TEXT,City TEXT ,PinCode TEXT, EmergencyOne TEXT, EmergencyTwo TEXT, EmergencyThree TEXT,barCode TEXT, socialUs TEXT)";
-        String CREATE_socialData_TABLE = "CREATE TABLE socialData(socialNoId INTEGER,socialName TEXT)";
+        String CREATE_surakshacavach_TABLE = "CREATE TABLE surakshacavach(scid INTEGER,loginId INTEGER,Username TEXT,UserPhone TEXT,EmailId TEXT,Address TEXT,City TEXT ,PinCode TEXT, EmergencyOne TEXT, EmergencyTwo TEXT, EmergencyThree TEXT,barCode TEXT, socialUs TEXT,locality TEXT)";
+        String CREATE_socialData_TABLE = "CREATE TABLE socialData(socialNoId INTEGER,socialName TEXT,district TEXT)";
         db.execSQL(CREATE_UserData_TABLE);
         db.execSQL(CREATE_socialData_TABLE);
         db.execSQL(CREATE_surakshacavach_TABLE);
@@ -212,6 +212,7 @@ public class DbHelper extends SQLiteOpenHelper {
         ob.setEmergencyThree(cursor.getString(10));
         ob.setBarCode(cursor.getString(11));
         ob.setSocialUs(cursor.getString(12));
+        ob.setLocality(cursor.getString(13));
     }
 
     // insert suraksha data.............
@@ -230,6 +231,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put("EmergencyThree", ob.getEmergencyThree());
         values.put("barCode", ob.getBarCode());
         values.put("socialUs", ob.getSocialUs());
+        values.put("locality", ob.getLocality());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -317,6 +319,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put("EmergencyThree", ob.getEmergencyThree());
         values.put("barCode", ob.getBarCode());
         values.put("socialUs", ob.getSocialUs());
+        values.put("locality", ob.getLocality());
 
         SQLiteDatabase db = this.getWritableDatabase();
         long i = 0;
@@ -356,6 +359,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private void populateSocialData(Cursor cursor, Result ob) {
         ob.setSocialNoId(cursor.getInt(0));
         ob.setSocialName(cursor.getString(1));
+        ob.setDistrict(cursor.getString(2));
     }
 
     // insert Social data.............
@@ -363,6 +367,7 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("socialNoId", ob.getSocialNoId());
         values.put("socialName", ob.getSocialName());
+        values.put("district", ob.getDistrict());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -417,6 +422,7 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("socialNoId", ob.getSocialNoId());
         values.put("socialName", ob.getSocialName());
+        values.put("district", ob.getDistrict());
 
         SQLiteDatabase db = this.getWritableDatabase();
         long i = 0;

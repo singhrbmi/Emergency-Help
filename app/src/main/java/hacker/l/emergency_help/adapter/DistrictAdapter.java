@@ -2,10 +2,8 @@ package hacker.l.emergency_help.adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -28,7 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import hacker.l.emergency_help.R;
-import hacker.l.emergency_help.fragments.AdminAdviseMgmtFragment;
+import hacker.l.emergency_help.fragments.AddPhoneCategoryFragment;
+import hacker.l.emergency_help.fragments.AddPhoneDistrictFragment;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.FontManager;
@@ -38,79 +37,68 @@ import hacker.l.emergency_help.utility.Utility;
  * Created by lalitsingh on 23/03/18.
  */
 
-public class ComplentAdapter extends RecyclerView.Adapter<ComplentAdapter.MyViewHolder> {
+public class DistrictAdapter extends RecyclerView.Adapter<DistrictAdapter.MyViewHolder> {
     private Typeface materialdesignicons_font, ProximaNovaRegular;
     private Context mContext;
     private List<Result> userList, FilteruserList;
+    AddPhoneDistrictFragment varietyFragment;
     ProgressDialog pd;
 
-    public ComplentAdapter(Context mContext, List<Result> userList) {
+    public DistrictAdapter(Context mContext, List<Result> userList, AddPhoneDistrictFragment varietyFragment) {
         this.mContext = mContext;
         this.userList = userList;
         this.FilteruserList = userList;
+        this.varietyFragment = varietyFragment;
         this.ProximaNovaRegular = FontManager.getFontTypeface(mContext, "fonts/ProximaNova-Regular.otf");
         this.materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(mContext, "fonts/materialdesignicons-webfont.otf");
     }
 
     @Override
-    public ComplentAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DistrictAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_complent, parent, false);
+                .inflate(R.layout.item_district, parent, false);
 
-        return new ComplentAdapter.MyViewHolder(itemView);
+        return new DistrictAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ComplentAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(DistrictAdapter.MyViewHolder holder, final int position) {
         if (position % 2 == 1) {
             holder.linearLayout.setBackgroundColor(Color.parseColor("#ffffff"));
         } else {
             holder.linearLayout.setBackgroundColor(Color.parseColor("#ffffff"));
         }
-        holder.tv_complent.setText(FilteruserList.get(position).getComplent());
-        holder.tv_date.setText(FilteruserList.get(position).getDate());
-        holder.tv_name.setText("By--" + FilteruserList.get(position).getName());
-        holder.tv_phone.setText(FilteruserList.get(position).getPhone());
-        holder.tv_share.setOnClickListener(new View.OnClickListener() {
+        holder.tv_variety.setText(FilteruserList.get(position).getDistrict());
+        holder.tv_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
-                txtIntent .setType("text/plain");
-                txtIntent .putExtra(android.content.Intent.EXTRA_SUBJECT, "Complent Data");
-                txtIntent .putExtra(android.content.Intent.EXTRA_TEXT, FilteruserList.get(position).getComplent()+","+FilteruserList.get(position).getName()+","+FilteruserList.get(position).getPhone());
-                mContext.startActivity(Intent.createChooser(txtIntent ,"Share"));
+                varietyFragment.updateDistrictData(true, FilteruserList.get(position).getDistrict(), FilteruserList.get(position).getDistrictId());
+//                varietyFragment.setVarietyAdapter();
             }
         });
-//        holder.tv_edit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                varietyFragment.updateShowData(true, FilteruserList.get(position).getAdvise(), FilteruserList.get(position).getAdviseId());
-////                varietyFragment.setVarietyAdapter();
-//            }
-//        });
-//        holder.tv_delete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                deleteVariety(position);
-//            }
-//        });
+        holder.tv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteData(position);
+            }
+        });
     }
 
 
-    private void deleteVariety(final int position) {
+    private void deleteData(final int position) {
         if (Utility.isOnline(mContext)) {
             pd = new ProgressDialog(mContext);
             pd.setMessage("Deleting wait......");
             pd.show();
             pd.setCancelable(false);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.deleteAdvise,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.deleteDistrict,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             pd.dismiss();
                             FilteruserList.remove(position);
-//                            varietyFragment.setAdapter();
+                            varietyFragment.setDistrictAdapter();
                             Toast.makeText(mContext, "Delete Successully", Toast.LENGTH_LONG).show();
                         }
                     },
@@ -123,7 +111,7 @@ public class ComplentAdapter extends RecyclerView.Adapter<ComplentAdapter.MyView
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("adviseId", String.valueOf(FilteruserList.get(position).getAdviseId()));
+                    params.put("districtId", String.valueOf(FilteruserList.get(position).getDistrictId()));
                     return params;
                 }
             };
@@ -142,22 +130,20 @@ public class ComplentAdapter extends RecyclerView.Adapter<ComplentAdapter.MyView
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_name, tv_complent, tv_date, tv_phone, tv_share;
+        TextView tv_variety, tv_edit, tv_delete;
         LinearLayout linearLayout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
-            tv_complent = (TextView) itemView.findViewById(R.id.tv_complent);
-            tv_date = (TextView) itemView.findViewById(R.id.tv_date);
-            tv_phone = (TextView) itemView.findViewById(R.id.tv_phone);
-            tv_share = (TextView) itemView.findViewById(R.id.tv_share);
+            tv_variety = (TextView) itemView.findViewById(R.id.tv_variety);
+            tv_edit = (TextView) itemView.findViewById(R.id.tv_edit);
+            tv_delete = (TextView) itemView.findViewById(R.id.tv_delete);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
-//            tv_variety.setTypeface(ProximaNovaRegular);
-//            tv_edit.setTypeface(materialdesignicons_font);
-//            tv_delete.setTypeface(materialdesignicons_font);
-//            tv_edit.setText(Html.fromHtml("&#xf64f;"));
-//            tv_delete.setText(Html.fromHtml("&#xf5ad;"));
+            tv_variety.setTypeface(ProximaNovaRegular);
+            tv_edit.setTypeface(materialdesignicons_font);
+            tv_delete.setTypeface(materialdesignicons_font);
+            tv_edit.setText(Html.fromHtml("&#xf64f;"));
+            tv_delete.setText(Html.fromHtml("&#xf5ad;"));
         }
     }
 }

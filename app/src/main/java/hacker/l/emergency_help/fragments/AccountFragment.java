@@ -84,8 +84,8 @@ public class AccountFragment extends Fragment {
 
     View view;
     Context context;
-    TextView tv_name, tv_phone, tv_email, tv_address, tv_city, tv_pincode, tv_emergency, tv_emergency2, tv_emergency3, tv_barcode, share;
-    LinearLayout layoutone, layouttwo, layoutthree, layoutAddress, layoutCity, layoutPincode;
+    TextView tv_name, tv_phone, tv_email, tv_locality, tv_address, tv_city, tv_pincode, tv_emergency, tv_emergency2, tv_emergency3, tv_barcode, share;
+    LinearLayout layoutone, layouttwo, layoutthree, layoutLocality, layoutAddress, layoutCity, layoutPincode;
     ImageView barCodeImage;
     public final static int QRcodeWidth = 500;
     Bitmap bitmap;
@@ -119,6 +119,8 @@ public class AccountFragment extends Fragment {
         layoutAddress = view.findViewById(R.id.layoutAddress);
         layoutCity = view.findViewById(R.id.layoutCity);
         layoutPincode = view.findViewById(R.id.layoutPincode);
+        layoutLocality = view.findViewById(R.id.layoutLocality);
+        tv_locality = view.findViewById(R.id.tv_locality);
         share = view.findViewById(R.id.share);
 //        final ProgressDialog progressDialog = new ProgressDialog(context);
 //        progressDialog.setMessage("Waiting");
@@ -221,6 +223,7 @@ public class AccountFragment extends Fragment {
                 tv_phone.setText(data.get(l).getUserPhone());
                 tv_address.setText(data.get(l).getAddress());
                 tv_city.setText(data.get(l).getCity());
+                tv_locality.setText(data.get(l).getLocality());
                 tv_pincode.setText(data.get(l).getPinCode());
                 tv_emergency.setText(data.get(l).getEmergencyOne());
                 tv_emergency2.setText(data.get(l).getEmergencyTwo());
@@ -239,6 +242,7 @@ public class AccountFragment extends Fragment {
             layoutPincode.setVisibility(View.GONE);
             tv_barcode.setVisibility(View.GONE);
             barCodeImage.setVisibility(View.GONE);
+            layoutLocality.setVisibility(View.GONE);
             share.setVisibility(View.GONE);
         }
     }

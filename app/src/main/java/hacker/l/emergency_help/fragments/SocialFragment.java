@@ -11,7 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -23,6 +26,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +71,10 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
     Context context;
     //    Button btn_police, btn_sakticomd, btn_tiger, btn_pcr, btn_policeNo, btn_highway;
     RecyclerView recycleView;
+    List<String> districtList;
+    List<Result> resultList = null;
+    Spinner spinnerDist;
+    String district;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,32 +100,44 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
 //        btn_pcr.setOnClickListener(this);
 //        btn_highway.setOnClickListener(this);
 //        btn_policeNo.setOnClickListener(this);
+        resultList = new ArrayList<>();
+        districtList = new ArrayList<>();
+        spinnerDist = view.findViewById(R.id.spinnerDist);
         recycleView = view.findViewById(R.id.recycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
-        getDataFromServer();
-        setAdapter();
+        setSpinnerDistAdapter();
+//        getDataFromServer();
+//        setAdapter();
     }
 
-    private void getDataFromServer() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllCategory,
+    private void setSpinnerDistAdapter() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllDistrict,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
-                        if (myPojo != null) {
-                            DbHelper dbHelper = new DbHelper(context);
-                            dbHelper.deleteSocialData();
-                            for (Result result : myPojo.getResult()) {
-                                if (result != null) {
-                                    dbHelper.upsertSocialData(result);
-                                    setAdapter();
-                                }
-                            }
+                        districtList.clear();
+                        for (Result result : myPojo.getResult()) {
+                            districtList.addAll(Arrays.asList(result.getDistrict()));
                         }
-//                        progressDialog.dismiss();
-                    }
+                        if (districtList != null) {
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, districtList);
+                            spinnerDist.setAdapter(adapter);
+                            spinnerDist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    district = parent.getSelectedItem().toString();
+                                    getDataFromServer();
+                                }
 
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+                        }
+                    }
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -133,12 +154,48 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
         requestQueue.add(stringRequest);
     }
 
+    private void getDataFromServer() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllCategory,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        resultList.clear();
+                        if (myPojo != null) {
+                            for (Result result : myPojo.getResult()) {
+                                resultList.addAll(Arrays.asList(result));
+                            }
+                            SocialAdapter socialAdapter = new SocialAdapter(context, resultList);
+                            recycleView.setAdapter(socialAdapter);
+//                            if (response.equalsIgnoreCase("no")) {
+//                                Toast.makeText(context, "Any category not Found", Toast.LENGTH_SHORT).show();
+//                            }
+                        }
+//                        progressDialog.dismiss();
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("district", district);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
     private void setAdapter() {
         DbHelper dbHelper = new DbHelper(context);
         List<Result> resultList = dbHelper.getAllSocialData();
         if (resultList != null) {
-            SocialAdapter socialAdapter = new SocialAdapter(context, resultList);
-            recycleView.setAdapter(socialAdapter);
+
 
         } else {
             Toast.makeText(context, "Add Social Numbers", Toast.LENGTH_SHORT).show();

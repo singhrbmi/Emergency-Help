@@ -35,6 +35,7 @@ public class LocationAddress {
                         for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
                             sb.append(address.getAddressLine(i)).append(",");
                         }
+//                        sb.append(address.getSubLocality()).append(",");
                         sb.append(address.getLocality()).append(",");
                         sb.append(address.getPostalCode()).append(",");
                         sb.append(address.getCountryName());

@@ -151,21 +151,23 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
         Button btn_hospital = (Button) findViewById(hacker.l.emergency_help.R.id.btn_hospital);
         btn_hospital.setOnClickListener(new View.OnClickListener() {
             String search = "hospital";
+
             @Override
             public void onClick(View v) {
-        mMap.clear();
-        String url = getUrl(latitude, longitude, search);
-        Object[] DataTransfer = new Object[2];
-        DataTransfer[0] = mMap;
-        DataTransfer[1] = url;
-        GetNearbyBanksData getNearbyBanksData = new GetNearbyBanksData();
-        getNearbyBanksData.execute(DataTransfer);
-        Toast.makeText(PlaceActivity.this, "These are your Nearby! ", Toast.LENGTH_LONG).show();
+                mMap.clear();
+                String url = getUrl(latitude, longitude, search);
+                Object[] DataTransfer = new Object[2];
+                DataTransfer[0] = mMap;
+                DataTransfer[1] = url;
+                GetNearbyBanksData getNearbyBanksData = new GetNearbyBanksData();
+                getNearbyBanksData.execute(DataTransfer);
+                Toast.makeText(PlaceActivity.this, "These are your Nearby! ", Toast.LENGTH_LONG).show();
             }
         });
         Button btn_ambulance = (Button) findViewById(hacker.l.emergency_help.R.id.btn_ambulance);
         btn_ambulance.setOnClickListener(new View.OnClickListener() {
             String search = "ambulance";
+
             @Override
             public void onClick(View v) {
                 mMap.clear();
@@ -181,6 +183,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
         Button btn_police = (Button) findViewById(hacker.l.emergency_help.R.id.btn_police);
         btn_police.setOnClickListener(new View.OnClickListener() {
             String search = "police";
+
             @Override
             public void onClick(View v) {
                 mMap.clear();
@@ -196,6 +199,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
         Button btn_atm = (Button) findViewById(hacker.l.emergency_help.R.id.btn_atm);
         btn_atm.setOnClickListener(new View.OnClickListener() {
             String search = "atm";
+
             @Override
             public void onClick(View v) {
                 mMap.clear();
@@ -205,6 +209,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
                 DataTransfer[1] = url;
                 GetNearbyBanksData getNearbyBanksData = new GetNearbyBanksData();
                 getNearbyBanksData.execute(DataTransfer);
+//                getNearbyBanksData.calcsDistance(latitude, longitude);
                 Toast.makeText(PlaceActivity.this, "These are your Nearby! ", Toast.LENGTH_LONG).show();
             }
         });
