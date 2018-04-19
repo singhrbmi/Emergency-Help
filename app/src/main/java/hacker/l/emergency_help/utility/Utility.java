@@ -327,4 +327,32 @@ public class Utility {
             //   throw new RuntimeException("Could not get language: " + e);
         }
     }
+    public static String formatDist(float meters) {
+        if (meters < 1000) {
+            return ((int) meters) + "m";
+        } else if (meters < 10000) {
+            return formatDec(meters / 1000f, 1) + "km";
+        } else {
+            return ((int) (meters / 1000f)) + "km";
+        }
+    }
+
+    static String formatDec(float val, int dec) {
+        int factor = (int) Math.pow(10, dec);
+
+        int front = (int) (val);
+        int back = (int) Math.abs(val * (factor)) % factor;
+
+        return front + "." + back;
+    }
+
+    public static String formatDistWithoutKM(float meters) {
+        if (meters < 1000) {
+            return ((int) meters) + "";
+        } else if (meters < 10000) {
+            return formatDec(meters / 1000f, 1) + "";
+        } else {
+            return ((int) (meters / 1000f)) + "";
+        }
+    }
 }

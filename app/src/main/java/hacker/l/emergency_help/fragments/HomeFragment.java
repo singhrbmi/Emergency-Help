@@ -28,6 +28,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -56,6 +57,7 @@ import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.AppLocationService;
 import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.LocationAddress;
+import hacker.l.emergency_help.utility.Utility;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -391,6 +393,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     void showAdvise() {
+        if (!Utility.isOnline(context)) {
+            Toast.makeText(context, "Connect Internet connection", Toast.LENGTH_SHORT).show();
+        }
         final List<Result> resultList = new ArrayList<>();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAdvise,
                 new Response.Listener<String>() {
@@ -417,12 +422,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             } else {
                                 image.setImageDrawable(getResources().getDrawable(R.drawable.logo));
                             }
-                            SharedPreferences sharedPreferences = context.getSharedPreferences("advise", Context.MODE_PRIVATE);
+                            final SharedPreferences sharedPreferences = context.getSharedPreferences("advise", Context.MODE_PRIVATE);
                             String data = sharedPreferences.getString("key", "");
                             if (data.isEmpty() || !resultList.get(resultList.size() - 1).getAdvise().equalsIgnoreCase(data)) {
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("key", resultList.get(resultList.size() - 1).getAdvise());
-                                editor.apply();
                                 dialog.show();
                             } else {
                                 dialog.dismiss();
@@ -430,6 +432,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             ok.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("key", resultList.get(resultList.size() - 1).getAdvise());
+                                    editor.apply();
                                     dialog.dismiss();
                                 }
                             });

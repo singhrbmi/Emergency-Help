@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,7 +20,8 @@ public class GetNearbyBanksData extends AsyncTask<Object, String, String> {
     String googlePlacesData;
     GoogleMap mMap;
     String url;
-    double lat, lng, distance;
+    double lat, lng;
+    String distance;
     List<HashMap<String, String>> nearbyPlacesList = null;
 
     @Override
@@ -62,7 +64,7 @@ public class GetNearbyBanksData extends AsyncTask<Object, String, String> {
             LatLng latLng = new LatLng(lat, lng);
             calcsDistance();
             markerOptions.position(latLng);
-            markerOptions.title(Float.parseFloat(decimalFormat.format(distance)) + "-Meters" + ":" + placeName + " : " + vicinity);
+            markerOptions.title(distance + ":" + placeName + " : " + vicinity);
             mMap.addMarker(markerOptions);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
             //move map camera
@@ -80,7 +82,15 @@ public class GetNearbyBanksData extends AsyncTask<Object, String, String> {
         double lat1 = Double.parseDouble(address[0]);
         double lon1 = Double.parseDouble(address[1]);
 
-        distance = distance(lat1, lon1, lat, lng);
+        Location cueerntLoc = new Location("");
+        cueerntLoc.setLatitude(lat);
+        cueerntLoc.setLongitude(lng);
+        Location loc2 = new Location("");
+        loc2.setLatitude(lat1);
+        loc2.setLongitude(lon1);
+        float distanceInMeters = cueerntLoc.distanceTo(loc2);
+        distance=Utility.formatDist(distanceInMeters);
+//        distance = distance(lat1, lon1, lat, lng);
 //        Location locationA = new Location("point A");
 //
 //        locationA.setLatitude(lat1);

@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            app:queryHint="Search Users here" />
+            app:queryHint="Search Name/Phone here" />
 
         <!-- TODO: Update blank fragment layout -->
         <android.support.v7.widget.RecyclerView

@@ -38,6 +38,7 @@ import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
+import hacker.l.emergency_help.utility.Utility;
 
 public class SocialFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
@@ -88,6 +89,9 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init() {
+        if (!Utility.isOnline(context)) {
+            Toast.makeText(context, "Connect Internet connection", Toast.LENGTH_SHORT).show();
+        }
 //        btn_police = view.findViewById(R.id.btn_police);
 //        btn_sakticomd = view.findViewById(R.id.btn_sakticomd);
 //        btn_tiger = view.findViewById(R.id.btn_tiger);
