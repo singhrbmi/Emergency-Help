@@ -1,5 +1,6 @@
 package hacker.l.emergency_help.utility;
 
+import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -9,6 +10,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ public class GetNearbyBanksData extends AsyncTask<Object, String, String> {
     String googlePlacesData;
     GoogleMap mMap;
     String url;
-    double lat, lng;
+    double lat, lng, lat1, lon1;
     String distance;
     List<HashMap<String, String>> nearbyPlacesList = null;
 
@@ -70,6 +73,14 @@ public class GetNearbyBanksData extends AsyncTask<Object, String, String> {
             //move map camera
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+//            PolylineOptions line =
+//                    new PolylineOptions().add(new LatLng(lat,
+//                                    lng),
+//                            new LatLng(lat1,
+//                                    lon1))
+//                            .width(5).color(Color.RED);
+//
+//            mMap.addPolyline(line);
         }
 
     }
@@ -79,8 +90,8 @@ public class GetNearbyBanksData extends AsyncTask<Object, String, String> {
         int endPo = url.indexOf("&");
         String sub = url.substring(po + 1, endPo);
         String[] address = sub.split(",");
-        double lat1 = Double.parseDouble(address[0]);
-        double lon1 = Double.parseDouble(address[1]);
+        lat1 = Double.parseDouble(address[0]);
+        lon1 = Double.parseDouble(address[1]);
 
         Location cueerntLoc = new Location("");
         cueerntLoc.setLatitude(lat);
@@ -89,7 +100,7 @@ public class GetNearbyBanksData extends AsyncTask<Object, String, String> {
         loc2.setLatitude(lat1);
         loc2.setLongitude(lon1);
         float distanceInMeters = cueerntLoc.distanceTo(loc2);
-        distance=Utility.formatDist(distanceInMeters);
+        distance = Utility.formatDist(distanceInMeters);
 //        distance = distance(lat1, lon1, lat, lng);
 //        Location locationA = new Location("point A");
 //

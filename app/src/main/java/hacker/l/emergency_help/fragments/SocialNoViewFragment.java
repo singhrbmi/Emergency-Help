@@ -106,12 +106,14 @@ public class SocialNoViewFragment extends Fragment {
                         public void onResponse(String response) {
                             pd.dismiss();
                             MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                            if (myPojo!=null){
                             resultList.addAll(Arrays.asList(myPojo.getResult()));
                             if (resultList != null) {
                                 Collections.reverse(resultList);
                                 socialContactsAdapter = new SocialContactsAdapter(context, resultList);
                                 recycleView.setAdapter(socialContactsAdapter);
                             }
+                        }
                         }
                     },
                     new Response.ErrorListener() {
