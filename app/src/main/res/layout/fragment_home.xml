@@ -8,482 +8,414 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
+            <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="@dimen/margin10"-->
+            <!--app:cardCornerRadius="@dimen/margin5"-->
+            <!--app:cardElevation="@dimen/margin5">-->
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/margin10"
-                app:cardCornerRadius="@dimen/margin5"
-                app:cardElevation="@dimen/margin5">
+                android:background="@color/bg"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin14"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/margin14"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/logo" />
 
                 <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin10"
                     android:orientation="vertical">
-
-
-                    <TextView
-                        android:id="@+id/tv_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin14"
-                        android:gravity="center"
-                        android:text=""
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/margin14"
-                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:orientation="horizontal">
-
-
-                            <LinearLayout
-                                android:id="@+id/layout_hospital"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/hospital" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Near Place"
-                                    android:textSize="@dimen/textSize14" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layout_social"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/help" />
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Emergency Help"
-                                    android:textSize="@dimen/textSize14" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layout_ambulance"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/call" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Govt No"
-                                    android:textSize="@dimen/textSize14" />
-
-
-                            </LinearLayout>
-                        </LinearLayout>
+                        android:layout_height="100dp"
+                        android:orientation="horizontal">
 
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:orientation="horizontal">
+                            android:id="@+id/layout_hospital"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
 
+                            <!--<android.support.v7.widget.CardView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_margin="@dimen/margin5"-->
+                            <!--app:cardElevation="@dimen/margin5">-->
 
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_place_black_24dp" />
 
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/ebolence" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text=" Call Ambulance"
-                                    android:textSize="@dimen/textSize14" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/police" />
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Call Police"
-                                    android:textSize="@dimen/textSize14" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/fire" />
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Call Fire"
-                                    android:textSize="@dimen/textSize14" />
-
-
-                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="Near Place"
+                                android:textSize="@dimen/textSize14" />
+                            <!--</android.support.v7.widget.CardView>-->
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:orientation="horizontal">
+                            android:id="@+id/layout_utility"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
 
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
+                            <!--<android.support.v7.widget.CardView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_margin="@dimen/margin5"-->
+                            <!--app:cardElevation="@dimen/margin5">-->
 
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/womenhelp" />
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Call Women Help"
-                                    android:textSize="@dimen/textSize14" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/lyout_barCode"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_perm_phone_msg_black_24dp" />
 
 
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/sacnner" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="Utility Contacts"
+                                android:textSize="@dimen/textSize14" />
+                            <!--</android.support.v7.widget.CardView>-->
+                        </LinearLayout>
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="QR Code Scanner"
-                                    android:textSize="@dimen/textSize14" />
+                        <LinearLayout
+                            android:id="@+id/lyout_suraksha"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
 
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/lyout_suraksha"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/suraksha" />
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_radio_button_checked_black_24dp" />
 
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Suraksha Kavach"
-                                    android:textSize="@dimen/textSize14" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="Suraksha Kavach"
+                                android:textSize="@dimen/textSize14" />
 
 
-                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:id="@+id/layout_jharadmistrtive"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_settings_phone_black_24dp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:gravity="center"
+                                android:text="Jharkhand Administrative Contacts"
+                                android:textSize="@dimen/textSize14" />
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:orientation="horizontal">
+                            android:id="@+id/layout_police"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
 
-                            <LinearLayout
-                                android:id="@+id/lyout_account"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/account" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Account"
-                                    android:textSize="@dimen/textSize14" />
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_security_black_24dp" />
 
 
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layout_police"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/station" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:gravity="center"
+                                android:text="Police Administrative Contacts"
+                                android:textSize="@dimen/textSize14" />
 
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Suggestion/Complent "
-                                    android:textSize="@dimen/textSize14" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_seggestion"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_comment_black_24dp" />
 
 
-                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="Suggestion/Complent"
+                                android:textSize="@dimen/textSize14" />
 
 
-                            <LinearLayout
-                                android:id="@+id/layout_contacts"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
+                        </LinearLayout>
 
 
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/contacts" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/layout_social"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
 
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Contacts"
-                                    android:textSize="@dimen/textSize14" />
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_group_work_black_24dp" />
 
 
-                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:gravity="center"
+                                android:text="Social"
+                                android:textSize="@dimen/textSize14" />
+
 
                         </LinearLayout>
 
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:orientation="horizontal">
+                            android:id="@+id/lyout_barCode"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
 
 
-                            <LinearLayout
-                                android:id="@+id/lyout_about"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/sacnner" />
 
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="QR Code Scanner"
+                                android:textSize="@dimen/textSize14" />
 
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/margin5"
-                                    android:src="@drawable/about" />
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="About Us"
-                                    android:textSize="@dimen/textSize14" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layout_pilicesire"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-
-                                <!--<ImageView-->
-                                <!--android:layout_width="80dp"-->
-                                <!--android:layout_height="60dp"-->
-                                <!--android:layout_gravity="center"-->
-                                <!--android:scaleType="fitCenter"-->
-                                <!--android:src="@drawable/logo" />-->
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:background="@drawable/znmgd"
-                                    android:gravity="center"
-                                    android:textSize="@dimen/textSize14" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/lyout_whistle"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".33"
-                                android:background="@drawable/done_corner_round"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/dimen_5_dp"
-                                    android:src="@drawable/whistle" />
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/margin10"
-                                    android:gravity="center"
-                                    android:text="Whistle"
-                                    android:textSize="@dimen/textSize14" />
-
-                            </LinearLayout>
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_contacts"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_record_voice_over_black_24dp" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="Contacts"
+                                android:textSize="@dimen/textSize14" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/lyout_account"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/znmgd" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="Account"
+                                android:textSize="@dimen/textSize14" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_wocall"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_airport_shuttle_black_24dp" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="Help"
+                                android:textSize="@dimen/textSize14" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/lyout_about"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_supervisor_account_black_24dp" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="About Us"
+                                android:textSize="@dimen/textSize14" />
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
+            <!--</android.support.v7.widget.CardView>-->
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

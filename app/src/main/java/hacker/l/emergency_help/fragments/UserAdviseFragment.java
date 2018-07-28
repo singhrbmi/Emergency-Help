@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.adapter.AdviseAdapter;
 import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
@@ -79,6 +80,8 @@ public class UserAdviseFragment extends Fragment {
     }
 
     private void init() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Advise");
         resultList = new ArrayList<>();
         recycleView = view.findViewById(R.id.recycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);

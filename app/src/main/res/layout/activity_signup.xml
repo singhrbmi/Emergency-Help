@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
+    android:background="@color/bg"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -12,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/margin10"
         android:elevation="@dimen/margin15"
+        app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="@dimen/margin5">
 
         <ScrollView

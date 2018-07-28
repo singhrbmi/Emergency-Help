@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 
 public class AboutFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -52,6 +53,8 @@ public class AboutFragment extends Fragment {
     }
 
     private void init() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("About");
 
     }
 

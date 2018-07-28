@@ -1,14 +1,18 @@
 package hacker.l.emergency_help.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
+
 public class ShareFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,8 +41,10 @@ public class ShareFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     View view;
     Context context;
+    Button btn_share;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +57,20 @@ public class ShareFragment extends Fragment {
     }
 
     private void init() {
-
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Share");
+        btn_share = view.findViewById(R.id.btn_share);
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String shareBody = "Here is the share content body";
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Play Store Link");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share"));
+            }
+        });
     }
 
 }

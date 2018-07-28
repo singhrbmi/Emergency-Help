@@ -102,6 +102,8 @@ public class AccountFragment extends Fragment {
     }
 
     private void init() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Account");
         barCodeImage = view.findViewById(R.id.image_barcode);
         tv_name = view.findViewById(R.id.tv_name);
         tv_email = view.findViewById(R.id.tv_email);

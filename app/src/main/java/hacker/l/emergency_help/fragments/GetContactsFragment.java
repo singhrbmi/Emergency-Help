@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.adapter.ContactsAdapter;
 import hacker.l.emergency_help.models.Result;
 
@@ -80,6 +81,8 @@ public class GetContactsFragment extends Fragment {
     }
 
     private void init() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Contacts");
         lstNames = view.findViewById(R.id.lstNames);
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         lstNames.setLayoutManager(linearLayoutManager);
@@ -126,9 +129,14 @@ public class GetContactsFragment extends Fragment {
      */
     private void showContacts() {
         // Android version is lesser than 6.0 or the permission is already granted.
-        List<Result> contacts = getContactNames();
-        adapter = new ContactsAdapter(context, contacts);
-        lstNames.setAdapter(adapter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context.checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
+            //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
+        } else {
+            List<Result> contacts = getContactNames();
+            adapter = new ContactsAdapter(context, contacts);
+            lstNames.setAdapter(adapter);
+        }
     }
 
     @Override
@@ -136,6 +144,8 @@ public class GetContactsFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             showContacts();
+        } else {
+            Toast.makeText(context, "Until you grant the permission, we canot display the names", Toast.LENGTH_SHORT).show();
         }
     }
 

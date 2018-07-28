@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -23,6 +24,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
             android:orientation="vertical">
 
             <include layout="@layout/nav_header_dash_board"></include>
@@ -41,10 +43,10 @@
 
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:layout_weight=".2"
-                        android:src="@drawable/hospital" />
+                        android:src="@drawable/ic_home_black_24dp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -53,7 +55,7 @@
                         android:layout_weight=".8"
                         android:gravity="center|left"
                         android:text="Home"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/textSize14" />
                 </LinearLayout>
 
@@ -66,10 +68,10 @@
 
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:layout_weight=".2"
-                        android:src="@drawable/account" />
+                        android:src="@drawable/ic_account_box_black_24dp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -78,7 +80,7 @@
                         android:layout_weight=".8"
                         android:gravity="center|left"
                         android:text="Account"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/textSize14" />
                 </LinearLayout>
 
@@ -91,10 +93,10 @@
 
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:layout_weight=".2"
-                        android:src="@drawable/suraksha" />
+                        android:src="@drawable/ic_radio_button_checked_black_24dp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -103,7 +105,7 @@
                         android:layout_weight=".8"
                         android:gravity="center|left"
                         android:text="Suraksha Kavach"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/textSize14" />
                 </LinearLayout>
 
@@ -129,7 +131,7 @@
                         android:layout_weight=".8"
                         android:gravity="center|left"
                         android:text="QR Code Scanner"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/textSize14" />
                 </LinearLayout>
 
@@ -142,10 +144,10 @@
 
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:layout_weight=".2"
-                        android:src="@drawable/share" />
+                        android:src="@drawable/ic_share_black_24dp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -154,7 +156,7 @@
                         android:layout_weight=".8"
                         android:gravity="center|left"
                         android:text="Share"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/textSize14" />
                 </LinearLayout>
 
@@ -167,10 +169,10 @@
 
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:layout_weight=".2"
-                        android:src="@drawable/settings" />
+                        android:src="@drawable/ic_settings_applications_black_24dp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -179,7 +181,7 @@
                         android:layout_weight=".8"
                         android:gravity="center|left"
                         android:text="Settings"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/textSize14" />
                 </LinearLayout>
 
@@ -192,10 +194,10 @@
 
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:layout_weight=".2"
-                        android:src="@drawable/help" />
+                        android:src="@drawable/ic_airport_shuttle_black_24dp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -204,7 +206,7 @@
                         android:layout_weight=".8"
                         android:gravity="center|left"
                         android:text="Help"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/textSize14" />
                 </LinearLayout>
 
@@ -217,10 +219,10 @@
 
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:layout_weight=".2"
-                        android:src="@drawable/about" />
+                        android:src="@drawable/ic_supervisor_account_black_24dp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -229,7 +231,7 @@
                         android:layout_weight=".8"
                         android:gravity="center|left"
                         android:text="About Us"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/textSize14" />
                 </LinearLayout>
             </LinearLayout>

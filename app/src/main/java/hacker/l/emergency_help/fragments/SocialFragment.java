@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.adapter.SocialAdapter;
 import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.models.MyPojo;
@@ -76,6 +77,7 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
     List<Result> resultList = null;
     Spinner spinnerDist;
     String district;
+    Result result;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,22 +91,11 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Social");
         if (!Utility.isOnline(context)) {
             Toast.makeText(context, "Connect Internet connection", Toast.LENGTH_SHORT).show();
         }
-//        btn_police = view.findViewById(R.id.btn_police);
-//        btn_sakticomd = view.findViewById(R.id.btn_sakticomd);
-//        btn_tiger = view.findViewById(R.id.btn_tiger);
-//        btn_pcr = view.findViewById(R.id.btn_pcr);
-//        btn_highway = view.findViewById(R.id.btn_highway);
-//        btn_policeNo = view.findViewById(R.id.btn_policeNo);
-//        btn_police.setOnClickListener(this);
-//        btn_sakticomd.setOnClickListener(this);
-//        btn_tiger.setOnClickListener(this);
-//        btn_pcr.setOnClickListener(this);
-//        btn_highway.setOnClickListener(this);
-//        btn_policeNo.setOnClickListener(this);
-        resultList = new ArrayList<>();
         districtList = new ArrayList<>();
         spinnerDist = view.findViewById(R.id.spinnerDist);
         recycleView = view.findViewById(R.id.recycleView);
@@ -159,40 +150,83 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getDataFromServer() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllCategory,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
-                        resultList.clear();
-                        if (myPojo != null) {
-                            for (Result result : myPojo.getResult()) {
-                                resultList.addAll(Arrays.asList(result));
-                            }
-                            SocialAdapter socialAdapter = new SocialAdapter(context, resultList);
-                            recycleView.setAdapter(socialAdapter);
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllCategory,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+//                        resultList.clear();
+//                        if (myPojo != null) {
+//                            for (Result result : myPojo.getResult()) {
+//                                resultList.addAll(Arrays.asList(result));
+//                            }
+        resultList = new ArrayList<>();
+        result = new Result();
+        result.setSocialName("Sri Maheswari Sabha,Ranchi");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Lions Club of Ranchi Central");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Rotaract Club of Ranchi City");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Marwari Yuwa Manch,Ranchi South");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Lions Club of Ranchi North");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Lions Club of Ranchi Citizen");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Rotaract Club of ICWAI");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Rotaract Club of Social Revolution");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Rotaract Club of NIFFT");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Rotaract Club of St.Xavier's College");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Rotaract Club of Kalimati");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Rotaract Club of Chaibase");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("Rotaract Club of BIT MESRA");
+        resultList.add(result);
+        result = new Result();
+        result.setSocialName("FJCCI");
+        resultList.add(result);
+        SocialAdapter socialAdapter = new SocialAdapter(context, resultList);
+        recycleView.setAdapter(socialAdapter);
 //                            if (response.equalsIgnoreCase("no")) {
 //                                Toast.makeText(context, "Any category not Found", Toast.LENGTH_SHORT).show();
 //                            }
-                        }
+//                        }
 //                        progressDialog.dismiss();
-                    }
+//                    }
 
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("district", district);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                    }
+//                }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("district", district);
+//                return params;
+//            }
+//        };
+//        RequestQueue requestQueue = Volley.newRequestQueue(context);
+//        requestQueue.add(stringRequest);
     }
 
     private void setAdapter() {

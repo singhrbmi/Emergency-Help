@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.adapter.AddContactsAdapter;
 import hacker.l.emergency_help.adapter.SocialContactsAdapter;
 import hacker.l.emergency_help.models.MyPojo;
@@ -70,7 +71,7 @@ public class SocialNoViewFragment extends Fragment {
     Context context;
     LinearLayoutManager linearLayoutManager;
     Result result;
-    TextView tv_type,tv_District;
+    TextView tv_type, tv_District;
     SearchView search_barUser;
     SocialContactsAdapter socialContactsAdapter;
     ProgressDialog pd;
@@ -87,6 +88,8 @@ public class SocialNoViewFragment extends Fragment {
     }
 
     private void init() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Social Number");
         resultList = new ArrayList<>();
         recycleView = view.findViewById(R.id.recycleView);
         tv_type = view.findViewById(R.id.type);
@@ -106,14 +109,18 @@ public class SocialNoViewFragment extends Fragment {
                         public void onResponse(String response) {
                             pd.dismiss();
                             MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
-                            if (myPojo!=null){
-                            resultList.addAll(Arrays.asList(myPojo.getResult()));
-                            if (resultList != null) {
-                                Collections.reverse(resultList);
-                                socialContactsAdapter = new SocialContactsAdapter(context, resultList);
-                                recycleView.setAdapter(socialContactsAdapter);
+                            if (myPojo != null) {
+                                resultList.addAll(Arrays.asList(myPojo.getResult()));
+                                if (resultList != null) {
+                                    Collections.reverse(resultList);
+                                    socialContactsAdapter = new SocialContactsAdapter(context, resultList);
+                                    recycleView.setAdapter(socialContactsAdapter);
+                                } else {
+                                    Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
                             }
-                        }
                         }
                     },
                     new Response.ErrorListener() {
@@ -152,365 +159,5 @@ public class SocialNoViewFragment extends Fragment {
                 return false;
             }
         });
-    }
-
-    private List<Result> getPoliceNoListContact() {
-        List<Result> PoliceNoContacts = new ArrayList<>();
-        result = new Result("A V Homkar,IPS", "9431706118", "DIG,SC RANGE,RANCHI", "2481876");
-        PoliceNoContacts.add(result);
-        result = new Result("KULDEEP DWIVEDI,IPS", "9431706136", "SR.S.P,RANCHI", "2200237");
-        PoliceNoContacts.add(result);
-        result = new Result("AMAN KUMAR,IPS", "9431706137", "CITY .S.P,RANCHI", "2200898");
-        PoliceNoContacts.add(result);
-        result = new Result("AJIT PETER DUNGDUNG", "9431706138", "RURAL SP,RANCHI", "2200238");
-        PoliceNoContacts.add(result);
-        result = new Result("SANJAY RANJAN SINGH,IPS", "9431706140", "TRAFFIC S.P,RANCHI", "2206266");
-        PoliceNoContacts.add(result);
-        result = new Result("BHOLA PRASAD SINGH", "9431770077", "DSP,KOTWALI", "2212680");
-        PoliceNoContacts.add(result);
-        result = new Result("BHOLA PRASAD SINGH", "9431375451", "DSP,KOTWALI", "2212680");
-        PoliceNoContacts.add(result);
-        return PoliceNoContacts;
-    }
-
-    public List<Result> getPoliceContact() {
-        List<Result> PoliceContacts = new ArrayList<>();
-        result = new Result("Angara PS", "9431706180");
-        PoliceContacts.add(result);
-        result = new Result("Argora PS", "9431706170");
-        PoliceContacts.add(result);
-        result = new Result("Bariyatu PS", "9437106161");
-        PoliceContacts.add(result);
-        result = new Result("Bero PS", "9431706179");
-        PoliceContacts.add(result);
-        result = new Result("BIT Mesra OP", "9470590705");
-        PoliceContacts.add(result);
-        result = new Result("Bundu PS", "9431706191");
-        PoliceContacts.add(result);
-        result = new Result("Burmu PS", "9431706190");
-        PoliceContacts.add(result);
-        result = new Result("Chanho PS", "9431706189");
-        PoliceContacts.add(result);
-        result = new Result("Chutia PS", "9431706165");
-        PoliceContacts.add(result);
-        result = new Result("Daily Market PS", "9431706163");
-        PoliceContacts.add(result);
-        result = new Result("Dhurwa PS", "9431706166");
-        PoliceContacts.add(result);
-        result = new Result("Doranda PS", "9431706168");
-        PoliceContacts.add(result);
-        result = new Result("Etki PS", "9431706177");
-        PoliceContacts.add(result);
-        result = new Result("Gonda PS", "9431706162");
-        PoliceContacts.add(result);
-        result = new Result("Hindipiri PS", "9431706164");
-        PoliceContacts.add(result);
-        result = new Result("Jagnnathpur PS", "9431706169");
-        PoliceContacts.add(result);
-        result = new Result("Kanke PS", "9431706185");
-        PoliceContacts.add(result);
-        result = new Result("Khelari PS", "9431706188");
-        PoliceContacts.add(result);
-        result = new Result("Kotwali PS", "9431706158");
-        PoliceContacts.add(result);
-        result = new Result("Lalpur PS", "9431706159");
-        PoliceContacts.add(result);
-        result = new Result("Lapung PS", "9431706178");
-        PoliceContacts.add(result);
-        result = new Result("Lower Bazar PS", "9431706171");
-        PoliceContacts.add(result);
-        result = new Result("Mackluskiganj PS", "9934902010");
-        PoliceContacts.add(result);
-        result = new Result("Mahila PS", "9431746865");
-        PoliceContacts.add(result);
-        result = new Result("Mandar PS", "9431706187");
-        PoliceContacts.add(result);
-        result = new Result("Muri OP PS", "9431727241");
-        PoliceContacts.add(result);
-        result = new Result("Nagri PS", "9431706176");
-        PoliceContacts.add(result);
-        result = new Result("Namkum PS", "9431706173");
-        PoliceContacts.add(result);
-        result = new Result("Narkopi PS", "9430182082");
-        PoliceContacts.add(result);
-        result = new Result("Oramanjhi PS", "9431706183");
-        PoliceContacts.add(result);
-        result = new Result("Pandra PS", "9431369111");
-        PoliceContacts.add(result);
-        result = new Result("Pithoria PS", "9431706186");
-        PoliceContacts.add(result);
-        result = new Result("Pundag PS", "9431163177");
-        PoliceContacts.add(result);
-        result = new Result("Rahe OP PS", "9431706194");
-        PoliceContacts.add(result);
-        result = new Result("Ratu PS", "9431706175");
-        PoliceContacts.add(result);
-        result = new Result("Sadar PS", "9431706160");
-        PoliceContacts.add(result);
-        result = new Result("Sikidiri PS", "9431706184");
-        PoliceContacts.add(result);
-        result = new Result("Silli PS", "9431217120");
-        PoliceContacts.add(result);
-        result = new Result("Sonahatu PS", "9431706192");
-        PoliceContacts.add(result);
-        result = new Result("ST/SC PS", "9431177785");
-        PoliceContacts.add(result);
-        result = new Result("Sukhdeo Nagar PS", "9431187548");
-        PoliceContacts.add(result);
-        result = new Result("Tamar PS", "9431706193");
-        PoliceContacts.add(result);
-        result = new Result("Tatisilway PS", "9431706174");
-        PoliceContacts.add(result);
-        result = new Result("Traffic PS", "9431706172");
-        PoliceContacts.add(result);
-        result = new Result("Tupudana PS", "94319431706167163177");
-        PoliceContacts.add(result);
-        return PoliceContacts;
-    }
-
-    public List<Result> getSaktiContact() {
-        List<Result> saktiContacts = new ArrayList<>();
-        result = new Result("Lower Bazar Thana", "7070194350");
-        saktiContacts.add(result);
-        result = new Result("Lower Bazar Thana", "7070194351");
-        saktiContacts.add(result);
-        result = new Result("Lalpur Thana", "7070194352");
-        saktiContacts.add(result);
-        result = new Result("Lalpur Thana", "7070194253");
-        saktiContacts.add(result);
-        result = new Result("Doranda Thana", "7070194255");
-        saktiContacts.add(result);
-        result = new Result("Lalpur Thana", "7070194356");
-        saktiContacts.add(result);
-        result = new Result("Lalpur Thana", "7070194357");
-        saktiContacts.add(result);
-        result = new Result("Kotwali Thana", "7070194358");
-        saktiContacts.add(result);
-        result = new Result("Kotwali Thana", "7070194259");
-        saktiContacts.add(result);
-        result = new Result("Doranda Thana", "7070194360");
-        saktiContacts.add(result);
-        result = new Result("Doranda Thana", "7070194261");
-        saktiContacts.add(result);
-        result = new Result("Jagannathpur Thana", "7070194362");
-        saktiContacts.add(result);
-        result = new Result("Chutia Thana", "7070194364");
-        saktiContacts.add(result);
-        result = new Result("Chutia Thana", "7070194365");
-        saktiContacts.add(result);
-        result = new Result("Sadar Thana", "7070194267");
-        saktiContacts.add(result);
-        result = new Result("Sadar Thana", "7070194366");
-        saktiContacts.add(result);
-        result = new Result("Dhurwa Thana", "7070194368");
-        saktiContacts.add(result);
-        result = new Result("Dhurwa Thana", "7070194269");
-        saktiContacts.add(result);
-        return saktiContacts;
-    }
-
-    public List<Result> getHighwayContact() {
-        List<Result> highwayContacts = new ArrayList<>();
-        result = new Result("NAMKUM THANA", "8987790648");
-        highwayContacts.add(result);
-        result = new Result("BUNDU THANA", "8987790649");
-        highwayContacts.add(result);
-        result = new Result("TAMAR THANA", "8987790650");
-        highwayContacts.add(result);
-        result = new Result("NAGRI THANA", "8987790651");
-        highwayContacts.add(result);
-        result = new Result("NAGRI/BERO THANA", "8987790652");
-        highwayContacts.add(result);
-        result = new Result("MANDAR/CHANHO THANA", "8987790653");
-        highwayContacts.add(result);
-        result = new Result("BARIATU/MESRA OP THANA", "8987790654");
-        highwayContacts.add(result);
-        result = new Result("MESRA OP/ORMANJHI THANA", "8987790655");
-        highwayContacts.add(result);
-        result = new Result("NAMKUM/TATISILWAY THANA", "8987790656");
-        highwayContacts.add(result);
-        result = new Result("ANGARA/MURI OP THANA", "8987790657");
-        highwayContacts.add(result);
-        result = new Result("CHANHO THANA", "8987790658");
-        highwayContacts.add(result);
-        result = new Result("RATU THANA", "8987790659");
-        highwayContacts.add(result);
-        result = new Result("PITHORIA THANA", "8987790660");
-        highwayContacts.add(result);
-        result = new Result("TUPUDANA THANA", "8987790661");
-        highwayContacts.add(result);
-        result = new Result("ORMANJHI THANA", "8987790662");
-        highwayContacts.add(result);
-        return highwayContacts;
-    }
-
-    public List<Result> getPerContact() {
-        List<Result> pcrContacts = new ArrayList<>();
-        result = new Result("Kotwali Thana", "8987790717");
-        pcrContacts.add(result);
-        result = new Result("ower Bazar/Chutia Thana", "8987790718");
-        pcrContacts.add(result);
-        result = new Result("Doranda Thana", "8987790719");
-        pcrContacts.add(result);
-        result = new Result("Dhurwa Thana", "8987790720");
-        pcrContacts.add(result);
-        result = new Result("Argora Thana", "8987790721");
-        pcrContacts.add(result);
-        result = new Result("Lower Bazar Thana", "8987790722");
-        pcrContacts.add(result);
-        result = new Result("Lalpur Thana", "8987790723");
-        pcrContacts.add(result);
-        result = new Result("Chutia/Lower Bazar Thana", "8987790724");
-        pcrContacts.add(result);
-        result = new Result("Bariatu Thana", "8987790725");
-        pcrContacts.add(result);
-        result = new Result("Gonda Thana", "8987790726");
-        pcrContacts.add(result);
-        result = new Result("Nagri Thana", "8987790727");
-        pcrContacts.add(result);
-        result = new Result("Lalpur/Bariatu Thana", "8987790728");
-        pcrContacts.add(result);
-        result = new Result("Jagannathpur Thana", "8987790729");
-        pcrContacts.add(result);
-        result = new Result("Jagannathpur Thana", "8987790730");
-        pcrContacts.add(result);
-        result = new Result("Doranda Thana", "8987790731");
-        pcrContacts.add(result);
-        result = new Result("Jagannathpur Thana", "8987790732");
-        pcrContacts.add(result);
-        result = new Result("TUPUDANA Thana", "8987790733");
-        pcrContacts.add(result);
-        result = new Result("Namkum Thana", "8987790734");
-        pcrContacts.add(result);
-        result = new Result("Namkum Thana", "8987790735");
-        pcrContacts.add(result);
-        result = new Result("Chutia Thana", "8987790736");
-        pcrContacts.add(result);
-        result = new Result("Chutia Thana", "8987790737");
-        pcrContacts.add(result);
-        result = new Result("Sadar Thana", "8987790738");
-        pcrContacts.add(result);
-        result = new Result("Lalpur Thana", "8987790739");
-        pcrContacts.add(result);
-        result = new Result("Lower Bazar Thana", "8987790740");
-        pcrContacts.add(result);
-        result = new Result("Lalpur/Kotwali Thana", "8987790741");
-        pcrContacts.add(result);
-        result = new Result("Pundag OP Thana", "8987790742");
-        pcrContacts.add(result);
-        result = new Result("Bariatu Thana", "8987790743");
-        pcrContacts.add(result);
-        result = new Result("Sukhdev Nagar Thana", "8987790744");
-        pcrContacts.add(result);
-        result = new Result("Ratu Thana", "8987790745");
-        pcrContacts.add(result);
-        result = new Result("Khelgaon OP Thana", "8987790746");
-        pcrContacts.add(result);
-        return pcrContacts;
-    }
-
-    public List<Result> getTigerContact() {
-        List<Result> tigerContacts = new ArrayList<>();
-        result = new Result("Argora Thana", "8987790751");
-        tigerContacts.add(result);
-        result = new Result("Argora Thana", "8987790752");
-        tigerContacts.add(result);
-        result = new Result("Bariatu Thana", "8987790753");
-        tigerContacts.add(result);
-        result = new Result("Bariatu Thana", "8987790754");
-        tigerContacts.add(result);
-        result = new Result("Chutia Thana", "8987790755");
-        tigerContacts.add(result);
-        result = new Result("Chutia Thana", "8987790756");
-        tigerContacts.add(result);
-        result = new Result("Chutia Thana", "8987790757");
-        tigerContacts.add(result);
-        result = new Result("Chutia Thana", "8987790758");
-        tigerContacts.add(result);
-        result = new Result("Doranda Thana", "8987790759");
-        tigerContacts.add(result);
-        result = new Result("DORANDA Thana", "8987790760");
-        tigerContacts.add(result);
-        result = new Result("DORANDA Thana", "8987790761");
-        tigerContacts.add(result);
-        result = new Result("DORANDA Thana", "8987790762");
-        tigerContacts.add(result);
-        result = new Result("Gonda Thana", "8987790763");
-        tigerContacts.add(result);
-        result = new Result("Gonda Thana", "8987790764");
-        tigerContacts.add(result);
-        result = new Result("Gonda Thana", "8987790765");
-        tigerContacts.add(result);
-        result = new Result("Dhurwa Thana", "8987790766");
-        tigerContacts.add(result);
-        result = new Result("Dhurwa Thana", "8987790767");
-        tigerContacts.add(result);
-        result = new Result("Jaganthpur Thana", "8987790768");
-        tigerContacts.add(result);
-        result = new Result("Jaganthpur Thana", "8987790769");
-        tigerContacts.add(result);
-        result = new Result("Jaganthpur Thana", "8987790771");
-        tigerContacts.add(result);
-        result = new Result("Tupudana Thana", "8987790770");
-        tigerContacts.add(result);
-        result = new Result("Kotwali Thana", "8987790772");
-        tigerContacts.add(result);
-        result = new Result("Kotwali Thana", "8987790773");
-        tigerContacts.add(result);
-        result = new Result("Kotwali Thana", "8987790774");
-        tigerContacts.add(result);
-        result = new Result("Kotwali Thana", "8987790775");
-        tigerContacts.add(result);
-        result = new Result("Kotwali Thana", "8987790776");
-        tigerContacts.add(result);
-        result = new Result("Kotwali Thana", "8987790777");
-        tigerContacts.add(result);
-        result = new Result("Lalpur Thana", "8987790778");
-        tigerContacts.add(result);
-        result = new Result("Lalpur Thana", "8987790779");
-        tigerContacts.add(result);
-        result = new Result("Lalpur Thana", "8987790780");
-        tigerContacts.add(result);
-        result = new Result("Lalpur Thana", "8987790781");
-        tigerContacts.add(result);
-        result = new Result("Lalpur Thana", "8987790782");
-        tigerContacts.add(result);
-        result = new Result("Lalpur Thana", "8987790783");
-        tigerContacts.add(result);
-        result = new Result("Lower Bazar Thana", "8987790784");
-        tigerContacts.add(result);
-        result = new Result("Lower Bazar Thana", "8987790785");
-        tigerContacts.add(result);
-        result = new Result("Lower Bazar Thana", "8987790786");
-        tigerContacts.add(result);
-        result = new Result("Lower Bazar Thana", "8987790787");
-        tigerContacts.add(result);
-        result = new Result("Lower Bazar Thana", "8987790788");
-        tigerContacts.add(result);
-        result = new Result("Lower Bazar Thana", "8987790789");
-        tigerContacts.add(result);
-        result = new Result("Pandra OP Thana", "8987790790");
-        tigerContacts.add(result);
-        result = new Result("Pandra OP Thana", "8987790791");
-        tigerContacts.add(result);
-        result = new Result("Pandra OP Thana", "8987790792");
-        tigerContacts.add(result);
-        result = new Result("Sadar Thana", "8987790793");
-        tigerContacts.add(result);
-        result = new Result("Sadar Thana", "8987790794");
-        tigerContacts.add(result);
-        result = new Result("Sadar Thana", "8987790795");
-        tigerContacts.add(result);
-        result = new Result("Sadar Thana", "8987790796");
-        tigerContacts.add(result);
-        result = new Result("SukhdevNagar Thana", "8987790797");
-        tigerContacts.add(result);
-        result = new Result("SukhdevNagar Thana", "8987790798");
-        tigerContacts.add(result);
-        result = new Result("SukhdevNagar Thana", "8987790799");
-        tigerContacts.add(result);
-        result = new Result("SukhdevNagar Thana", "8987790800");
-        tigerContacts.add(result);
-        return tigerContacts;
     }
 }

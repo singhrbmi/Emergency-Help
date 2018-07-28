@@ -4,10 +4,46 @@
     android:layout_height="match_parent"
     tools:context="hacker.l.emergency_help.fragments.ShareFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".35"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin5"
+                android:src="@drawable/logo" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".65"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_share"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin10"
+                android:background="@drawable/capsule_button"
+                android:drawableRight="@drawable/ic_share_black_24dp"
+                android:gravity="center"
+                android:paddingRight="@dimen/margin10"
+                android:text="Share Suraksha Kavach"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textSize16"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

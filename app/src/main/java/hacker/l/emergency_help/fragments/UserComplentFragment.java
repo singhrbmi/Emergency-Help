@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
@@ -75,6 +76,8 @@ public class UserComplentFragment extends Fragment {
     }
 
     private void init() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Complent");
         edt_message = view.findViewById(R.id.edt_message);
         tv_submit = view.findViewById(R.id.tv_submit);
         tv_submit.setOnClickListener(new View.OnClickListener() {

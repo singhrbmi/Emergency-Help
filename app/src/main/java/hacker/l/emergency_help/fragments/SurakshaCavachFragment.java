@@ -39,6 +39,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.activity.ForgetPasswordActivity;
 import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.models.Result;
@@ -93,6 +94,8 @@ public class SurakshaCavachFragment extends Fragment {
     }
 
     private void intit() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Suraksha Kavach");
         spinnerList = new ArrayList<>();
         spinnerList.add("Sri Maheswari Sabha,Ranchi");
         spinnerList.add("Lions Club of Ranchi Central");

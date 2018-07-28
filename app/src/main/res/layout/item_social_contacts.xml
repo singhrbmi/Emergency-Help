@@ -128,7 +128,7 @@
                 android:layout_marginTop="@dimen/dimen_1_dp"
                 android:layout_weight=".5"
                 android:scaleType="fitCenter"
-                android:src="@drawable/sms" />
+                android:src="@drawable/ic_sms_black_24dp" />
 
             <ImageView
                 android:id="@+id/call"
@@ -137,7 +137,7 @@
                 android:layout_gravity="center"
                 android:layout_weight=".5"
                 android:scaleType="fitCenter"
-                android:src="@drawable/call" />
+                android:src="@drawable/ic_settings_phone_black_24dp" />
         </LinearLayout>
     </LinearLayout>
 

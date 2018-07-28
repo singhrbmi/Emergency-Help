@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#60cb67</color>
-    <color name="colorPrimaryDark">#4fb656</color>
+    <color name="colorPrimary">#5D349E</color>
+    <!--//#60cb67&ndash;&gt;-->
+    <color name="colorPrimaryDark">#5D349E</color>
     <color name="colorAccent">#FF4081</color>
     <color name="greyed_out">#c7c7c7</color>
     <color name="grey_color">#f0f0f0</color>
     <color name="grey_code">#b4b4b4</color>
     <!--<color name="colorAccent">#FE5722</color>-->
     <color name="prmary_txt_color">#FE5722</color>
+    <color name="bg">#ffffff</color>
 
     <color name="blue">#133396</color>
     <color name="ligh_blue">#133396</color>
@@ -21,7 +23,7 @@
     <color name="black">#000000</color>
     <color name="selected_tab">#0288D1</color>
     <color name="header">#FF6D00</color>
-    <color name="button_color"> #293e53 </color>
+    <color name="button_color">#293e53</color>
     <color name="red">#FF2A2A</color>
     <color name="grey_dark">#37474F</color>
     <color name="text_color">#686868</color>
