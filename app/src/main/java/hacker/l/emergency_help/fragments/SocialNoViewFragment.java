@@ -45,14 +45,17 @@ public class SocialNoViewFragment extends Fragment {
     private static final String TYPE = "type";
 
     // TODO: Rename and change types of parameters
-    private String type;
-    private String district;
+    private String socialname;
+    private String district, subCategory;
+    private boolean flag;
 
-    public static SocialNoViewFragment newInstance(String type, String district) {
+    public static SocialNoViewFragment newInstance(String socialname, String district, String subCategory, boolean flag) {
         SocialNoViewFragment fragment = new SocialNoViewFragment();
         Bundle args = new Bundle();
-        args.putString(TYPE, type);
+        args.putString(TYPE, socialname);
         args.putString("district", district);
+        args.putString("subCategory", subCategory);
+        args.putBoolean("flag", flag);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,8 +64,10 @@ public class SocialNoViewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            type = getArguments().getString(TYPE);
+            socialname = getArguments().getString(TYPE);
             district = getArguments().getString("district");
+            subCategory = getArguments().getString("subCategory");
+            flag = getArguments().getBoolean("flag");
         }
     }
 
@@ -71,7 +76,7 @@ public class SocialNoViewFragment extends Fragment {
     Context context;
     LinearLayoutManager linearLayoutManager;
     Result result;
-    TextView tv_type, tv_District;
+    TextView tv_type, tv_District, subcategory;
     SearchView search_barUser;
     SocialContactsAdapter socialContactsAdapter;
     ProgressDialog pd;
@@ -89,15 +94,96 @@ public class SocialNoViewFragment extends Fragment {
 
     private void init() {
         DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
-        dashBoardActivity.setTitle("Social Number");
+        dashBoardActivity.setTitle("Contacts");
         resultList = new ArrayList<>();
         recycleView = view.findViewById(R.id.recycleView);
         tv_type = view.findViewById(R.id.type);
         tv_District = view.findViewById(R.id.tv_District);
-        tv_type.setText(type);
-        tv_District.setText(district);
+        subcategory = view.findViewById(R.id.subcategory);
+        tv_type.setText(socialname);
+        if (subCategory != null) {
+            subcategory.setText(subCategory);
+        }
+        if (district != null) {
+            tv_District.setText(district);
+        } else {
+            tv_District.setText("Ranchi");
+        }
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
+        if (flag) {
+            getSubCategoryData();
+        } else {
+            getCategoryData();
+        }
+        search_barUser = (SearchView) view.findViewById(R.id.search_barUser);
+        search_barUser.setIconified(true);
+        search_barUser.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // filter recycler view when query submitted
+                socialContactsAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                // filter recycler view when text is changed
+                socialContactsAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
+    }
+
+    private void getSubCategoryData() {
+        if (Utility.isOnline(context)) {
+            pd = new ProgressDialog(context);
+            pd.setMessage("Getting  wait...");
+            pd.show();
+            pd.setCancelable(false);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllSubCategoryPhone,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            pd.dismiss();
+                            MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                            if (myPojo != null) {
+                                resultList.addAll(Arrays.asList(myPojo.getResult()));
+                                if (resultList != null) {
+                                    Collections.reverse(resultList);
+                                    socialContactsAdapter = new SocialContactsAdapter(context, resultList);
+                                    recycleView.setAdapter(socialContactsAdapter);
+                                } else {
+                                    Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            pd.dismiss();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("district", district);
+                    params.put("subCategory", subCategory);
+                    params.put("category", socialname);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+            requestQueue.add(stringRequest);
+        } else {
+            Toast.makeText(context, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void getCategoryData() {
         if (Utility.isOnline(context)) {
             pd = new ProgressDialog(context);
             pd.setMessage("Getting  wait...");
@@ -133,7 +219,7 @@ public class SocialNoViewFragment extends Fragment {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("district", district);
-                    params.put("category", type);
+                    params.put("category", socialname);
                     return params;
                 }
             };
@@ -142,22 +228,5 @@ public class SocialNoViewFragment extends Fragment {
         } else {
             Toast.makeText(context, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
         }
-        search_barUser = (SearchView) view.findViewById(R.id.search_barUser);
-        search_barUser.setIconified(true);
-        search_barUser.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // filter recycler view when query submitted
-                socialContactsAdapter.getFilter().filter(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-                // filter recycler view when text is changed
-                socialContactsAdapter.getFilter().filter(query);
-                return false;
-            }
-        });
     }
 }

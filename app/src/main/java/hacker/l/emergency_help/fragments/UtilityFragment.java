@@ -39,7 +39,7 @@ import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.Utility;
 
-public class UtilityFragment extends Fragment implements View.OnClickListener {
+public class UtilityFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -207,35 +207,6 @@ public class UtilityFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-//            case R.id.btn_police:
-//                SocialNoViewFragment fragment = SocialNoViewFragment.newInstance("police", "");
-//                moveFragment(fragment);
-//                break;
-//            case R.id.btn_sakticomd:
-//                SocialNoViewFragment fragmentSakti = SocialNoViewFragment.newInstance("sakti", "");
-//                moveFragment(fragmentSakti);
-//                break;
-//            case R.id.btn_tiger:
-//                SocialNoViewFragment fragmenttiger = SocialNoViewFragment.newInstance("tiger", "");
-//                moveFragment(fragmenttiger);
-//                break;
-//            case R.id.btn_pcr:
-//                SocialNoViewFragment fragmentPcr = SocialNoViewFragment.newInstance("pcr", "");
-//                moveFragment(fragmentPcr);
-//                break;
-//            case R.id.btn_highway:
-//                SocialNoViewFragment fragmenthighway = SocialNoViewFragment.newInstance("highway", "");
-//                moveFragment(fragmenthighway);
-//                break;
-//            case R.id.btn_policeNo:
-//                SocialNoViewFragment fragmentPolice = SocialNoViewFragment.newInstance("policeNo", "");
-//                moveFragment(fragmentPolice);
-//                break;
-        }
-    }
 
     private void moveFragment(Fragment fragment) {
         FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();

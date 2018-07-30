@@ -133,8 +133,8 @@ public class GetContactsFragment extends Fragment {
             requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
             //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
         } else {
-            List<Result> contacts = getContactNames();
-            adapter = new ContactsAdapter(context, contacts);
+//            List<Result> contacts =
+            adapter = new ContactsAdapter(context, getContactNames());
             lstNames.setAdapter(adapter);
         }
     }

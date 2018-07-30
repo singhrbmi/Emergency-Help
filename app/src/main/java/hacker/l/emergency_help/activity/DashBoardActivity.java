@@ -34,6 +34,7 @@ import hacker.l.emergency_help.fragments.AccountFragment;
 import hacker.l.emergency_help.fragments.AdminLoginFragment;
 import hacker.l.emergency_help.fragments.HelpFragment;
 import hacker.l.emergency_help.fragments.HomeFragment;
+import hacker.l.emergency_help.fragments.JharkhandAdminstrtiveFragment;
 import hacker.l.emergency_help.fragments.SettingsFragment;
 import hacker.l.emergency_help.fragments.ShareFragment;
 import hacker.l.emergency_help.fragments.SurakshaCavachFragment;
@@ -76,8 +77,15 @@ public class DashBoardActivity extends AppCompatActivity
         lyout_share.setOnClickListener(this);
         lyout_setting.setOnClickListener(this);
         lyout_home.setOnClickListener(this);
-        HomeFragment fragment = HomeFragment.newInstance("", "");
-        moveHomeFragment(fragment);
+        Intent intent = getIntent();
+        String keeys = intent.getStringExtra("key");
+        if (keeys!=null&&keeys.equalsIgnoreCase("jhar")) {
+            JharkhandAdminstrtiveFragment jharkhandAdminstrtiveFragment = JharkhandAdminstrtiveFragment.newInstance("", "");
+            moveFragment(jharkhandAdminstrtiveFragment);
+        } else {
+            HomeFragment fragment = HomeFragment.newInstance("", "");
+            moveHomeFragment(fragment);
+        }
         isStoragePermissionGranted();
         isConteactPermissionGranted();
         isPhoneCallPermissionGranted();

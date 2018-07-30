@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    tools:context=".activity.AgreeActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_180_dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin10"
+        android:text="Pending.."
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSize14" />
+
+    <RadioGroup
+        android:id="@+id/radipGroup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin10"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_decline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin10"
+            android:layout_weight=".5"
+            android:text="Decline"
+            android:textColor="@color/red"
+            android:textSize="@dimen/textSize16" />
+
+        <RadioButton
+            android:id="@+id/rb_agree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin10"
+            android:layout_weight=".5"
+            android:text="Agree"
+            android:textColor="@color/selected_tab"
+            android:textSize="@dimen/textSize16" />
+
+    </RadioGroup>
+</LinearLayout>

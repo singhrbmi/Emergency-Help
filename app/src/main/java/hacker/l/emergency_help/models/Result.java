@@ -168,6 +168,16 @@ public class Result {
     private String image;
     private String district;
 
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    private String subCategory;
+
     public String getDistrict() {
         return district;
     }

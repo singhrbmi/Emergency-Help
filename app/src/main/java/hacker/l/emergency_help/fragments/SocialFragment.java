@@ -35,13 +35,14 @@ import java.util.Map;
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.adapter.SocialAdapter;
+import hacker.l.emergency_help.adapter.SocialOrgAdapter;
 import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.Utility;
 
-public class SocialFragment extends Fragment implements View.OnClickListener {
+public class SocialFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -97,6 +98,7 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(context, "Connect Internet connection", Toast.LENGTH_SHORT).show();
         }
         districtList = new ArrayList<>();
+        resultList = new ArrayList<>();
         spinnerDist = view.findViewById(R.id.spinnerDist);
         recycleView = view.findViewById(R.id.recycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
@@ -150,125 +152,46 @@ public class SocialFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getDataFromServer() {
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllCategory,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
-//                        resultList.clear();
-//                        if (myPojo != null) {
-//                            for (Result result : myPojo.getResult()) {
-//                                resultList.addAll(Arrays.asList(result));
-//                            }
-        resultList = new ArrayList<>();
-        result = new Result();
-        result.setSocialName("Sri Maheswari Sabha,Ranchi");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Lions Club of Ranchi Central");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Rotaract Club of Ranchi City");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Marwari Yuwa Manch,Ranchi South");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Lions Club of Ranchi North");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Lions Club of Ranchi Citizen");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Rotaract Club of ICWAI");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Rotaract Club of Social Revolution");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Rotaract Club of NIFFT");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Rotaract Club of St.Xavier's College");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Rotaract Club of Kalimati");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Rotaract Club of Chaibase");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("Rotaract Club of BIT MESRA");
-        resultList.add(result);
-        result = new Result();
-        result.setSocialName("FJCCI");
-        resultList.add(result);
-        SocialAdapter socialAdapter = new SocialAdapter(context, resultList);
-        recycleView.setAdapter(socialAdapter);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllSocialOrgCategory,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        resultList.clear();
+                        if (myPojo != null) {
+                            for (Result result : myPojo.getResult()) {
+                                resultList.addAll(Arrays.asList(result));
+                            }
+                            SocialOrgAdapter socialAdapter = new SocialOrgAdapter(context, resultList);
+                            recycleView.setAdapter(socialAdapter);
 //                            if (response.equalsIgnoreCase("no")) {
 //                                Toast.makeText(context, "Any category not Found", Toast.LENGTH_SHORT).show();
 //                            }
-//                        }
+                        }
 //                        progressDialog.dismiss();
-//                    }
+                    }
 
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                    }
-//                }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("district", district);
-//                return params;
-//            }
-//        };
-//        RequestQueue requestQueue = Volley.newRequestQueue(context);
-//        requestQueue.add(stringRequest);
+                },
+                new Response.ErrorListener()
+
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("district", district);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
     }
 
-    private void setAdapter() {
-        DbHelper dbHelper = new DbHelper(context);
-        List<Result> resultList = dbHelper.getAllSocialData();
-        if (resultList != null) {
-
-
-        } else {
-            Toast.makeText(context, "Add Social Numbers", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-//            case R.id.btn_police:
-//                SocialNoViewFragment fragment = SocialNoViewFragment.newInstance("police", "");
-//                moveFragment(fragment);
-//                break;
-//            case R.id.btn_sakticomd:
-//                SocialNoViewFragment fragmentSakti = SocialNoViewFragment.newInstance("sakti", "");
-//                moveFragment(fragmentSakti);
-//                break;
-//            case R.id.btn_tiger:
-//                SocialNoViewFragment fragmenttiger = SocialNoViewFragment.newInstance("tiger", "");
-//                moveFragment(fragmenttiger);
-//                break;
-//            case R.id.btn_pcr:
-//                SocialNoViewFragment fragmentPcr = SocialNoViewFragment.newInstance("pcr", "");
-//                moveFragment(fragmentPcr);
-//                break;
-//            case R.id.btn_highway:
-//                SocialNoViewFragment fragmenthighway = SocialNoViewFragment.newInstance("highway", "");
-//                moveFragment(fragmenthighway);
-//                break;
-//            case R.id.btn_policeNo:
-//                SocialNoViewFragment fragmentPolice = SocialNoViewFragment.newInstance("policeNo", "");
-//                moveFragment(fragmentPolice);
-//                break;
-        }
-    }
 
     private void moveFragment(Fragment fragment) {
         FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();

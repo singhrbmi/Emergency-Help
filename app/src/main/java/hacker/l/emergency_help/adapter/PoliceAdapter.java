@@ -10,9 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,11 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +28,6 @@ import java.util.Map;
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.fragments.SocialNoViewFragment;
 import hacker.l.emergency_help.fragments.SubCategoryFragment;
-import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.Utility;
@@ -44,13 +36,13 @@ import hacker.l.emergency_help.utility.Utility;
  * Created by lalitsingh on 05/03/18.
  */
 
-public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.MyViewHolder> {
+public class PoliceAdapter extends RecyclerView.Adapter<PoliceAdapter.MyViewHolder> {
     private Typeface materialdesignicons_font, ProximaNovaRegular, ProximaNovaLight;
     private Context mContext;
     private List<Result> dataList, FilteruserList;
     ProgressDialog pd;
 
-    public SocialAdapter(Context mContext, List<Result> dataList) {
+    public PoliceAdapter(Context mContext, List<Result> dataList) {
         this.mContext = mContext;
         this.dataList = dataList;
         this.FilteruserList = dataList;
@@ -60,15 +52,15 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.MyViewHold
     }
 
     @Override
-    public SocialAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PoliceAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_social, parent, false);
-        return new SocialAdapter.MyViewHolder(itemView);
+                .inflate(R.layout.item_police, parent, false);
+        return new PoliceAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(SocialAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(PoliceAdapter.MyViewHolder holder, final int position) {
         final String name = FilteruserList.get(position).getSocialName();
         final String dist = FilteruserList.get(position).getDistrict();
         holder.tv_socialName.setText(name);
@@ -86,7 +78,7 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.MyViewHold
             pd.setMessage("Getting  wait...");
             pd.show();
             pd.setCancelable(false);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllSubCategory,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getPoliceSubCategory,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

@@ -42,11 +42,11 @@
                     android:visibility="gone" />
 
                 <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="190dp"
+                    android:layout_height="130dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/margin5"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:src="@drawable/logo" />
 
                 <LinearLayout
@@ -154,7 +154,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="110dp"
+                        android:layout_height="115dp"
                         android:orientation="horizontal">
 
 
@@ -178,13 +178,220 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/margin5"
                                 android:gravity="center"
-                                android:text="Jharkhand Administrative Contacts"
+                                android:text="Administrative Contacts"
                                 android:textSize="@dimen/textSize14" />
 
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/lyout_barCode"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/sacnner" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="QR Code \nScanner"
+                                android:textSize="@dimen/textSize14" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
                             android:id="@+id/layout_police"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:clickable="false"
+                            android:orientation="vertical"
+                            android:saveEnabled="false">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/jhrpol" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:gravity="center"
+                                android:text="Police \nContacts"
+                                android:textSize="@dimen/textSize14" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:id="@+id/layout_bOrg"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_business_black_24dp" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:gravity="center"
+                                android:text="Business Organzation"
+                                android:textSize="@dimen/textSize14" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/lyout_account"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/znmgd" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="Zindagi Milegi Dobara"
+                                android:textSize="@dimen/textSize14" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/layout_social"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:src="@drawable/ic_group_work_black_24dp" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:gravity="center"
+                                android:text="Social Organzation"
+                                android:textSize="@dimen/textSize14" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="horizontal">
+
+
+                        <!--<LinearLayout-->
+                        <!--android:id="@+id/layout_wocall"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight=".33"-->
+                        <!--android:orientation="vertical">-->
+
+
+                        <!--<ImageView-->
+                        <!--android:layout_width="50dp"-->
+                        <!--android:layout_height="50dp"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginTop="@dimen/margin5"-->
+                        <!--android:src="@drawable/ic_airport_shuttle_black_24dp" />-->
+
+
+                        <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="@dimen/margin10"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="Help"-->
+                        <!--android:textSize="@dimen/textSize14" />-->
+
+                        <!--</LinearLayout>-->
+
+
+                        <LinearLayout
+                            android:id="@+id/lyout_about"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".33"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/logo" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:gravity="center"
+                                android:text="About Us"
+                                android:textSize="@dimen/textSize14" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_panic"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight=".33"
@@ -195,15 +402,15 @@
                                 android:layout_height="50dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/margin5"
-                                android:src="@drawable/ic_security_black_24dp" />
+                                android:src="@drawable/round" />
 
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin5"
+                                android:layout_marginTop="@dimen/margin10"
                                 android:gravity="center"
-                                android:text="Police Administrative Contacts"
+                                android:text="Emergency"
                                 android:textSize="@dimen/textSize14" />
 
 
@@ -229,185 +436,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/margin10"
                                 android:gravity="center"
-                                android:text="Suggestion/Complent"
+                                android:text="Suggestions"
                                 android:textSize="@dimen/textSize14" />
 
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="@dimen/margin10"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/layout_social"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".33"
-                            android:orientation="vertical">
-
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/margin5"
-                                android:src="@drawable/ic_group_work_black_24dp" />
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin5"
-                                android:gravity="center"
-                                android:text="Social"
-                                android:textSize="@dimen/textSize14" />
-
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:id="@+id/lyout_barCode"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".33"
-                            android:orientation="vertical">
-
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/margin5"
-                                android:src="@drawable/sacnner" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin10"
-                                android:gravity="center"
-                                android:text="QR Code Scanner"
-                                android:textSize="@dimen/textSize14" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/layout_contacts"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".33"
-                            android:orientation="vertical">
-
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/margin5"
-                                android:src="@drawable/ic_record_voice_over_black_24dp" />
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin10"
-                                android:gravity="center"
-                                android:text="Contacts"
-                                android:textSize="@dimen/textSize14" />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/lyout_account"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".33"
-                            android:orientation="vertical">
-
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/margin5"
-                                android:src="@drawable/znmgd" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin10"
-                                android:gravity="center"
-                                android:text="Account"
-                                android:textSize="@dimen/textSize14" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/layout_wocall"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".33"
-                            android:orientation="vertical">
-
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/margin5"
-                                android:src="@drawable/ic_airport_shuttle_black_24dp" />
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin10"
-                                android:gravity="center"
-                                android:text="Help"
-                                android:textSize="@dimen/textSize14" />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:id="@+id/lyout_about"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".33"
-                            android:orientation="vertical">
-
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/margin5"
-                                android:src="@drawable/ic_supervisor_account_black_24dp" />
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin10"
-                                android:gravity="center"
-                                android:text="About Us"
-                                android:textSize="@dimen/textSize14" />
 
                         </LinearLayout>
 

@@ -49,6 +49,13 @@ public class Contants {
 
     public static final String addCategory = "addCategory.php";
     public static final String getAllCategory = "getAllCategory.php";
+    public static final String getAllSubCategory = "getAllSubCategory.php";
+    public static final String getAllSocialOrgCategory = "getAllSocialOrgCategory.php";
+    public static final String getPoliceCategory = "getPoliceCategory.php";
+    public static final String getAllBusinessCategory = "getAllBusinessCategory.php";
+    public static final String getAllBusinessSubCat = "getAllBusinessSubCat.php";
+    public static final String getAllSubSocialOrgCate = "getAllSubSocialOrgCate.php";
+    public static final String getPoliceSubCategory = "getPoliceSubCategory.php";
     public static final String updateCategory = "updateCategory.php";
     public static final String deleteCategory = "deleteCategory.php";
 
@@ -59,6 +66,7 @@ public class Contants {
 
     public static final String addPhone = "addPhone.php";
     public static final String getAllPhone = "getAllPhone.php";
+    public static final String getAllSubCategoryPhone = "getAllSubCategoryPhone.php";
     public static final String updatePhone = "updatePhone.php";
     public static final String deletePhone = "deletePhone.php";
 

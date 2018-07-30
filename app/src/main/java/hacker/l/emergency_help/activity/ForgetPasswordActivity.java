@@ -39,19 +39,19 @@ import hacker.l.emergency_help.utility.Utility;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
     ProgressDialog pd;
-    TextView forgot_password;
+//    TextView forgot_password;
     Button id_bt_forget;
-    EditText id_et_phone, id_et_email;
+    EditText id_et_phone;
     String userPhone, userEmail, copyText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
-        forgot_password = findViewById(R.id.forgot_password);
+//        forgot_password = findViewById(R.id.forgot_password);
         id_bt_forget = findViewById(R.id.id_bt_forget);
         id_et_phone = findViewById(R.id.id_et_phone);
-        id_et_email = findViewById(R.id.id_et_email);
+//        id_et_email = findViewById(R.id.id_et_email);
         id_bt_forget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,12 +65,12 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 //                } else {
                 Pattern pattern = Patterns.EMAIL_ADDRESS;
                 userPhone = id_et_phone.getText().toString();
-                userEmail = id_et_email.getText().toString();
-                if (userEmail.length() == 0) {
-                    id_et_email.setError("Enter Email");
-                } else if (!pattern.matcher(userEmail).matches()) {
-                    id_et_email.setError("Enter Valid Email");
-                } else if (userPhone.length() == 0) {
+//                userEmail = id_et_email.getText().toString();
+//                if (userEmail.length() == 0) {
+//                    id_et_email.setError("Enter Email");
+//                } else if (!pattern.matcher(userEmail).matches()) {
+//                    id_et_email.setError("Enter Valid Email");
+                if (userPhone.length() == 0) {
                     id_et_phone.setError("Enter  Phone Number ");
                 } else if (userPhone.length() != 10) {
                     id_et_phone.setError("Enter  Valid Phone");
@@ -97,7 +97,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             pd.dismiss();
                             copyText = response;
-                            forgot_password.setText("Your Password:-" + response);
+//                            forgot_password.setText("Your Password:-" + response);
                             //id_bt_forget.setText("Copy Password");
                         }
                     },
@@ -111,7 +111,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("UserPhone", userPhone);
-                    params.put("EmailId", userEmail);
+//                    params.put("EmailId", userEmail);
                     return params;
                 }
             };
@@ -124,6 +124,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             Toast.makeText(this, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
         }
     }
+
     //for hid keyboard when tab outside edittext box
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {

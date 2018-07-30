@@ -61,7 +61,7 @@ public class JharkhandAdminstrtiveFragment extends Fragment {
 
     private void init() {
         DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
-        dashBoardActivity.setTitle("Jharkhand Administrative");
+        dashBoardActivity.setTitle("Administrative Contacts");
         if (!Utility.isOnline(context)) {
             Toast.makeText(context, "Connect Internet connection", Toast.LENGTH_SHORT).show();
         }

@@ -1,6 +1,7 @@
 package hacker.l.emergency_help.fragments;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -33,14 +34,14 @@ import java.util.Map;
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.adapter.BusinessSocialAdapter;
-import hacker.l.emergency_help.adapter.PoliceAdapter;
 import hacker.l.emergency_help.adapter.SocialAdapter;
+import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.Utility;
 
-public class PoliceAdminstrtiveFragment extends Fragment {
+public class BusinessOrgFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -51,13 +52,12 @@ public class PoliceAdminstrtiveFragment extends Fragment {
     private String mParam2;
 
 
-    public PoliceAdminstrtiveFragment() {
+    public BusinessOrgFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static PoliceAdminstrtiveFragment newInstance(String param1, String param2) {
-        PoliceAdminstrtiveFragment fragment = new PoliceAdminstrtiveFragment();
+    public static BusinessOrgFragment newInstance(String param1, String param2) {
+        BusinessOrgFragment fragment = new BusinessOrgFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -81,25 +81,19 @@ public class PoliceAdminstrtiveFragment extends Fragment {
     List<Result> resultList = null;
     Spinner spinnerDist;
     String district;
-    Result result;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         context = getActivity();
-        view = inflater.inflate(R.layout.fragment_police_adminstrtive, container, false);
+        view = inflater.inflate(R.layout.fragment_business_org, container, false);
         init();
         return view;
     }
 
     private void init() {
         DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
-        dashBoardActivity.setTitle("Police Administrative");
-        if (!Utility.isOnline(context)) {
-            Toast.makeText(context, "Connect Internet connection", Toast.LENGTH_SHORT).show();
-        }
+        dashBoardActivity.setTitle("Business Organization");
         resultList = new ArrayList<>();
         districtList = new ArrayList<>();
         spinnerDist = view.findViewById(R.id.spinnerDist);
@@ -155,16 +149,17 @@ public class PoliceAdminstrtiveFragment extends Fragment {
     }
 
     private void getDataFromServer() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getPoliceCategory,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllBusinessCategory,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        resultList.clear();
                         if (myPojo != null) {
                             for (Result result : myPojo.getResult()) {
                                 resultList.addAll(Arrays.asList(result));
                             }
-                            PoliceAdapter socialAdapter = new PoliceAdapter(context, resultList);
+                            BusinessSocialAdapter socialAdapter = new BusinessSocialAdapter(context, resultList);
                             recycleView.setAdapter(socialAdapter);
 //                            if (response.equalsIgnoreCase("no")) {
 //                                Toast.makeText(context, "Any category not Found", Toast.LENGTH_SHORT).show();

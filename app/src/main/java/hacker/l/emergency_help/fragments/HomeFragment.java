@@ -91,14 +91,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     View view;
     Context context;
-    LinearLayout layout_contacts, layout_utility, layout_social, layout_wocall, layout_hospital, layout_seggestion, layout_police, layout_jharadmistrtive, lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
-    private Camera camera;
+    LinearLayout layout_utility, layout_bOrg, layout_social, layout_panic, layout_hospital, layout_seggestion, layout_police, layout_jharadmistrtive, lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
     TextView tv_address;
-    private boolean isFlashOn;
-    private boolean hasFlash;
     Camera.Parameters params;
-    private CameraManager camManager;
-    private int CAMERA_PERM = 0;
     AppLocationService appLocationService;
     MediaPlayer police, weshile;
 
@@ -118,7 +113,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         dashBoardActivity.setTitle("Dashboard");
         police = MediaPlayer.create(context, R.raw.pilice);
         weshile = MediaPlayer.create(context, R.raw.killbill);
-        layout_contacts = view.findViewById(R.id.layout_contacts);
         layout_social = view.findViewById(R.id.layout_social);
         layout_hospital = view.findViewById(R.id.layout_hospital);
         layout_jharadmistrtive = view.findViewById(R.id.layout_jharadmistrtive);
@@ -130,24 +124,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         tv_address = view.findViewById(R.id.tv_address);
         layout_utility = view.findViewById(R.id.layout_utility);
         layout_seggestion = view.findViewById(R.id.layout_seggestion);
-        layout_wocall = view.findViewById(R.id.layout_wocall);
-        layout_contacts.setOnClickListener(this);
+        layout_panic = view.findViewById(R.id.layout_panic);
+        layout_bOrg = view.findViewById(R.id.layout_bOrg);
         layout_seggestion.setOnClickListener(this);
         layout_social.setOnClickListener(this);
         layout_hospital.setOnClickListener(this);
         layout_jharadmistrtive.setOnClickListener(this);
         layout_police.setOnClickListener(this);
         lyout_suraksha.setOnClickListener(this);
-//        lyout_help.setOnClickListener(this);
         lyout_about.setOnClickListener(this);
         lyout_account.setOnClickListener(this);
         lyout_barCode.setOnClickListener(this);
         layout_utility.setOnClickListener(this);
-        layout_wocall.setOnClickListener(this);
+        layout_panic.setOnClickListener(this);
+        layout_bOrg.setOnClickListener(this);
         appLocationService = new AppLocationService(context);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
         animation.reset();
-        layout_contacts.clearAnimation();
         layout_social.clearAnimation();
         layout_hospital.clearAnimation();
         layout_police.clearAnimation();
@@ -158,8 +151,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         layout_jharadmistrtive.clearAnimation();
         layout_utility.clearAnimation();
         layout_seggestion.clearAnimation();
-        layout_wocall.clearAnimation();
-        layout_contacts.setAnimation(animation);
+        layout_panic.clearAnimation();
+        layout_bOrg.clearAnimation();
         layout_social.setAnimation(animation);
         layout_hospital.setAnimation(animation);
         layout_police.setAnimation(animation);
@@ -170,7 +163,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         layout_jharadmistrtive.setAnimation(animation);
         layout_utility.setAnimation(animation);
         layout_seggestion.setAnimation(animation);
-        layout_wocall.setAnimation(animation);
+        layout_panic.setAnimation(animation);
+        layout_bOrg.setAnimation(animation);
     }
 
     @Override
@@ -223,7 +217,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 default:
                     locationAddress = null;
             }
-            tv_address.setVisibility(View.VISIBLE);
+//            tv_address.setVisibility(View.VISIBLE);
             tv_address.setText(locationAddress);
         }
     }
@@ -244,10 +238,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 UtilityFragment utilityFragment = UtilityFragment.newInstance("", "");
                 moveFragment(utilityFragment);
                 break;
-            case R.id.layout_contacts:
-                GetContactsFragment fragmentContacts = GetContactsFragment.newInstance("", "");
-                moveFragment(fragmentContacts);
-                break;
             case R.id.layout_police:
                 PoliceAdminstrtiveFragment policeAdminstrtiveFragment = PoliceAdminstrtiveFragment.newInstance("", "");
                 moveFragment(policeAdminstrtiveFragment);
@@ -256,9 +246,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 JharkhandAdminstrtiveFragment jharkhandAdminstrtiveFragment = JharkhandAdminstrtiveFragment.newInstance("", "");
                 moveFragment(jharkhandAdminstrtiveFragment);
                 break;
-            case R.id.layout_wocall:
-                HelpFragment helpFragment = HelpFragment.newInstance("", "");
-                moveFragment(helpFragment);
+            case R.id.layout_bOrg:
+                BusinessOrgFragment businessOrgFragment = BusinessOrgFragment.newInstance("", "");
+                moveFragment(businessOrgFragment);
                 break;
             case R.id.layout_social:
                 SocialFragment fragmentS = SocialFragment.newInstance("", "");
@@ -280,123 +270,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(context, QrcodeScannerActivity.class));
                 break;
         }
-
-    }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        if (requestCode == CAMERA_PERM) {
-//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                runFlashLight();
-//            } else {
-//                Toast.makeText(context, "Permission was not Granted", Toast.LENGTH_SHORT).show();
-//            }
-//        } else {
-//            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        }
-//    }
-
-    public void piliceSiren() {
-        if (!police.isPlaying()) {
-            police.start();
-            police.isLooping();
-        } else {
-            police.pause();
-        }
-    }
-
-    public void whisilePlay() {
-        if (!weshile.isPlaying()) {
-            weshile.start();
-            weshile.isLooping();
-        } else {
-            weshile.pause();
-        }
-    }
-
-    private void runFlashLight() {
-        hasFlash = context.getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-        if (!hasFlash) {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-            builder1.setMessage("Sorry, your device doesn't support flash light!");
-            builder1.setCancelable(true);
-            builder1.setTitle("Error");
-            builder1.setPositiveButton(
-                    "ok",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.dismiss();
-                        }
-                    });
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-        }
-        getCamera();
-        if (isFlashOn) {
-            turnOffFlash();
-//            Toast.makeText(context, "Off", Toast.LENGTH_SHORT).show();
-        } else {
-            turnOnFlash();
-//            Toast.makeText(context, "On", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void getCamera() {
-
-        if (camera == null) {
-            try {
-                camera = Camera.open();
-                params = camera.getParameters();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private void turnOnFlash() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            try {
-                camManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
-                String cameraId = null; // Usually front camera is at 0 position.
-                if (camManager != null) {
-                    cameraId = camManager.getCameraIdList()[0];
-                    camManager.setTorchMode(cameraId, true);
-                }
-            } catch (CameraAccessException e) {
-                e.printStackTrace();
-            }
-        } else {
-            camera = Camera.open();
-            params = camera.getParameters();
-            params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-            camera.setParameters(params);
-            camera.startPreview();
-        }
-        isFlashOn = true;
-    }
-
-    private void turnOffFlash() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            try {
-                String cameraId;
-                camManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
-                if (camManager != null) {
-                    cameraId = camManager.getCameraIdList()[0]; // Usually front camera is at 0 position.
-                    camManager.setTorchMode(cameraId, false);
-                }
-            } catch (CameraAccessException e) {
-                e.printStackTrace();
-            }
-        } else {
-            params = camera.getParameters();
-            params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-            camera.setParameters(params);
-            camera.stopPreview();
-
-        }
-        isFlashOn = false;
     }
 
     private void moveFragment(Fragment fragment) {
@@ -417,42 +290,44 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(String response) {
                         MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
-                        resultList.addAll(Arrays.asList(myPojo.getResult()));
-                        if (resultList != null && resultList.size() != 0) {
-                            final Dialog dialog = new Dialog(context);
-                            dialog.setCancelable(false);
-                            dialog.setCanceledOnTouchOutside(false);
-                            dialog.setContentView(R.layout.custom_advise_dialog);
-                            Window window = dialog.getWindow();
-                            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                        if (myPojo != null) {
+                            resultList.addAll(Arrays.asList(myPojo.getResult()));
+                            if (resultList != null && resultList.size() != 0) {
+                                final Dialog dialog = new Dialog(context);
+                                dialog.setCancelable(false);
+                                dialog.setCanceledOnTouchOutside(false);
+                                dialog.setContentView(R.layout.custom_advise_dialog);
+                                Window window = dialog.getWindow();
+                                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 //                            dialog.show();
-                            TextView date = dialog.findViewById(R.id.tv_date);
-                            TextView advise = dialog.findViewById(R.id.tv_advise);
-                            TextView ok = dialog.findViewById(R.id.tv_ok);
-                            ImageView image = dialog.findViewById(R.id.image);
-                            date.setText(resultList.get(resultList.size() - 1).getDate());
-                            advise.setText(resultList.get(resultList.size() - 1).getAdvise());
-                            if (resultList.get(resultList.size() - 1).getImage() != null && !resultList.get(resultList.size() - 1).getImage().equalsIgnoreCase("") && !resultList.get(resultList.size() - 1).getImage().equalsIgnoreCase("no")) {
-                                Picasso.with(context).load(resultList.get(resultList.size() - 1).getImage()).into(image);
-                            } else {
-                                image.setImageDrawable(getResources().getDrawable(R.drawable.logo));
-                            }
-                            final SharedPreferences sharedPreferences = context.getSharedPreferences("advise", Context.MODE_PRIVATE);
-                            String data = sharedPreferences.getString("key", "");
-                            if (data.isEmpty() || !resultList.get(resultList.size() - 1).getAdvise().equalsIgnoreCase(data)) {
-                                dialog.show();
-                            } else {
-                                dialog.dismiss();
-                            }
-                            ok.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("key", resultList.get(resultList.size() - 1).getAdvise());
-                                    editor.apply();
+                                TextView date = dialog.findViewById(R.id.tv_date);
+                                TextView advise = dialog.findViewById(R.id.tv_advise);
+                                TextView ok = dialog.findViewById(R.id.tv_ok);
+                                ImageView image = dialog.findViewById(R.id.image);
+                                date.setText(resultList.get(resultList.size() - 1).getDate());
+                                advise.setText(resultList.get(resultList.size() - 1).getAdvise());
+                                if (resultList.get(resultList.size() - 1).getImage() != null && !resultList.get(resultList.size() - 1).getImage().equalsIgnoreCase("") && !resultList.get(resultList.size() - 1).getImage().equalsIgnoreCase("no")) {
+                                    Picasso.with(context).load(resultList.get(resultList.size() - 1).getImage()).into(image);
+                                } else {
+                                    image.setImageDrawable(getResources().getDrawable(R.drawable.logo));
+                                }
+                                final SharedPreferences sharedPreferences = context.getSharedPreferences("advise", Context.MODE_PRIVATE);
+                                String data = sharedPreferences.getString("key", "");
+                                if (data.isEmpty() || !resultList.get(resultList.size() - 1).getAdvise().equalsIgnoreCase(data)) {
+                                    dialog.show();
+                                } else {
                                     dialog.dismiss();
                                 }
-                            });
+                                ok.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("key", resultList.get(resultList.size() - 1).getAdvise());
+                                        editor.apply();
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }
                         }
                     }
                 },
@@ -471,5 +346,4 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         requestQueue.add(stringRequest);
 
     }
-
 }

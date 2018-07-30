@@ -21,49 +21,62 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/margin40"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_hospital"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/margin5"
-                android:textColor="@color/white"
-                android:background="@drawable/capsule_button"
-                android:text="Hospital" />
+                android:layout_marginBottom="@dimen/margin5"
+                android:layout_weight=".25"
+                android:background="@drawable/dark_capsule_button"
+                android:text="Hospital"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textSize12"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btn_ambulance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin5"
                 android:layout_marginLeft="@dimen/margin5"
-                android:textColor="@color/white"
-                android:background="@drawable/capsule_button"
-                android:text="Ambulance" />
+                android:layout_marginBottom="@dimen/margin5"
+                android:layout_weight=".25"
+                android:textAllCaps="false"
+                android:background="@drawable/dark_capsule_button"
+                android:text="Ambulance"
+                android:textSize="@dimen/textSize12"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btn_police"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin5"
                 android:layout_marginBottom="@dimen/margin5"
-                android:layout_marginLeft="@dimen/margin5"
-                android:textColor="@color/white"
-                android:background="@drawable/capsule_button"
-                android:text="Police" />
+                android:layout_weight=".25"
+                android:textAllCaps="false"
+                android:background="@drawable/dark_capsule_button"
+                android:text="Police"
+                android:textSize="@dimen/textSize12"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btn_atm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/margin5"
-                android:layout_marginLeft="@dimen/margin5"
-                android:textColor="@color/white"
-                android:background="@drawable/capsule_button"
-                android:text="Atm" />
+                android:layout_marginRight="@dimen/margin5"
+                android:layout_weight=".25"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textSize12"
+                android:background="@drawable/dark_capsule_button"
+                android:text="Atm"
+                android:textColor="@color/white" />
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>
