@@ -162,7 +162,9 @@ public class PoliceAdminstrtiveFragment extends Fragment {
                         MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
                         if (myPojo != null) {
                             for (Result result : myPojo.getResult()) {
-                                resultList.addAll(Arrays.asList(result));
+                                if (result != null) {
+                                    resultList.addAll(Arrays.asList(result));
+                                }
                             }
                             PoliceAdapter socialAdapter = new PoliceAdapter(context, resultList);
                             recycleView.setAdapter(socialAdapter);

@@ -80,8 +80,6 @@ public class SubCategoryFragment extends Fragment {
     }
 
     private void init() {
-        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
-        dashBoardActivity.setTitle("Sub Category");
         recycleView = view.findViewById(R.id.recycleView);
         tv_type = view.findViewById(R.id.type);
         tv_District = view.findViewById(R.id.tv_District);
@@ -91,7 +89,7 @@ public class SubCategoryFragment extends Fragment {
         if (myPojo != null) {
             List<Result> results = new ArrayList<>();
             for (Result result : myPojo.getResult()) {
-               Result resultModel = new Result();
+                Result resultModel = new Result();
                 suCate = result.getSubCategory();
                 social = result.getSocialName();
                 dist = result.getDistrict();
@@ -101,6 +99,8 @@ public class SubCategoryFragment extends Fragment {
                 results.add(resultModel);
 
             }
+            DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+            dashBoardActivity.setTitle(social);
             tv_type.setText(social);
 
             if (dist != null) {

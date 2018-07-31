@@ -24,14 +24,33 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.adapter.AdviseAdapter;
 import hacker.l.emergency_help.database.DbHelper;
+import hacker.l.emergency_help.fragments.AdminAdviseMgmtFragment;
 import hacker.l.emergency_help.fragments.JharkhandAdminstrtiveFragment;
+import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
+import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.FontManager;
 
 
@@ -39,6 +58,8 @@ public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
     //    public static final double DESTROY_APP_TH = 131531.01001;
     public static final double DESTROY_APP_TH = 31539999999.9988899;
+    TextView adminMsg;
+    List<String> resultList, dateList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +70,38 @@ public class SplashActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         checkExpired();
+        getAdminAdvise();
+    }
+
+    private void getAdminAdvise() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAdvise,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        resultList = new ArrayList<>();
+                        dateList = new ArrayList<>();
+                        for (Result result : myPojo.getResult()) {
+                            resultList.addAll(Arrays.asList(result.getAdvise()));
+                            dateList.addAll(Arrays.asList(result.getDate()));
+                        }
+//                        Collections.reverse(resultList);
+                        adminMsg.setText(resultList.get(resultList.size() - 1));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
     private void checkExpired() {
@@ -62,6 +115,16 @@ public class SplashActivity extends AppCompatActivity {
         imageView.startAnimation(top);
         TextView textView = findViewById(R.id.tv);
         TextView tv1 = findViewById(R.id.tv1);
+        adminMsg = findViewById(R.id.adminMsg);
+        adminMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SplashActivity.this, AdviceViewerActivity.class);
+                intent.putExtra("advise", adminMsg.getText().toString());
+                intent.putExtra("date", dateList.get(dateList.size() - 1));
+                startActivity(intent);
+            }
+        });
         Button btn_next = findViewById(R.id.btn_next);
         TextView tv2 = findViewById(R.id.tv2);
         TextView tv3 = findViewById(R.id.tv3);

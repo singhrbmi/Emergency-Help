@@ -31,6 +31,7 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 app:cardCornerRadius="80dp">
 
                 <ImageView
@@ -46,7 +47,8 @@
                 android:id="@+id/image_camera"
                 android:layout_width="@dimen/dimen_50_dp"
                 android:layout_height="@dimen/dimen_50_dp"
-                android:src="@drawable/ic_camera_alt_black_24dp" />
+                android:src="@drawable/ic_camera_alt_black_24dp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <EditText

@@ -80,4 +80,8 @@ public class Contants {
 
     public static final String getAllComplents = "getAllComplents.php";
     public static final String AddComplents = "AddComplents.php";
+
+
+    public static final String SearchsurakshaNo = "SearchsurakshaNo.php";
+    public static final String getState = "getState.php";
 }

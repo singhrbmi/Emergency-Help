@@ -20,7 +20,7 @@
             android:layout_width="250dp"
             android:layout_height="0dp"
             android:layout_gravity="center|top"
-            android:layout_weight=".3"
+            android:layout_weight=".32"
             android:scaleType="fitXY"
             android:src="@drawable/logo" />
 
@@ -30,10 +30,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="@dimen/margin10"
-            android:layout_weight=".15"
+            android:layout_weight=".13"
             android:background="@drawable/done_corner_round"
             android:gravity="center"
-            android:text="Administrative person message here..."
+            android:padding="@dimen/margin10"
+            android:text=""
             android:textColor="@color/selected_tab"
             android:textSize="@dimen/textSize14" />
 
@@ -41,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="@dimen/margin10"
-            android:layout_weight=".25"
+            android:layout_weight=".22"
             android:background="@drawable/done_corner_round"
             android:gravity="center"
             android:orientation="horizontal">
@@ -61,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin10"
-                android:text="App owner daily advise message with image here ..this is dummy content."
+                android:text="Welcome to Suraksha Kavach"
                 android:textColor="@color/selected_tab"
                 android:textSize="@dimen/textSize14" />
         </LinearLayout>
@@ -69,7 +70,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".3">
+            android:layout_weight=".33">
 
 
             <LinearLayout
@@ -255,6 +256,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin5"
                     android:gravity="center"
                     android:orientation="horizontal">
 

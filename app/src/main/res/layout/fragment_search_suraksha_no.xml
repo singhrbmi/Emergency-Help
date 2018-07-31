@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".fragments.SearchSurakshaNoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin10"
+            android:src="@drawable/logo" />
+
+        <EditText
+            android:id="@+id/id_et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin40"
+            android:layout_marginLeft="@dimen/dimen_15_dp"
+            android:layout_marginRight="@dimen/dimen_15_dp"
+            android:layout_marginTop="@dimen/margin20"
+            android:background="@drawable/done_corner_round"
+            android:hint="Phone Number"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="10"
+            android:paddingLeft="@dimen/dimen_10_dp"
+            android:singleLine="true"
+            android:textColor="@color/color0E0E0F"
+            android:textColorHint="@color/color595c63"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/textSize14" />
+
+
+        <Button
+            android:id="@+id/id_bt_forget"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin10"
+            android:layout_marginTop="@dimen/dimen_30_dp"
+            android:background="@drawable/capsule_button"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize14" />
+
+        <LinearLayout
+            android:id="@+id/layoutone"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/margin10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".4"
+                android:gravity="center|left"
+                android:text="Number 1:-"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+
+            <TextView
+                android:id="@+id/tv_emergency"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+
+            <TextView
+                android:id="@+id/tv_phone1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin5"
+                android:layout_weight=".1"
+                android:background="@drawable/ic_settings_phone_black_24dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layouttwo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin30"
+            android:layout_margin="@dimen/margin10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".4"
+                android:gravity="center|left"
+                android:text="Number 2:-"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+
+            <TextView
+                android:id="@+id/tv_emergency2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+
+            <TextView
+                android:id="@+id/tv_phone2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin5"
+                android:layout_weight=".1"
+                android:background="@drawable/ic_settings_phone_black_24dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutthree"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_30_dp"
+            android:layout_margin="@dimen/margin10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".4"
+                android:gravity="center|left"
+                android:text="Number 3:-"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+
+            <TextView
+                android:id="@+id/tv_emergency3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+
+            <TextView
+                android:id="@+id/tv_phone3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin5"
+                android:layout_weight=".1"
+                android:background="@drawable/ic_settings_phone_black_24dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

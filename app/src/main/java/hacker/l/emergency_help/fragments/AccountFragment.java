@@ -90,6 +90,7 @@ public class AccountFragment extends Fragment {
     public final static int QRcodeWidth = 500;
     Bitmap bitmap;
     String barcode;
+    TextView tv_phone1, tv_phone2, tv_phone3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,7 +104,7 @@ public class AccountFragment extends Fragment {
 
     private void init() {
         DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
-        dashBoardActivity.setTitle("Account");
+        dashBoardActivity.setTitle("Zindagi Milegi Dobara");
         barCodeImage = view.findViewById(R.id.image_barcode);
         tv_name = view.findViewById(R.id.tv_name);
         tv_email = view.findViewById(R.id.tv_email);
@@ -124,6 +125,27 @@ public class AccountFragment extends Fragment {
         layoutLocality = view.findViewById(R.id.layoutLocality);
         tv_locality = view.findViewById(R.id.tv_locality);
         share = view.findViewById(R.id.share);
+        tv_phone1 = view.findViewById(R.id.tv_phone1);
+        tv_phone2 = view.findViewById(R.id.tv_phone2);
+        tv_phone3 = view.findViewById(R.id.tv_phone3);
+        tv_phone1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCall("9709500007");
+            }
+        });
+        tv_phone2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCall("9709000007");
+            }
+        });
+        tv_phone3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCall("8294995996");
+            }
+        });
 //        final ProgressDialog progressDialog = new ProgressDialog(context);
 //        progressDialog.setMessage("Waiting");
 //        progressDialog.show();
@@ -176,6 +198,14 @@ public class AccountFragment extends Fragment {
 //            }
             }
         });
+    }
+
+    void makeCall(String no) {
+        if (no != null) {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:" + no));
+            startActivity(intent);
+        }
     }
 
     public boolean isStoragePermissionGranted() {

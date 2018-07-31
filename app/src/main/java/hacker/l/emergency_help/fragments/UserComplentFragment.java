@@ -77,7 +77,7 @@ public class UserComplentFragment extends Fragment {
 
     private void init() {
         DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
-        dashBoardActivity.setTitle("Complent");
+        dashBoardActivity.setTitle("Suggestion");
         edt_message = view.findViewById(R.id.edt_message);
         tv_submit = view.findViewById(R.id.tv_submit);
         tv_submit.setOnClickListener(new View.OnClickListener() {

@@ -12,6 +12,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -89,6 +90,8 @@ public class AdminLoginFragment extends Fragment {
     }
 
     private void init() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Admin Login");
         id_bt_login = view.findViewById(R.id.id_bt_login);
         id_et_username = view.findViewById(R.id.id_et_username);
         id_et_password = view.findViewById(R.id.id_et_password);
@@ -120,10 +123,13 @@ public class AdminLoginFragment extends Fragment {
         final String userPass = id_et_password.getText().toString();
         if (userPhone.length() == 0) {
             id_et_username.setError("Enter  Phone Number ");
+            requestFocus(id_et_username);
         } else if (userPhone.length() != 10) {
             id_et_username.setError("Enter  Valid Phone");
+            requestFocus(id_et_username);
         } else if (userPass.length() == 0) {
             id_et_password.setError("Enter password");
+            requestFocus(id_et_password);
         } else {
             if (Utility.isOnline(context)) {
                 pd = new ProgressDialog(context);
@@ -141,6 +147,8 @@ public class AdminLoginFragment extends Fragment {
                                 } else {
                                     Toast.makeText(context, "Invalid Information", Toast.LENGTH_SHORT).show();
                                     id_et_username.setError("Invalid Information");
+                                    requestFocus(id_et_username);
+
                                 }
                             }
                         },
@@ -177,4 +185,9 @@ public class AdminLoginFragment extends Fragment {
                 .commit();
     }
 
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
 }

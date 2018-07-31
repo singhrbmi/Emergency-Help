@@ -78,7 +78,7 @@ public class ComplentAdapter extends RecyclerView.Adapter<ComplentAdapter.MyView
                 Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
                 txtIntent .setType("text/plain");
                 txtIntent .putExtra(android.content.Intent.EXTRA_SUBJECT, "Complent Data");
-                txtIntent .putExtra(android.content.Intent.EXTRA_TEXT, FilteruserList.get(position).getComplent()+","+FilteruserList.get(position).getName()+","+FilteruserList.get(position).getPhone());
+                txtIntent .putExtra(android.content.Intent.EXTRA_TEXT, FilteruserList.get(position).getComplent()+","+FilteruserList.get(position).getName()+","+FilteruserList.get(position).getPhone()+","+FilteruserList.get(position).getDate());
                 mContext.startActivity(Intent.createChooser(txtIntent ,"Share"));
             }
         });

@@ -2,8 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/bg"
     android:layout_height="match_parent"
+    android:background="@color/bg"
     tools:context="hacker.l.emergency_help.fragments.AccountFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -28,281 +28,413 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="190dp"
+                    android:layout_height="130dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
                     android:layout_marginTop="@dimen/margin5"
+                    android:scaleType="fitXY"
                     android:src="@drawable/logo" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin10"
-                    android:layout_marginRight="@dimen/margin10"
-                    android:layout_marginTop="@dimen/margin30"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin5"
+                    android:orientation="vertical">
+
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text="Name:-"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize16" />
-
-                    <TextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text=""
+                        android:layout_margin="@dimen/margin5"
+                        android:gravity="center|left"
+                        android:text="Free Ambulance Service\n Cell No."
+                        android:textAllCaps="false"
                         android:textColor="@color/black"
                         android:textSize="@dimen/textSize14" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_margin="@dimen/margin5"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".9"
+                            android:gravity="center|left"
+                            android:text="9709500007"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+
+                        <TextView
+                            android:id="@+id/tv_phone1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/margin5"
+                            android:layout_weight=".1"
+                            android:background="@drawable/ic_settings_phone_black_24dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin5"
+                        android:gravity="center|left"
+                        android:text="President \n
+Ashwani Rajgarhia"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSize14" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_margin="@dimen/margin5"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".9"
+                            android:gravity="center|left"
+                            android:text="9709000007"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+
+                        <TextView
+                            android:id="@+id/tv_phone2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/margin5"
+                            android:layout_weight=".1"
+                            android:background="@drawable/ic_settings_phone_black_24dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin5"
+                        android:gravity="center|left"
+                        android:text="Secretary \n
+Jai Prakash Singhania ‭"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSize14" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_margin="@dimen/margin5"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".9"
+                            android:gravity="center|left"
+                            android:text="8294995996"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+
+                        <TextView
+                            android:id="@+id/tv_phone3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/margin5"
+                            android:layout_weight=".1"
+                            android:background="@drawable/ic_settings_phone_black_24dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin10"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_marginRight="@dimen/margin10"
+                        android:layout_marginTop="@dimen/margin30"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="Name:-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize16" />
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="Email Id:-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize16" />
+
+                        <TextView
+                            android:id="@+id/tv_email"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="Phone Number:-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize16" />
+
+                        <TextView
+                            android:id="@+id/tv_phone"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="Emergency number 1:-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize16" />
+
+                        <TextView
+                            android:id="@+id/tv_emergency"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layouttwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="Emergency number 2:-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize16" />
+
+                        <TextView
+                            android:id="@+id/tv_emergency2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutthree"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="Emergency number 3:-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize16" />
+
+                        <TextView
+                            android:id="@+id/tv_emergency3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="Address:-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize16" />
+
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="City:-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize16" />
+
+                        <TextView
+                            android:id="@+id/tv_city"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutLocality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="Locality:-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize16" />
+
+                        <TextView
+                            android:id="@+id/tv_locality"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutPincode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text="Pin Code:-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize16" />
+
+                        <TextView
+                            android:id="@+id/tv_pincode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".5"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize14" />
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:id="@+id/tv_barcode"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text="Email Id:-"
+                        android:layout_marginTop="@dimen/margin30"
+                        android:gravity="center"
+                        android:text="Your Security Code"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/textSize16" />
+                        android:textSize="@dimen/textSize18" />
+
+                    <ImageView
+                        android:id="@+id/image_barcode"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/dimen_20_dp" />
 
                     <TextView
-                        android:id="@+id/tv_email"
-                        android:layout_width="0dp"
+                        android:id="@+id/share"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text=""
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize14" />
+                        android:layout_margin="@dimen/margin20"
+                        android:gravity="center|right"
+                        android:text="Share"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/textSize18" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin10"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text="Phone Number:-"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize16" />
-
-                    <TextView
-                        android:id="@+id/tv_phone"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize14" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layoutone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin10"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text="Emergency number 1:-"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize16" />
-
-                    <TextView
-                        android:id="@+id/tv_emergency"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize14" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layouttwo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin10"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text="Emergency number 2:-"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize16" />
-
-                    <TextView
-                        android:id="@+id/tv_emergency2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize14" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layoutthree"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin10"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text="Emergency number 3:-"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize16" />
-
-                    <TextView
-                        android:id="@+id/tv_emergency3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize14" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layoutAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin10"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text="Address:-"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize16" />
-
-                    <TextView
-                        android:id="@+id/tv_address"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize14" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layoutCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin10"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text="City:-"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize16" />
-
-                    <TextView
-                        android:id="@+id/tv_city"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize14" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layoutLocality"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin10"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text="Locality:-"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize16" />
-
-                    <TextView
-                        android:id="@+id/tv_locality"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize14" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layoutPincode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin10"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text="Pin Code:-"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize16" />
-
-                    <TextView
-                        android:id="@+id/tv_pincode"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:text=""
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/textSize14" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_barcode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin30"
-                    android:gravity="center"
-                    android:text="Your Security Code"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/textSize18" />
-
-                <ImageView
-                    android:id="@+id/image_barcode"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/dimen_20_dp" />
-
-                <TextView
-                    android:id="@+id/share"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin20"
-                    android:gravity="center|right"
-                    android:text="Share"
-                    android:textColor="@color/red"
-                    android:textSize="@dimen/textSize18" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.v7.widget.CardView>

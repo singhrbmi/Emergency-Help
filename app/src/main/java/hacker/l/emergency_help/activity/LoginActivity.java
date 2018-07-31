@@ -131,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Invalid Information", Toast.LENGTH_SHORT).show();
                                     id_et_username.setError("Invalid Information");
+                                    requestFocus(id_et_username);
                                 }
                             }
                         },

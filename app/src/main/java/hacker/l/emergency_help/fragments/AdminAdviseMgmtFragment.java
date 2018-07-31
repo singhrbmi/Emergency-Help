@@ -106,15 +106,16 @@ public class AdminAdviseMgmtFragment extends Fragment {
         image_camera = view.findViewById(R.id.image_camera);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
-//        setAdapter();
+        setAdapter();
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (aBoolean) {
-                    updateAdvise();
-                } else {
-                    uploadData();
-                }
+                addAdviseData();
+//                if (aBoolean) {
+//                    updateAdvise();
+//                } else {
+//                    uploadData();
+//                }
             }
         });
         image_camera.setOnClickListener(new View.OnClickListener() {
@@ -259,8 +260,8 @@ public class AdminAdviseMgmtFragment extends Fragment {
                                 pd.dismiss();
                                 Toast.makeText(context, "Send Successfully", Toast.LENGTH_SHORT).show();
                                 edt_message.setText("");
-                                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_file_upload_black_24dp));
-//                                setAdapter();
+//                                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_file_upload_black_24dp));
+                                setAdapter();
                             }
                         },
                         new Response.ErrorListener() {
@@ -273,7 +274,7 @@ public class AdminAdviseMgmtFragment extends Fragment {
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("advise", message);
-                        params.put("image", imageUrl);
+//                        params.put("image", imageUrl);
                         return params;
                     }
                 };

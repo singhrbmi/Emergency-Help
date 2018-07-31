@@ -28,12 +28,16 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.adapter.PoliceAdapter;
+import hacker.l.emergency_help.models.MyPojo;
+import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.Utility;
 
@@ -43,6 +47,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText id_et_userName, id_phone, id_email, id_password, id_city, id_locality;
     String userName, userPhone, emailId, Password, city, state, locality;
     Spinner spinnerState;
+    List<String> resultList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,32 +71,51 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void setStateSpinner() {
-        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, getState());
-        spinnerState.setAdapter(stringArrayAdapter);
-        spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        resultList = new ArrayList<>();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getState,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        if (myPojo != null) {
+                            for (Result result : myPojo.getResult()) {
+                                resultList.addAll(Arrays.asList(result.getStateName()));
+                            }
+                            ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(SignupActivity.this, android.R.layout.simple_dropdown_item_1line, resultList);
+                            spinnerState.setAdapter(stringArrayAdapter);
+                            spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    state = parent.getSelectedItem().toString();
+
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+
+                            });
+                        }
+//                        progressDialog.dismiss();
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                state = parent.getSelectedItem().toString();
-
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-
-        });
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
-    private List<String> getState() {
-        List<String> strings = new ArrayList<>();
-        strings.add("Jharkhand");
-        strings.add("Delhi");
-        strings.add("Punjab");
-        strings.add("Haryana");
-        strings.add("Bihar");
-        return strings;
-    }
 
     public boolean Validation() {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
@@ -103,27 +127,35 @@ public class SignupActivity extends AppCompatActivity {
         Password = id_password.getText().toString();
         if (userName.isEmpty()) {
             id_et_userName.setError("Enter Username");
+            requestFocus(id_et_userName);
             return false;
         } else if (userPhone.isEmpty()) {
             id_phone.setError("Enter Phone Number");
+            requestFocus(id_phone);
             return false;
         } else if (userPhone.length() != 10) {
             id_phone.setError("Enter Valid Phone Number");
+            requestFocus(id_phone);
             return false;
         } else if (emailId.length() == 0) {
             id_email.setError("Enter Email Id");
+            requestFocus(id_email);
             return false;
         } else if (!pattern.matcher(emailId).matches()) {
             id_email.setError("Enter Valid Email Id");
+            requestFocus(id_email);
             return false;
         } else if (city.length() == 0) {
             id_city.setError("Enter City");
+            requestFocus(id_city);
             return false;
         } else if (locality.length() == 0) {
             id_locality.setError("Enter Locality");
+            requestFocus(id_locality);
             return false;
         } else if (Password.length() == 0) {
             id_password.setError("Enter Password");
+            requestFocus(id_password);
             return false;
         } else {
             return true;
@@ -141,8 +173,16 @@ public class SignupActivity extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
+                                if (!response.equalsIgnoreCase("Phone already exists")) {
+                                    startActivity(new Intent(SignupActivity.this, DashBoardActivity.class));
+                                    finish();
+                                } else {
+                                    id_phone.setError(response);
+                                    requestFocus(id_phone);
+                                    Toast.makeText(SignupActivity.this, response, Toast.LENGTH_SHORT).show();
+                                }
                                 pd.dismiss();
-                                startActivity(new Intent(SignupActivity.this, DashBoardActivity.class));
+
                             }
                         },
                         new Response.ErrorListener() {

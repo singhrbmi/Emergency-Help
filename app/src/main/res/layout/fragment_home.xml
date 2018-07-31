@@ -57,7 +57,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="110dp"
                         android:orientation="horizontal">
 
 
@@ -130,11 +130,12 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="50dp"
+                                android:layout_width="60dp"
                                 android:layout_height="50dp"
                                 android:layout_gravity="center"
+                                android:scaleType="fitCenter"
                                 android:layout_marginTop="@dimen/margin5"
-                                android:src="@drawable/ic_radio_button_checked_black_24dp" />
+                                android:src="@drawable/sticker" />
 
 
                             <TextView
@@ -332,7 +333,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="110dp"
                         android:orientation="horizontal">
 
 
@@ -372,7 +373,7 @@
 
 
                             <ImageView
-                                android:layout_width="60dp"
+                                android:layout_width="70dp"
                                 android:layout_height="50dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/margin5"

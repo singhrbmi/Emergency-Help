@@ -266,6 +266,16 @@ public class Result {
     private int scid;
     private int socialNoId;
 
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    private String stateName;
+
     public Result(String name, String phone) {
         this.name = name;
         this.phone = phone;
@@ -306,4 +316,5 @@ public class Result {
     public void setPhoneId(int phoneId) {
         this.phoneId = phoneId;
     }
+
 }

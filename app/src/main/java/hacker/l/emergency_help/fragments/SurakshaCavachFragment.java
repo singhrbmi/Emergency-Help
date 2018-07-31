@@ -6,11 +6,14 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Base64;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -77,7 +80,7 @@ public class SurakshaCavachFragment extends Fragment {
     List<String> spinnerList;
     Spinner spinner;
     EditText id_et_userName, id_phone, id_email, id_address, id_no1, id_no2, id_no3, id_city, id_pincode, id_locality;
-    Button id_btproced;
+    Button id_btproced, id_btSearch;
     ProgressDialog pd;
     int loginID;
     String name, phone, email, city, address, pincode, no1, no2, no3, socialUs, temp, locality;
@@ -124,6 +127,7 @@ public class SurakshaCavachFragment extends Fragment {
         id_locality = view.findViewById(R.id.id_locality);
         id_pincode = view.findViewById(R.id.id_pincode);
         id_btproced = view.findViewById(R.id.id_btproced);
+        id_btSearch = view.findViewById(R.id.id_btSearch);
         DbHelper dbHelper = new DbHelper(context);
         Result result = dbHelper.getUserData();
         loginID = result.getLoginId();
@@ -155,6 +159,21 @@ public class SurakshaCavachFragment extends Fragment {
                 uploadSurakhshaCavach();
             }
         });
+        id_btSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchSurakshaNoFragment searchSurakshaNoFragment = SearchSurakshaNoFragment.newInstance("", "");
+                moveFragment(searchSurakshaNoFragment);
+            }
+        });
+    }
+
+    private void moveFragment(Fragment fragment) {
+        FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private boolean validation() {
@@ -171,39 +190,51 @@ public class SurakshaCavachFragment extends Fragment {
         no3 = id_no3.getText().toString();
         if (name.isEmpty()) {
             id_et_userName.setError("Enter Username");
+            requestFocus(id_et_userName);
             return false;
         } else if (phone.isEmpty()) {
             id_phone.setError("Enter Phone Number");
+            requestFocus(id_phone);
             return false;
         } else if (phone.length() != 10) {
             id_phone.setError("Enter Valid Phone Number");
+            requestFocus(id_phone);
             return false;
         } else if (email.length() == 0) {
             id_email.setError("Enter Email Id");
+            requestFocus(id_email);
             return false;
         } else if (!pattern.matcher(email).matches()) {
             id_email.setError("Enter Valid Email Id");
+            requestFocus(id_email);
             return false;
         } else if (address.length() == 0) {
             id_address.setError("Enter Address");
+            requestFocus(id_address);
             return false;
         } else if (no1.length() == 0) {
             id_no1.setError("Enter Number");
+            requestFocus(id_no1);
             return false;
         } else if (no2.length() == 0) {
             id_no2.setError("Enter Number");
+            requestFocus(id_no2);
             return false;
         } else if (no3.length() == 0) {
             id_no3.setError("Enter Number");
+            requestFocus(id_no3);
             return false;
         } else if (city.length() == 0) {
             id_city.setError("Enter City");
+            requestFocus(id_city);
             return false;
         } else if (pincode.length() == 0) {
             id_pincode.setError("Enter Pincode");
+            requestFocus(id_pincode);
             return false;
         } else if (locality.length() == 0) {
             id_locality.setError("Enter Locality");
+            requestFocus(id_locality);
             return false;
         } else {
             return true;
@@ -214,7 +245,7 @@ public class SurakshaCavachFragment extends Fragment {
         if (Utility.isOnline(context)) {
             if (validation()) {
                 pd = new ProgressDialog(context);
-                pd.setMessage("Uploading wait...");
+                pd.setMessage("Adding wait...");
                 pd.show();
                 pd.setCancelable(false);
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.surakshacavach,
@@ -311,5 +342,11 @@ public class SurakshaCavachFragment extends Fragment {
 
         bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight);
         return bitmap;
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 }

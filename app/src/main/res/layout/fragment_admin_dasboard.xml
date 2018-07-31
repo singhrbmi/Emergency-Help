@@ -28,6 +28,7 @@
             android:layout_margin="@dimen/margin10"
             android:background="@drawable/capsule_button"
             android:gravity="center"
+            android:visibility="invisible"
             android:text="Phone Management"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize16" />
@@ -50,7 +51,7 @@
             android:layout_margin="@dimen/margin10"
             android:background="@drawable/capsule_button"
             android:gravity="center"
-            android:text="Complent Management"
+            android:text="Suggestion Management"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize16" />
 
