@@ -179,12 +179,14 @@ public class SplashActivity extends AppCompatActivity {
                             resultListOwner.addAll(Arrays.asList(result.getAdviseOwner()));
                             dateListOwner.addAll(Arrays.asList(result.getDateOwner()));
                             resultImageLst.addAll(Arrays.asList(result.getImage()));
+                           // Log.d("lalit", "lalit" + (resultImageLst.size());
                         }
                         if (resultListOwner.size() != 0) {
 //                        Collections.reverse(resultList);
                             msg.setText(resultListOwner.get(resultListOwner.size() - 1));
                             if (resultImageLst.get(resultImageLst.size() - 1) != null) {
-                                Picasso.with(SplashActivity.this).load(resultImageLst.size() - 1).into(imageMsg);
+                                Picasso.with(SplashActivity.this).load(resultImageLst.get(resultImageLst.size() - 1)).into(imageMsg);
+
                             } else {
                                 Picasso.with(SplashActivity.this).load(R.drawable.logo).into(imageMsg);
                             }
@@ -201,7 +203,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("district", district);
+//                params.put("district", district);
                 return params;
             }
         };

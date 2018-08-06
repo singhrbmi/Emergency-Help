@@ -94,6 +94,7 @@ public class AddUpdateAdministiveFragment extends Fragment {
     Button tv_add;
     RecyclerView recycleView;
     boolean updateFlag = false;
+    int adminId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -230,6 +231,7 @@ public class AddUpdateAdministiveFragment extends Fragment {
                             if (!response.equalsIgnoreCase("Phone already exists")) {
                                 if (!response.equalsIgnoreCase("District already Used")) {
                                     Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
+                                    tv_add.setText("Add Administrative");
                                     setAdapter();
                                 } else {
                                     Toast.makeText(context, "District already Used", Toast.LENGTH_SHORT).show();
@@ -251,11 +253,12 @@ public class AddUpdateAdministiveFragment extends Fragment {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("district", district);
+//                    params.put("district", district);
                     params.put("isActive", isActive);
                     params.put("adminName", adminName);
                     params.put("adminPass", adminPass);
-                    params.put("adminPhone", adminPhone);
+//                    params.put("adminPhone", adminPhone);
+                    params.put("adminId", String.valueOf(adminId));
 
                     return params;
                 }
@@ -267,7 +270,7 @@ public class AddUpdateAdministiveFragment extends Fragment {
         }
     }
 
-    private void setAdapter() {
+    public void setAdapter() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllAdmin,
                 new Response.Listener<String>() {
                     @Override
@@ -362,11 +365,12 @@ public class AddUpdateAdministiveFragment extends Fragment {
         }
     }
 
-    public void updateShowData(boolean updateFlag, String name, String phone, String pass, String dist, String stus) {
+    public void updateShowData(boolean updateFlag, int adminId, String name, String phone, String pass, String dist, String stus) {
         this.updateFlag = updateFlag;
-        this.adminName=name;
-        this.adminPhone=phone;
-        this.adminPass=pass;
+        this.adminId = adminId;
+        this.adminName = name;
+        this.adminPhone = phone;
+        this.adminPass = pass;
         edt_name.setText(name);
         edt_pass.setText(pass);
         edt_phone.setText(phone);
@@ -381,5 +385,9 @@ public class AddUpdateAdministiveFragment extends Fragment {
 
 //set the default according to value
         spinnerDist.setSelection(spinnerPosition);
+        edt_phone.setEnabled(false);
+        edt_phone.setFocusable(false);
+        edt_phone.setClickable(false);
+        tv_add.setText("Update Administrative");
     }
 }

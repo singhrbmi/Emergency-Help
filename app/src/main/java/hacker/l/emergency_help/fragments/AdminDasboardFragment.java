@@ -65,12 +65,12 @@ public class AdminDasboardFragment extends Fragment {
         tv_advise = view.findViewById(R.id.tv_advise);
         tv_complent = view.findViewById(R.id.tv_complent);
         tv_allLogin = view.findViewById(R.id.tv_allLogin);
-//        if (!userPhone.equals("9431174521")) {
-//            tv_allLogin.setVisibility(View.GONE);
-//            tv_complent.setVisibility(View.GONE);
-//            tv_administrative.setVisibility(View.GONE);
-//            tv_phone.setVisibility(View.GONE);
-//        }
+        if (!userPhone.equals("9431174521")) {
+            tv_allLogin.setVisibility(View.GONE);
+            tv_complent.setVisibility(View.GONE);
+            tv_administrative.setVisibility(View.GONE);
+            tv_phone.setVisibility(View.GONE);
+        }
         tv_administrative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

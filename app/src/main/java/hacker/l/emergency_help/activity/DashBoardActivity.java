@@ -137,10 +137,10 @@ public class DashBoardActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.admin) {
-            AdminDasboardFragment adminDasboardFragment = AdminDasboardFragment.newInstance("", "");
-            moveFragment(adminDasboardFragment);
-//            AdminLoginFragment adminLoginFragment = AdminLoginFragment.newInstance("", "");
-//            moveFragment(adminLoginFragment);
+//            AdminDasboardFragment adminDasboardFragment = AdminDasboardFragment.newInstance("", "");
+//            moveFragment(adminDasboardFragment);
+            AdminLoginFragment adminLoginFragment = AdminLoginFragment.newInstance("", "");
+            moveFragment(adminLoginFragment);
             return true;
         }
 

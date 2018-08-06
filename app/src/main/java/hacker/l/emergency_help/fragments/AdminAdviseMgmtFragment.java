@@ -4,15 +4,21 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.Time;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,15 +34,31 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.fido.u2f.api.common.RequestParams;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.activity.DashBoardActivity;
@@ -47,6 +69,8 @@ import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.FilePath;
 import hacker.l.emergency_help.utility.Utility;
 import hacker.l.emergency_help.utility.myUploadImage;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class AdminAdviseMgmtFragment extends Fragment {
@@ -89,7 +113,22 @@ public class AdminAdviseMgmtFragment extends Fragment {
     ImageView imageView, image_camera;
     int id;
     CardView cardView;
-    String selectedPath, imageUrl;
+    String selectedPath, message;
+
+
+    Bitmap bitmap;
+
+    boolean check = true;
+
+
+    ProgressDialog progressDialog;
+
+
+    String ADVISE = "adviseOwner";
+
+    String ImagePath = "image";
+
+    String ServerUploadPath = Contants.SERVICE_BASE_URL + Contants.uploadOwnerAdvise;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,11 +161,20 @@ public class AdminAdviseMgmtFragment extends Fragment {
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                message = edt_message.getText().toString();
                 if (mParam1.equalsIgnoreCase("9431174521")) {
-                    addOwnerAdviseData();
+                    if (message.length() != 0) {
+                        if (Utility.isOnline(context)) {
+                ImageUploadToServerFunction();
+                        } else {
+                            Toast.makeText(context, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 } else {
                     addAdviseData();
                 }
+
+
             }
         });
         image_camera.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +183,180 @@ public class AdminAdviseMgmtFragment extends Fragment {
                 showImageChooser();
             }
         });
+    }
+
+
+    @Override
+    public void onActivityResult(int RC, int RQC, Intent I) {
+
+        super.onActivityResult(RC, RQC, I);
+
+        if (RC == 1 && RQC == RESULT_OK && I != null && I.getData() != null) {
+
+            Uri uri = I.getData();
+
+            try {
+
+                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
+
+                imageView.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void ImageUploadToServerFunction() {
+
+        ByteArrayOutputStream byteArrayOutputStreamObject;
+
+        byteArrayOutputStreamObject = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStreamObject);
+
+        byte[] byteArrayVar = byteArrayOutputStreamObject.toByteArray();
+
+        final String ConvertImage = Base64.encodeToString(byteArrayVar, Base64.DEFAULT);
+
+        class AsyncTaskUploadClass extends AsyncTask<Void, Void, String> {
+
+            @Override
+            protected void onPreExecute() {
+
+                super.onPreExecute();
+
+                progressDialog = ProgressDialog.show(context, "Advise is Uploading", "Please Wait", false, false);
+            }
+
+            @Override
+            protected void onPostExecute(String string1) {
+
+                super.onPostExecute(string1);
+
+                // Dismiss the progress dialog after done uploading.
+                progressDialog.dismiss();
+                edt_message.setText("");
+                // Printing uploading success message coming from server on android app.
+                Toast.makeText(context, string1, Toast.LENGTH_LONG).show();
+
+                // Setting image as transparent after done uploading.
+                imageView.setImageResource(android.R.color.transparent);
+
+
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+
+                ImageProcessClass imageProcessClass = new ImageProcessClass();
+
+                HashMap<String, String> HashMapParams = new HashMap<String, String>();
+                HashMapParams.put(ADVISE, message);
+
+                HashMapParams.put(ImagePath, ConvertImage);
+                //HashMapParams.put(DATE, currentDateandTime);
+
+                String FinalData = imageProcessClass.ImageHttpRequest(ServerUploadPath, HashMapParams);
+
+                return FinalData;
+            }
+        }
+        AsyncTaskUploadClass AsyncTaskUploadClassOBJ = new AsyncTaskUploadClass();
+
+        AsyncTaskUploadClassOBJ.execute();
+    }
+
+    public class ImageProcessClass {
+
+        public String ImageHttpRequest(String requestURL, HashMap<String, String> PData) {
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            try {
+
+                URL url;
+                HttpURLConnection httpURLConnectionObject;
+                OutputStream OutPutStream;
+                BufferedWriter bufferedWriterObject;
+                BufferedReader bufferedReaderObject;
+                int RC;
+
+                url = new URL(requestURL);
+
+                httpURLConnectionObject = (HttpURLConnection) url.openConnection();
+
+                httpURLConnectionObject.setReadTimeout(19000);
+
+                httpURLConnectionObject.setConnectTimeout(19000);
+
+                httpURLConnectionObject.setRequestMethod("POST");
+
+                httpURLConnectionObject.setDoInput(true);
+
+                httpURLConnectionObject.setDoOutput(true);
+
+                OutPutStream = httpURLConnectionObject.getOutputStream();
+
+                bufferedWriterObject = new BufferedWriter(
+
+                        new OutputStreamWriter(OutPutStream, "UTF-8"));
+
+                bufferedWriterObject.write(bufferedWriterDataFN(PData));
+
+                bufferedWriterObject.flush();
+
+                bufferedWriterObject.close();
+
+                OutPutStream.close();
+
+                RC = httpURLConnectionObject.getResponseCode();
+
+                if (RC == HttpsURLConnection.HTTP_OK) {
+
+                    bufferedReaderObject = new BufferedReader(new InputStreamReader(httpURLConnectionObject.getInputStream()));
+
+                    stringBuilder = new StringBuilder();
+
+                    String RC2;
+
+                    while ((RC2 = bufferedReaderObject.readLine()) != null) {
+
+                        stringBuilder.append(RC2);
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return stringBuilder.toString();
+        }
+
+        private String bufferedWriterDataFN(HashMap<String, String> HashMapParams) throws UnsupportedEncodingException {
+
+            StringBuilder stringBuilderObject;
+
+            stringBuilderObject = new StringBuilder();
+
+            for (Map.Entry<String, String> KEY : HashMapParams.entrySet()) {
+
+                if (check)
+
+                    check = false;
+                else
+                    stringBuilderObject.append("&");
+
+                stringBuilderObject.append(URLEncoder.encode(KEY.getKey(), "UTF-8"));
+
+                stringBuilderObject.append("=");
+
+                stringBuilderObject.append(URLEncoder.encode(KEY.getValue(), "UTF-8"));
+            }
+
+            return stringBuilderObject.toString();
+        }
+
     }
 
     private void showImageChooser() {
@@ -147,62 +369,62 @@ public class AdminAdviseMgmtFragment extends Fragment {
         startActivityForResult(Intent.createChooser(intent, "Choose File to Upload.."), 1);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == 1) {
-                Uri selectedFileUri = data.getData();
-                selectedPath = FilePath.getPath(context, selectedFileUri);
-                //chat_list_view.setVisibility(View.GONE);
-                Picasso.with(context).load(selectedFileUri).into(imageView);
-            }
-        }
-    }
+//    @RequiresApi(api = Build.VERSION_CODES.M)
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == Activity.RESULT_OK) {
+//            if (requestCode == 1) {
+//                Uri selectedFileUri = data.getData();
+//                selectedPath = FilePath.getPath(context, selectedFileUri);
+//                //chat_list_view.setVisibility(View.GONE);
+//                Picasso.with(context).load(selectedFileUri).into(imageView);
+//            }
+//        }
+//    }
 
-    private void addOwnerAdviseData() {
-        final String message = edt_message.getText().toString();
-        if (message.length() != 0) {
-            if (Utility.isOnline(context)) {
-                pd = new ProgressDialog(context);
-                pd.setMessage("Submit Your Advise Please wait...");
-                pd.show();
-                pd.setCancelable(false);
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.addOwnerAdvise,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                pd.dismiss();
-                                Toast.makeText(context, "Send Successfully", Toast.LENGTH_SHORT).show();
-                                edt_message.setText("");
-                                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_file_upload_black_24dp));
+//    private void addOwnerAdviseData() {
+//        final String message = edt_message.getText().toString();
+//        if (message.length() != 0) {
+//            if (Utility.isOnline(context)) {
+//                pd = new ProgressDialog(context);
+//                pd.setMessage("Submit Your Advise Please wait...");
+//                pd.show();
+//                pd.setCancelable(false);
+//                StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.addOwnerAdvise,
+//                        new Response.Listener<String>() {
+//                            @Override
+//                            public void onResponse(String response) {
+//                                pd.dismiss();
+//                                Toast.makeText(context, "Send Successfully", Toast.LENGTH_SHORT).show();
+//                                edt_message.setText("");
+//                                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_file_upload_black_24dp));
 //                                setAdapter();
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                pd.dismiss();
-                            }
-                        }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("advise", message);
-                        params.put("image", selectedPath);
-                        return params;
-                    }
-                };
-                RequestQueue requestQueue = Volley.newRequestQueue(context);
-                requestQueue.add(stringRequest);
-            } else {
-                Toast.makeText(context, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            edt_message.setError("Enter Advise Please");
-        }
-    }
+//                            }
+//                        },
+//                        new Response.ErrorListener() {
+//                            @Override
+//                            public void onErrorResponse(VolleyError error) {
+//                                pd.dismiss();
+//                            }
+//                        }) {
+//                    @Override
+//                    protected Map<String, String> getParams() throws AuthFailureError {
+//                        Map<String, String> params = new HashMap<String, String>();
+//                        params.put("advise", message);
+//                        params.put("image", selectedPath);
+//                        return params;
+//                    }
+//                };
+//                RequestQueue requestQueue = Volley.newRequestQueue(context);
+//                requestQueue.add(stringRequest);
+//            } else {
+//                Toast.makeText(context, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
+//            }
+//        } else {
+//            edt_message.setError("Enter Advise Please");
+//        }
+//    }
 
     private void addAdviseData() {
         final String message = edt_message.getText().toString();

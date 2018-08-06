@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import hacker.l.emergency_help.R;
 
 public class AdviceViewerActivity extends AppCompatActivity {
@@ -19,15 +21,16 @@ public class AdviceViewerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         TextView textView = findViewById(R.id.tv_advice);
         TextView tv_date = findViewById(R.id.tv_date);
-        ImageView image = findViewById(R.id.image);
+        ImageView image = findViewById(R.id.tv_image);
         textView.setText(intent.getStringExtra("advise"));
         tv_date.setText(intent.getStringExtra("date"));
         String url = intent.getStringExtra("image");
-        if (url != null) {
-            image.setImageURI(Uri.parse(url));
-        } else {
-            if (image != null) {
-                image.setImageResource(R.drawable.logo);
+        if (image != null) {
+            if (url != null) {
+                Picasso.with(AdviceViewerActivity.this).load(url).into(image);
+
+            } else {
+                Picasso.with(AdviceViewerActivity.this).load(R.drawable.logo).into(image);
             }
         }
 

@@ -86,6 +86,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
         final String pass = FilteruserList.get(position).getAdminPass();
         final String dist = FilteruserList.get(position).getDistrict();
         final String stus = FilteruserList.get(position).getIsActive();
+        final int adminId = FilteruserList.get(position).getAdminId();
         if (name != null && !name.equalsIgnoreCase("")) {
             holder.tv_name.setText("Name:- " + name);
             holder.tv_phone.setText("Phone:- " + phone);
@@ -102,7 +103,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
             holder.tv_edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    addUpdateAdministiveFragment.updateShowData(true, name, phone, pass, dist, stus);
+                    addUpdateAdministiveFragment.updateShowData(true, adminId, name, phone, pass, dist, stus);
                 }
             });
             holder.tv_delete.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +147,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
                         public void onResponse(String response) {
                             pd.dismiss();
                             FilteruserList.remove(position);
-//                            varietyFragment.setAdapter();
+                            addUpdateAdministiveFragment.setAdapter();
                             Toast.makeText(mContext, "Delete Successully", Toast.LENGTH_LONG).show();
                         }
                     },

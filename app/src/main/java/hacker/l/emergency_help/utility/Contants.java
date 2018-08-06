@@ -71,7 +71,7 @@ public class Contants {
     public static final String deletePhone = "deletePhone.php";
 
     public static final String addAdvise = "addAdvise.php";
-    public static final String addOwnerAdvise = "addOwnerAdvise.php";
+    public static final String uploadOwnerAdvise = "uploadOwnerAdvise.php";
     public static final String getAdvise = "getAdvise.php";
     public static final String getOwnerAdvise = "getOwnerAdvise.php";
     public static final String updateAdvise = "updateAdvise.php";
