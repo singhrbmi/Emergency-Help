@@ -86,7 +86,7 @@ public class AdviseAdapter extends RecyclerView.Adapter<AdviseAdapter.MyViewHold
         holder.tv_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                varietyFragment.updateShowData(true, FilteruserList.get(position).getAdvise(), FilteruserList.get(position).getAdviseId());
+//                varietyFragment.updateShowData(true, FilteruserList.get(position).getAdvise(), FilteruserList.get(position).getAdviseId());
 //                varietyFragment.setVarietyAdapter();
             }
         });

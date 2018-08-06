@@ -9,6 +9,52 @@ public class Result {
     private String phone;
     private String offName;
     private String offNumber;
+    private String adminName;
+    private String adminPass;
+    private String adminPhone;
+
+    public String getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
+    }
+
+    private String isActive;
+    private int adminId;
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    public String getAdminPass() {
+        return adminPass;
+    }
+
+    public void setAdminPass(String adminPass) {
+        this.adminPass = adminPass;
+    }
+
+    public String getAdminPhone() {
+        return adminPhone;
+    }
+
+    public void setAdminPhone(String adminPhone) {
+        this.adminPhone = adminPhone;
+    }
+
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
+    }
 
     public String getNameOff() {
         return offName;
@@ -223,6 +269,24 @@ public class Result {
     }
 
     private String date;
+
+    public String getDateOwner() {
+        return dateOwner;
+    }
+
+    public void setDateOwner(String dateOwner) {
+        this.dateOwner = dateOwner;
+    }
+
+    public String getAdviseOwner() {
+        return adviseOwner;
+    }
+
+    public void setAdviseOwner(String adviseOwner) {
+        this.adviseOwner = adviseOwner;
+    }
+
+    private String dateOwner;
     private int loginId;
     private int phoneId;
 
@@ -244,6 +308,7 @@ public class Result {
 
     private int adviseId;
     private String advise;
+    private String adviseOwner;
 
     public String getComplent() {
         return complent;

@@ -1,7 +1,9 @@
 package hacker.l.emergency_help.fragments;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -77,6 +79,7 @@ public class AdminLoginFragment extends Fragment {
     Button id_bt_login;
     EditText id_et_username, id_et_password;
     CheckBox showCheck;
+    String isactive, district;
     ProgressDialog pd;
 
     @Override
@@ -142,8 +145,26 @@ public class AdminLoginFragment extends Fragment {
                             public void onResponse(String response) {
                                 pd.dismiss();
                                 if (!response.equalsIgnoreCase("no")) {
-                                    AdminDasboardFragment adminDasboardFragment = AdminDasboardFragment.newInstance("", "");
-                                    moveFragment(adminDasboardFragment);
+                                    MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                                    for (Result result : myPojo.getResult()) {
+                                        isactive = result.getIsActive();
+                                        district = result.getDistrict();
+                                    }
+                                    if (isactive != null && isactive.equalsIgnoreCase("unblock")) {
+                                        AdminDasboardFragment adminDasboardFragment = AdminDasboardFragment.newInstance(userPhone, district);
+                                        moveFragment(adminDasboardFragment);
+                                    } else {
+                                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                                        builder.setMessage("Sorry Your Don't Have Permission for access This. Please Contact to Admin For take Permission.");
+                                        builder.setTitle("Notification");
+                                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                        builder.show();
+                                    }
                                 } else {
                                     Toast.makeText(context, "Invalid Information", Toast.LENGTH_SHORT).show();
                                     id_et_username.setError("Invalid Information");

@@ -3,7 +3,9 @@ package hacker.l.emergency_help.activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,9 +20,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,8 +64,11 @@ public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
     //    public static final double DESTROY_APP_TH = 131531.01001;
     public static final double DESTROY_APP_TH = 31539999999.9988899;
-    TextView adminMsg;
-    List<String> resultList, dateList;
+    TextView adminMsg, msg;
+    List<String> resultList, resultListOwner, resultImageLst, dateList, dateListOwner, districtList;
+    Spinner spinnerDist;
+    ImageView imageMsg;
+    String district;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,24 +78,41 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+        spinnerDist = findViewById(R.id.spinnerDist);
+        msg = findViewById(R.id.msg);
+        imageMsg = findViewById(R.id.imageMsg);
         checkExpired();
-        getAdminAdvise();
+        setSpinnerDistAdapter();
+        getOwnerAdvise();
     }
 
-    private void getAdminAdvise() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAdvise,
+    private void setSpinnerDistAdapter() {
+        districtList = new ArrayList<>();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllDistrict,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
-                        resultList = new ArrayList<>();
-                        dateList = new ArrayList<>();
+                        districtList.clear();
                         for (Result result : myPojo.getResult()) {
-                            resultList.addAll(Arrays.asList(result.getAdvise()));
-                            dateList.addAll(Arrays.asList(result.getDate()));
+                            districtList.addAll(Arrays.asList(result.getDistrict()));
                         }
-//                        Collections.reverse(resultList);
-                        adminMsg.setText(resultList.get(resultList.size() - 1));
+                        if (districtList != null) {
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(SplashActivity.this, android.R.layout.simple_spinner_dropdown_item, districtList);
+                            spinnerDist.setAdapter(adapter);
+                            spinnerDist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    district = parent.getSelectedItem().toString();
+                                    getAdminAdvise();
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -104,6 +130,86 @@ public class SplashActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    private void getAdminAdvise() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAdvise,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        resultList = new ArrayList<>();
+                        dateList = new ArrayList<>();
+                        for (Result result : myPojo.getResult()) {
+                            resultList.addAll(Arrays.asList(result.getAdvise()));
+                            dateList.addAll(Arrays.asList(result.getDate()));
+                        }
+                        if (resultList.size() != 0) {
+//                        Collections.reverse(resultList);
+                            adminMsg.setText(resultList.get(resultList.size() - 1));
+                        } else {
+                            adminMsg.setText("Suraksha Kavach");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("district", district);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void getOwnerAdvise() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getOwnerAdvise,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                        resultListOwner = new ArrayList<>();
+                        dateListOwner = new ArrayList<>();
+                        resultImageLst = new ArrayList<>();
+                        for (Result result : myPojo.getResult()) {
+                            resultListOwner.addAll(Arrays.asList(result.getAdviseOwner()));
+                            dateListOwner.addAll(Arrays.asList(result.getDateOwner()));
+                            resultImageLst.addAll(Arrays.asList(result.getImage()));
+                        }
+                        if (resultListOwner.size() != 0) {
+//                        Collections.reverse(resultList);
+                            msg.setText(resultListOwner.get(resultListOwner.size() - 1));
+                            if (resultImageLst.get(resultImageLst.size() - 1) != null) {
+                                Picasso.with(SplashActivity.this).load(resultImageLst.size() - 1).into(imageMsg);
+                            } else {
+                                Picasso.with(SplashActivity.this).load(R.drawable.logo).into(imageMsg);
+                            }
+                        } else {
+                            msg.setText("Welcome to Suraksha Kavach");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("district", district);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+
     private void checkExpired() {
         Typeface ExtraOrnamentalNo = FontManager.getFontTypeface(this, "fonts/ExtraOrnamentalNo2.ttf");
         Animation left = AnimationUtils.loadAnimation(this, R.anim.left);
@@ -111,7 +217,7 @@ public class SplashActivity extends AppCompatActivity {
         Animation top = AnimationUtils.loadAnimation(this, R.anim.top);
         Animation bottom = AnimationUtils.loadAnimation(this, R.anim.bottom);
         Animation bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
-        ImageView imageView = findViewById(R.id.image);
+        final ImageView imageView = findViewById(R.id.image);
         imageView.startAnimation(top);
         TextView textView = findViewById(R.id.tv);
         TextView tv1 = findViewById(R.id.tv1);
@@ -119,10 +225,24 @@ public class SplashActivity extends AppCompatActivity {
         adminMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SplashActivity.this, AdviceViewerActivity.class);
-                intent.putExtra("advise", adminMsg.getText().toString());
-                intent.putExtra("date", dateList.get(dateList.size() - 1));
-                startActivity(intent);
+                if (!adminMsg.getText().toString().equalsIgnoreCase("Suraksha Kavach")) {
+                    Intent intent = new Intent(SplashActivity.this, AdviceViewerActivity.class);
+                    intent.putExtra("advise", adminMsg.getText().toString());
+                    intent.putExtra("date", dateList.get(dateList.size() - 1));
+                    startActivity(intent);
+                }
+            }
+        });
+        msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!msg.getText().toString().equalsIgnoreCase("Welcome to Suraksha Kavach")) {
+                    Intent intent = new Intent(SplashActivity.this, AdviceViewerActivity.class);
+                    intent.putExtra("advise", msg.getText().toString());
+                    intent.putExtra("image", resultImageLst.get(resultImageLst.size() - 1));
+                    intent.putExtra("date", dateListOwner.get(dateListOwner.size() - 1));
+                    startActivity(intent);
+                }
             }
         });
         Button btn_next = findViewById(R.id.btn_next);

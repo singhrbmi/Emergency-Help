@@ -31,6 +31,7 @@ import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.database.DbHelper;
 import hacker.l.emergency_help.fragments.AboutFragment;
 import hacker.l.emergency_help.fragments.AccountFragment;
+import hacker.l.emergency_help.fragments.AdminDasboardFragment;
 import hacker.l.emergency_help.fragments.AdminLoginFragment;
 import hacker.l.emergency_help.fragments.HelpFragment;
 import hacker.l.emergency_help.fragments.HomeFragment;
@@ -79,7 +80,7 @@ public class DashBoardActivity extends AppCompatActivity
         lyout_home.setOnClickListener(this);
         Intent intent = getIntent();
         String keeys = intent.getStringExtra("key");
-        if (keeys!=null&&keeys.equalsIgnoreCase("jhar")) {
+        if (keeys != null && keeys.equalsIgnoreCase("jhar")) {
             JharkhandAdminstrtiveFragment jharkhandAdminstrtiveFragment = JharkhandAdminstrtiveFragment.newInstance("", "");
             moveFragment(jharkhandAdminstrtiveFragment);
         } else {
@@ -136,8 +137,10 @@ public class DashBoardActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.admin) {
-            AdminLoginFragment adminLoginFragment = AdminLoginFragment.newInstance("", "");
-            moveFragment(adminLoginFragment);
+            AdminDasboardFragment adminDasboardFragment = AdminDasboardFragment.newInstance("", "");
+            moveFragment(adminDasboardFragment);
+//            AdminLoginFragment adminLoginFragment = AdminLoginFragment.newInstance("", "");
+//            moveFragment(adminLoginFragment);
             return true;
         }
 

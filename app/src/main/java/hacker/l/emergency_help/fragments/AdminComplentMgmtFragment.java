@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.adapter.AdviseAdapter;
 import hacker.l.emergency_help.adapter.ComplentAdapter;
 import hacker.l.emergency_help.models.MyPojo;
@@ -79,6 +80,8 @@ public class AdminComplentMgmtFragment extends Fragment {
     }
 
     private void init() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Suggestion Management");
         resultList = new ArrayList<>();
         recycleView = view.findViewById(R.id.recycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);

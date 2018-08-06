@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".fragments.AddUpdateAdministiveFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--<ImageView-->
+        <!--android:layout_width="@dimen/dimen_180_dp"-->
+        <!--android:layout_height="@dimen/margin110"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:src="@drawable/logo" />-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin10"
+            android:layout_marginTop="@dimen/margin5"
+            android:text="Select District"
+            android:textColor="@color/grey_hard"
+            android:textSize="@dimen/textSize14" />
+
+        <Spinner
+            android:id="@+id/spinnerDist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin10"
+            android:spinnerMode="dropdown"></Spinner>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin10"
+            android:text="Administrative Name"
+            android:textColor="@color/grey_dark"
+            android:textSize="@dimen/textSize14" />
+
+        <EditText
+            android:id="@+id/edt_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin30"
+            android:layout_margin="@dimen/margin10"
+            android:background="@drawable/done_corner_round"
+            android:hint="Enter Name."
+            android:paddingLeft="@dimen/margin10"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize14" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin10"
+            android:text="Administrative Mobile Number"
+            android:textColor="@color/grey_dark"
+            android:textSize="@dimen/textSize14" />
+
+        <EditText
+            android:id="@+id/edt_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin30"
+            android:layout_margin="@dimen/margin10"
+            android:background="@drawable/done_corner_round"
+            android:hint="Enter Number."
+            android:inputType="number"
+            android:maxLength="10"
+            android:paddingLeft="@dimen/margin10"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize14" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin10"
+            android:text="Administrative Password"
+            android:textColor="@color/grey_dark"
+            android:textSize="@dimen/textSize14" />
+
+        <EditText
+            android:id="@+id/edt_pass"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin30"
+            android:layout_margin="@dimen/margin10"
+            android:background="@drawable/done_corner_round"
+            android:hint="Enter Password."
+            android:paddingLeft="@dimen/margin10"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize14" />
+
+        <RadioGroup
+            android:id="@+id/radipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin10"
+            android:layout_marginRight="@dimen/margin10"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_unblock"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin30"
+                android:layout_weight=".5"
+                android:checked="true"
+                android:text="UnBlock" />
+
+            <RadioButton
+                android:id="@+id/radio_block"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin30"
+                android:layout_weight=".5"
+                android:checked="false"
+                android:text="Block" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/tv_add"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/margin10"
+            android:background="@drawable/capsule_button"
+            android:gravity="center"
+            android:text="Add Administrative"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize14" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+</FrameLayout>

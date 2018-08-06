@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.adapter.AdviseAdapter;
 import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
@@ -55,7 +57,7 @@ public class AdminAdviseMgmtFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2;
+    private String district;
 
     // TODO: Rename and change types and number of parameters
     public static AdminAdviseMgmtFragment newInstance(String param1, String param2) {
@@ -72,7 +74,7 @@ public class AdminAdviseMgmtFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            district = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -86,6 +88,7 @@ public class AdminAdviseMgmtFragment extends Fragment {
     boolean aBoolean = false;
     ImageView imageView, image_camera;
     int id;
+    CardView cardView;
     String selectedPath, imageUrl;
 
     @Override
@@ -98,24 +101,32 @@ public class AdminAdviseMgmtFragment extends Fragment {
     }
 
     private void init() {
+
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("Advise Management");
         resultList = new ArrayList<>();
+
+        cardView = view.findViewById(R.id.card);
         edt_message = view.findViewById(R.id.edt_message);
         tv_submit = view.findViewById(R.id.tv_submit);
         recycleView = view.findViewById(R.id.recycleView);
         imageView = view.findViewById(R.id.imageView);
         image_camera = view.findViewById(R.id.image_camera);
+        if (!mParam1.equals("9431174521")) {
+            image_camera.setVisibility(View.GONE);
+            cardView.setVisibility(View.GONE);
+        }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
-        setAdapter();
+//        setAdapter();
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAdviseData();
-//                if (aBoolean) {
-//                    updateAdvise();
-//                } else {
-//                    uploadData();
-//                }
+                if (mParam1.equalsIgnoreCase("9431174521")) {
+                    addOwnerAdviseData();
+                } else {
+                    addAdviseData();
+                }
             }
         });
         image_camera.setOnClickListener(new View.OnClickListener() {
@@ -150,22 +161,23 @@ public class AdminAdviseMgmtFragment extends Fragment {
         }
     }
 
-    private void updateAdvise() {
+    private void addOwnerAdviseData() {
         final String message = edt_message.getText().toString();
         if (message.length() != 0) {
             if (Utility.isOnline(context)) {
                 pd = new ProgressDialog(context);
-                pd.setMessage("Updating wait...");
+                pd.setMessage("Submit Your Advise Please wait...");
                 pd.show();
                 pd.setCancelable(false);
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.updateAdvise,
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.addOwnerAdvise,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 pd.dismiss();
-                                Toast.makeText(context, "Update Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Send Successfully", Toast.LENGTH_SHORT).show();
+                                edt_message.setText("");
+                                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_file_upload_black_24dp));
 //                                setAdapter();
-                                tv_submit.setText("Submit");
                             }
                         },
                         new Response.ErrorListener() {
@@ -177,8 +189,8 @@ public class AdminAdviseMgmtFragment extends Fragment {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
-                        params.put("adviseId", String.valueOf(id));
                         params.put("advise", message);
+                        params.put("image", selectedPath);
                         return params;
                     }
                 };
@@ -190,59 +202,6 @@ public class AdminAdviseMgmtFragment extends Fragment {
         } else {
             edt_message.setError("Enter Advise Please");
         }
-    }
-
-    private void uploadData() {
-        class UploadData extends AsyncTask<Void, Integer, String> {
-            ProgressDialog uploading;
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                uploading = new ProgressDialog(context);
-                uploading.setMessage("Please Wait..");
-                uploading.setCancelable(false);
-                uploading.setProgress(0);
-                try {
-                    if (uploading.isShowing()) {
-                        uploading.dismiss();
-                    } else {
-                        uploading.show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            protected void onProgressUpdate(Integer... progress) {
-                uploading.setProgress(progress[0]);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                uploading.dismiss();
-                imageUrl = s;
-                addAdviseData();
-            }
-
-            @Override
-            protected String doInBackground(Void... params) {
-                String msg = null;
-                myUploadImage myUploadImage = new myUploadImage();
-                if (selectedPath != null) {
-                    msg = myUploadImage.uploadImageData(selectedPath);
-                } else {
-                    Toast.makeText(context, "Select Image Please", Toast.LENGTH_SHORT).show();
-                }
-                return msg;
-            }
-        }
-
-
-        UploadData uv = new UploadData();
-        uv.execute();
     }
 
     private void addAdviseData() {
@@ -261,7 +220,7 @@ public class AdminAdviseMgmtFragment extends Fragment {
                                 Toast.makeText(context, "Send Successfully", Toast.LENGTH_SHORT).show();
                                 edt_message.setText("");
 //                                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_file_upload_black_24dp));
-                                setAdapter();
+//                                setAdapter();
                             }
                         },
                         new Response.ErrorListener() {
@@ -274,7 +233,7 @@ public class AdminAdviseMgmtFragment extends Fragment {
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("advise", message);
-//                        params.put("image", imageUrl);
+                        params.put("district", district);
                         return params;
                     }
                 };
@@ -286,14 +245,6 @@ public class AdminAdviseMgmtFragment extends Fragment {
         } else {
             edt_message.setError("Enter Advise Please");
         }
-    }
-
-    public void updateShowData(boolean b, String name, int id) {
-        this.aBoolean = b;
-        this.id = id;
-        edt_message.setText(name);
-        tv_submit.setText("Update");
-        edt_message.setSelection(edt_message.length());
     }
 
     public void setAdapter() {

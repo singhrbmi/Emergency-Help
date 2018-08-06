@@ -71,7 +71,9 @@ public class Contants {
     public static final String deletePhone = "deletePhone.php";
 
     public static final String addAdvise = "addAdvise.php";
+    public static final String addOwnerAdvise = "addOwnerAdvise.php";
     public static final String getAdvise = "getAdvise.php";
+    public static final String getOwnerAdvise = "getOwnerAdvise.php";
     public static final String updateAdvise = "updateAdvise.php";
     public static final String deleteAdvise = "deleteAdvise.php";
 
@@ -84,4 +86,12 @@ public class Contants {
 
     public static final String SearchsurakshaNo = "SearchsurakshaNo.php";
     public static final String getState = "getState.php";
+    public static final String addadmin = "addAdmin.php";
+    public static final String updateAdmin = "updateAdmin.php";
+    public static final String getAllAdmin = "getAllAdmin.php";
+    public static final String getAllUnBlockAdmin = "getAllUnBlockAdmin.php";
+    public static final String getAllBlockAdmin = "getAllBlockAdmin.php";
+    public static final String UnBlockAdmin = "UnBlockAdmin.php";
+    public static final String BlockAdmin = "BlockAdmin.php";
+    public static final String deleteAdmin = "deleteAdmin.php";
 }

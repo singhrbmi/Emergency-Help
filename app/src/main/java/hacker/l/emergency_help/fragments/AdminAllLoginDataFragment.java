@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 import hacker.l.emergency_help.R;
+import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.adapter.AllLoginAdapter;
 import hacker.l.emergency_help.adapter.CategoryAdapter;
 import hacker.l.emergency_help.models.MyPojo;
@@ -91,6 +92,8 @@ public class AdminAllLoginDataFragment extends Fragment {
     }
 
     private void init() {
+        DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
+        dashBoardActivity.setTitle("All Login Users");
         resultList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recycleView);
         tv_save = view.findViewById(R.id.tv_save);

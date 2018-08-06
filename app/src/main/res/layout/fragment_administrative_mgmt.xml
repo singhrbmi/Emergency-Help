@@ -1,11 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    tools:context="hacker.l.emergency_help.fragments.AdminDasboardFragment">
+    tools:context=".fragments.AdministrativeMgmtFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,58 +22,47 @@
             android:src="@drawable/logo" />
 
         <TextView
-            android:id="@+id/tv_phone"
+            android:id="@+id/tv_add"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="@dimen/margin10"
             android:background="@drawable/capsule_button"
             android:gravity="center"
-            android:text="Phone Management"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize16"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tv_administrative"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="@dimen/margin10"
-            android:background="@drawable/capsule_button"
-            android:gravity="center"
-            android:text="Administrative Management"
+            android:text="Add/Update Administrative"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize16" />
 
         <TextView
-            android:id="@+id/tv_advise"
+            android:id="@+id/tv_ViewAll"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="@dimen/margin10"
             android:background="@drawable/capsule_button"
             android:gravity="center"
-            android:text="Advise Management"
+            android:text="View All Administrative"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize16" />
+
+
+        <TextView
+            android:id="@+id/tv_unblock"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/margin10"
+            android:background="@drawable/capsule_button"
+            android:gravity="center"
+            android:text="UnBlock Administrative List"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize16" />
 
         <TextView
-            android:id="@+id/tv_complent"
+            android:id="@+id/tv_block"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="@dimen/margin10"
             android:background="@drawable/capsule_button"
             android:gravity="center"
-            android:text="Suggestion Management"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize16" />
-
-        <TextView
-            android:id="@+id/tv_allLogin"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="@dimen/margin10"
-            android:background="@drawable/capsule_button"
-            android:gravity="center"
-            android:text="All Login Users"
+            android:text="Block Administrative List"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize16" />
     </LinearLayout>
