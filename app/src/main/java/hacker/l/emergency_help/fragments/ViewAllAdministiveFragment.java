@@ -122,7 +122,7 @@ public class ViewAllAdministiveFragment extends Fragment {
                                         }
                                     }
                                     if (resultList.size() != 0) {
-                                        tv_size.setText("Total:-"+resultList.size());
+                                        tv_size.setText("Total:-"+(resultList.size()-1));
                                         Collections.reverse(resultList);
                                         AdminAdapter adminAdapter = new AdminAdapter(context, resultList, true);
                                         recycleView.setAdapter(adminAdapter);

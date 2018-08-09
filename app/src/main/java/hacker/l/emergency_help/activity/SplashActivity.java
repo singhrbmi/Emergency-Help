@@ -321,6 +321,8 @@ public class SplashActivity extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 DbHelper dbHelper = new DbHelper(SplashActivity.this);
                 Result result = dbHelper.getUserData();
                 if (result == null) {

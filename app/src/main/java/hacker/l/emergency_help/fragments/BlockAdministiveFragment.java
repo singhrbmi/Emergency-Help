@@ -127,7 +127,7 @@ public class BlockAdministiveFragment extends Fragment {
                                         }
                                     }
                                     if (resultList.size() != 0) {
-                                        tv_size.setText("Total:-" + resultList.size());
+                                        tv_size.setText("Total:-" + (resultList.size()));
                                         Collections.reverse(resultList);
                                         AdminPermsstionAdapter adminAdapter = new AdminPermsstionAdapter(context, resultList, true, BlockAdministiveFragment.this);
                                         recycleView.setAdapter(adminAdapter);
@@ -182,7 +182,7 @@ public class BlockAdministiveFragment extends Fragment {
                                         }
                                     }
                                     if (resultList.size() != 0) {
-                                        tv_size.setText("Total:-" + resultList.size());
+                                        tv_size.setText("Total:-" + (resultList.size()-1));
                                         Collections.reverse(resultList);
                                         AdminPermsstionAdapter adminAdapter = new AdminPermsstionAdapter(context, resultList, false, BlockAdministiveFragment.this);
                                         recycleView.setAdapter(adminAdapter);
