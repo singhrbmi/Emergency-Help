@@ -54,7 +54,7 @@ public class AboutFragment extends Fragment {
 
     private void init() {
         DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
-        dashBoardActivity.setTitle("About");
+        dashBoardActivity.setTitle("About Us");
 
     }
 

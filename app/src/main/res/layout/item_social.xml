@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="@dimen/margin5"
-        app:cardCornerRadius="@dimen/margin5">
+        app:cardCornerRadius="@dimen/margin5"
+        app:cardElevation="@dimen/margin5">
 
         <TextView
             android:id="@+id/tv_socialName"

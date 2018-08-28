@@ -27,8 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin10"
-                android:gravity="center"
-                android:text="Pending......."
+                android:gravity="center|left"
+                android:text="@string/aboutus"
                 android:textColor="@color/grey_dark"
                 android:textSize="@dimen/textSize14" />
         </LinearLayout>
