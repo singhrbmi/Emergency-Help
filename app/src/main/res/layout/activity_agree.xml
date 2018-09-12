@@ -8,46 +8,60 @@
     android:orientation="vertical"
     tools:context=".activity.AgreeActivity">
 
-    <ImageView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_180_dp"
-        android:src="@drawable/logo" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin10"
-        android:text="Pending.."
-        android:textColor="@color/black"
-        android:textSize="@dimen/textSize14" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/radipGroup"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin10"
-        android:gravity="bottom"
-        android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/rb_decline"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin10"
-            android:layout_weight=".5"
-            android:text="Decline"
-            android:textColor="@color/red"
-            android:textSize="@dimen/textSize16" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_180_dp"
+                android:src="@drawable/logo" />
 
-        <RadioButton
-            android:id="@+id/rb_agree"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin10"
-            android:layout_weight=".5"
-            android:text="Agree"
-            android:textColor="@color/selected_tab"
-            android:textSize="@dimen/textSize16" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin10"
+                android:text="@string/aboutus"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize14" />
 
-    </RadioGroup>
+            <RadioGroup
+                android:id="@+id/radipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_decline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin10"
+                    android:layout_weight=".5"
+                    android:text="Decline"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/textSize16" />
+
+                <RadioButton
+                    android:id="@+id/rb_agree"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin10"
+                    android:layout_weight=".5"
+                    android:text="Agree"
+                    android:textColor="@color/selected_tab"
+                    android:textSize="@dimen/textSize16" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
 </LinearLayout>

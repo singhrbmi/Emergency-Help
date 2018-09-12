@@ -179,12 +179,16 @@ public class SplashActivity extends AppCompatActivity {
                             resultListOwner.addAll(Arrays.asList(result.getAdviseOwner()));
                             dateListOwner.addAll(Arrays.asList(result.getDateOwner()));
                             resultImageLst.addAll(Arrays.asList(result.getImage()));
-                           // Log.d("lalit", "lalit" + (resultImageLst.size());
+                            // Log.d("lalit", "lalit" + (resultImageLst.size());
                         }
                         if (resultListOwner.size() != 0) {
+                            if (resultListOwner.get(resultListOwner.size() - 1) == null && !resultListOwner.get(resultListOwner.size() - 1).equalsIgnoreCase("")) {
+                                msg.setText("Welcome to Suraksha Kavach");
+                            } else {
+                                msg.setText(resultListOwner.get(resultListOwner.size() - 1));
+                            }
 //                        Collections.reverse(resultList);
-                            msg.setText(resultListOwner.get(resultListOwner.size() - 1));
-                            if (resultImageLst.get(resultImageLst.size() - 1) != null) {
+                            if (resultImageLst.get(resultImageLst.size() - 1) != null && !resultImageLst.get(resultImageLst.size() - 1).equalsIgnoreCase("")) {
                                 Picasso.with(SplashActivity.this).load(resultImageLst.get(resultImageLst.size() - 1)).into(imageMsg);
 
                             } else {

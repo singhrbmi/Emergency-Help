@@ -163,12 +163,18 @@ public class AdminAdviseMgmtFragment extends Fragment {
             public void onClick(View v) {
                 message = edt_message.getText().toString();
                 if (mParam1.equalsIgnoreCase("9431174521")) {
-                    if (message.length() != 0) {
-                        if (Utility.isOnline(context)) {
-                ImageUploadToServerFunction();
+                    if (Utility.isOnline(context)) {
+                        if (bitmap != null) {
+                            ImageUploadToServerFunction();
                         } else {
-                            Toast.makeText(context, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
+                            if (message.length() != 0) {
+                                addOwnerAdviseData();
+                            } else {
+                                edt_message.setError("Enter Something");
+                            }
                         }
+                    } else {
+                        Toast.makeText(context, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     addAdviseData();
@@ -238,12 +244,13 @@ public class AdminAdviseMgmtFragment extends Fragment {
                 // Dismiss the progress dialog after done uploading.
                 progressDialog.dismiss();
                 edt_message.setText("");
+                bitmap = null;
                 // Printing uploading success message coming from server on android app.
                 Toast.makeText(context, string1, Toast.LENGTH_LONG).show();
 
                 // Setting image as transparent after done uploading.
-                imageView.setImageResource(android.R.color.transparent);
-
+//                imageView.setImageResource(android.R.color.transparent);
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_file_upload_black_24dp));
 
             }
 
@@ -383,48 +390,39 @@ public class AdminAdviseMgmtFragment extends Fragment {
 //        }
 //    }
 
-//    private void addOwnerAdviseData() {
-//        final String message = edt_message.getText().toString();
-//        if (message.length() != 0) {
-//            if (Utility.isOnline(context)) {
-//                pd = new ProgressDialog(context);
-//                pd.setMessage("Submit Your Advise Please wait...");
-//                pd.show();
-//                pd.setCancelable(false);
-//                StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.addOwnerAdvise,
-//                        new Response.Listener<String>() {
-//                            @Override
-//                            public void onResponse(String response) {
-//                                pd.dismiss();
-//                                Toast.makeText(context, "Send Successfully", Toast.LENGTH_SHORT).show();
-//                                edt_message.setText("");
-//                                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_file_upload_black_24dp));
-//                                setAdapter();
-//                            }
-//                        },
-//                        new Response.ErrorListener() {
-//                            @Override
-//                            public void onErrorResponse(VolleyError error) {
-//                                pd.dismiss();
-//                            }
-//                        }) {
-//                    @Override
-//                    protected Map<String, String> getParams() throws AuthFailureError {
-//                        Map<String, String> params = new HashMap<String, String>();
-//                        params.put("advise", message);
-//                        params.put("image", selectedPath);
-//                        return params;
-//                    }
-//                };
-//                RequestQueue requestQueue = Volley.newRequestQueue(context);
-//                requestQueue.add(stringRequest);
-//            } else {
-//                Toast.makeText(context, "You are Offline. Please check your Internet Connection.", Toast.LENGTH_SHORT).show();
-//            }
-//        } else {
-//            edt_message.setError("Enter Advise Please");
-//        }
-//    }
+    private void addOwnerAdviseData() {
+        pd = new ProgressDialog(context);
+        pd.setMessage("Submit Your Advise Please wait...");
+        pd.show();
+        pd.setCancelable(false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.uploadOwnerTextAdvise,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        pd.dismiss();
+                        Toast.makeText(context, "Send Successfully", Toast.LENGTH_SHORT).show();
+                        edt_message.setText("");
+                        bitmap = null;
+                        imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_file_upload_black_24dp));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pd.dismiss();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("adviseOwner", message);
+//                params.put("image", selectedPath);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
 
     private void addAdviseData() {
         final String message = edt_message.getText().toString();

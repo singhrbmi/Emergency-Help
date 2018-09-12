@@ -26,7 +26,7 @@ public class AdviceViewerActivity extends AppCompatActivity {
         tv_date.setText(intent.getStringExtra("date"));
         String url = intent.getStringExtra("image");
         if (image != null) {
-            if (url != null) {
+            if (url != null&&!url.equalsIgnoreCase("")) {
                 Picasso.with(AdviceViewerActivity.this).load(url).into(image);
 
             } else {
