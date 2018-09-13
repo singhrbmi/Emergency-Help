@@ -58,6 +58,7 @@ import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
 import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.FontManager;
+import hacker.l.emergency_help.utility.Utility;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -87,47 +88,52 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void setSpinnerDistAdapter() {
-        districtList = new ArrayList<>();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllDistrict,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
-                        districtList.clear();
-                        for (Result result : myPojo.getResult()) {
-                            districtList.addAll(Arrays.asList(result.getDistrict()));
-                        }
-                        if (districtList != null) {
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(SplashActivity.this, android.R.layout.simple_spinner_dropdown_item, districtList);
-                            spinnerDist.setAdapter(adapter);
-                            spinnerDist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    district = parent.getSelectedItem().toString();
-                                    getAdminAdvise();
-                                }
+        if (Utility.isOnline(this)) {
+            districtList = new ArrayList<>();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllDistrict,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
+                            districtList.clear();
+                            for (Result result : myPojo.getResult()) {
+                                districtList.addAll(Arrays.asList(result.getDistrict()));
+                            }
+                            if (districtList != null) {
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(SplashActivity.this, android.R.layout.simple_spinner_dropdown_item, districtList);
+                                spinnerDist.setAdapter(adapter);
+                                spinnerDist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        district = parent.getSelectedItem().toString();
+                                        getAdminAdvise();
+                                    }
 
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
 
-                                }
-                            });
+                                    }
+                                });
+                            }
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+        } else {
+            adminMsg.setText("Suraksha Kavach");
+
+        }
     }
 
     private void getAdminAdvise() {

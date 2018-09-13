@@ -68,38 +68,38 @@ public class SocialContactsAdapter extends RecyclerView.Adapter<SocialContactsAd
         holder.sms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                final String phone = FilteruserList.get(position).getPhone();
-//                try {
-//                    String msg = "test message";
-//                    SmsManager smsManager = SmsManager.getDefault();
-//                    smsManager.sendTextMessage(phone, null, msg, null, null);
-//                    Toast.makeText(mContext, "SMS sent.On" + phone,
-//                            Toast.LENGTH_LONG).show();
-//                } catch (Exception e) {
-//                    Toast.makeText(mContext,
-//                            "SMS faild, Please try Again.",
-//                            Toast.LENGTH_LONG).show();
-//                    e.printStackTrace();
-//                }
+                final String phone = FilteruserList.get(position).getPhone();
+                try {
+                    String msg = "I Need Your Help?";
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(phone, null, msg, null, null);
+                    Toast.makeText(mContext, "SMS sent.On" + phone,
+                            Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(mContext,
+                            "SMS faild, Please try Again.",
+                            Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
             }
         });
         holder.call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                final String phone = FilteruserList.get(position).getPhone();
-//                Intent callIntent = new Intent(Intent.ACTION_CALL);
-//                callIntent.setData(Uri.parse("tel:" + phone));//change the number
-//                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                final String phone = FilteruserList.get(position).getPhone();
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + phone));//change the number
+                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 //                     TODO: Consider calling
 //                        ActivityCompat#requestPermissions
 //                     here to request the missing permissions, and then overriding
 //                       public void onRequestPermissionsResult(int requestCode, String[] permissions,
 //                                                              int[] grantResults)
 //                     to handle the case where the user grants the permission. See the documentation
-//                     for ActivityCompat#requestPermissions for more details.
-//                    return;
-//                }
-//                mContext.startActivity(callIntent);
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                mContext.startActivity(callIntent);
 
             }
         });

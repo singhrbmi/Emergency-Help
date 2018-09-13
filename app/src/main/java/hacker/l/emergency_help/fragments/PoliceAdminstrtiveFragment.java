@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,7 +167,7 @@ public class PoliceAdminstrtiveFragment extends Fragment {
                                     resultList.addAll(Arrays.asList(result));
                                 }
                             }
-                            PoliceAdapter socialAdapter = new PoliceAdapter(context, resultList);
+                            PoliceAdapter socialAdapter = new PoliceAdapter(context, resultList,district);
                             recycleView.setAdapter(socialAdapter);
 //                            if (response.equalsIgnoreCase("no")) {
 //                                Toast.makeText(context, "Any category not Found", Toast.LENGTH_SHORT).show();

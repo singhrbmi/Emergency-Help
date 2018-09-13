@@ -150,7 +150,7 @@ public class SocialNoViewFragment extends Fragment {
                             if (myPojo != null) {
                                 resultList.addAll(Arrays.asList(myPojo.getResult()));
                                 if (resultList != null) {
-                                    Collections.reverse(resultList);
+//                                    Collections.reverse(resultList);
                                     socialContactsAdapter = new SocialContactsAdapter(context, resultList);
                                     recycleView.setAdapter(socialContactsAdapter);
                                 } else {
@@ -198,7 +198,7 @@ public class SocialNoViewFragment extends Fragment {
                             if (myPojo != null) {
                                 resultList.addAll(Arrays.asList(myPojo.getResult()));
                                 if (resultList != null) {
-                                    Collections.reverse(resultList);
+//                                    Collections.reverse(resultList);
                                     socialContactsAdapter = new SocialContactsAdapter(context, resultList);
                                     recycleView.setAdapter(socialContactsAdapter);
                                 } else {

@@ -197,7 +197,7 @@ public class DashBoardActivity extends AppCompatActivity
     }
 
     public boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 21) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
                 return true;
@@ -211,7 +211,7 @@ public class DashBoardActivity extends AppCompatActivity
     }
 
     public boolean isConteactPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 21) {
             if (checkSelfPermission(android.Manifest.permission.READ_CONTACTS)
                     == PackageManager.PERMISSION_GRANTED) {
                 return true;
@@ -225,7 +225,7 @@ public class DashBoardActivity extends AppCompatActivity
     }
 
     public boolean isLocationPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 21) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 return true;
@@ -239,7 +239,7 @@ public class DashBoardActivity extends AppCompatActivity
     }
 
     public boolean isPhoneCallPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 21) {
             if (checkSelfPermission(Manifest.permission.CALL_PHONE)
                     == PackageManager.PERMISSION_GRANTED) {
                 return true;
@@ -253,7 +253,7 @@ public class DashBoardActivity extends AppCompatActivity
     }
 
     public boolean isSmsCallPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 21) {
             if (checkSelfPermission(Manifest.permission.SEND_SMS)
                     == PackageManager.PERMISSION_GRANTED) {
                 return true;
@@ -267,7 +267,7 @@ public class DashBoardActivity extends AppCompatActivity
     }
 
     public boolean isCameraCallPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 21) {
             if (checkSelfPermission(Manifest.permission.CAMERA)
                     == PackageManager.PERMISSION_GRANTED) {
                 return true;

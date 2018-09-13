@@ -41,11 +41,13 @@ public class PoliceAdapter extends RecyclerView.Adapter<PoliceAdapter.MyViewHold
     private Context mContext;
     private List<Result> dataList, FilteruserList;
     ProgressDialog pd;
+    String district;
 
-    public PoliceAdapter(Context mContext, List<Result> dataList) {
+    public PoliceAdapter(Context mContext, List<Result> dataList, String district) {
         this.mContext = mContext;
         this.dataList = dataList;
         this.FilteruserList = dataList;
+        this.district = district;
 //        this.ProximaNovaRegular = FontManager.getFontTypeface(mContext, "fonts/ProximaNova-Regular.otf");
 //        this.ProximaNovaLight = FontManager.getFontTypeface(mContext, "fonts/ProximaNova-Light.otf");
 //        this.materialdesignicons_font = FontManager.getFontTypefaceMaterialDesignIcons(mContext, "fonts/materialdesignicons-webfont.otf");
@@ -83,7 +85,7 @@ public class PoliceAdapter extends RecyclerView.Adapter<PoliceAdapter.MyViewHold
                         @Override
                         public void onResponse(String response) {
                             if (response.equalsIgnoreCase("no")) {
-                                SocialNoViewFragment fragment = SocialNoViewFragment.newInstance(name, dist, null, false);
+                                SocialNoViewFragment fragment = SocialNoViewFragment.newInstance(name, district, null, false);
                                 moveFragment(fragment);
                             } else {
                                 SubCategoryFragment fragment = SubCategoryFragment.newInstance(response, "");

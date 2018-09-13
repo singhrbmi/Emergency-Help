@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import hacker.l.emergency_help.R;
@@ -108,6 +109,7 @@ public class SubCategoryFragment extends Fragment {
             } else {
                 tv_District.setText("Ranchi");
             }
+//            Collections.reverse(results);
             SubCategoryAdapter subCategoryAdapter = new SubCategoryAdapter(context, results);
             recycleView.setAdapter(subCategoryAdapter);
         }

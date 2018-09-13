@@ -75,13 +75,17 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
         boolean network_enabled = false;
 
         try {
+            assert lm != null;
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         try {
+            assert lm != null;
             network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         if (!gps_enabled && !network_enabled) {
@@ -105,7 +109,11 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
 
                 }
             });
-            dialog.show();
+            try {
+                dialog.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
