@@ -39,7 +39,7 @@ import hacker.l.emergency_help.utility.Utility;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
     ProgressDialog pd;
-//    TextView forgot_password;
+    //    TextView forgot_password;
     Button id_bt_forget;
     EditText id_et_phone;
     String userPhone, userEmail, copyText;
@@ -88,7 +88,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     private void forgetPass() {
         if (Utility.isOnline(this)) {
             pd = new ProgressDialog(ForgetPasswordActivity.this);
-            pd.setMessage("Checking wait...");
+            pd.setMessage("Forget Password wait...");
             pd.show();
             pd.setCancelable(false);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.forgetpassword,
@@ -96,7 +96,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             pd.dismiss();
-                            copyText = response;
+                            Toast.makeText(ForgetPasswordActivity.this, response, Toast.LENGTH_SHORT).show();
 //                            forgot_password.setText("Your Password:-" + response);
                             //id_bt_forget.setText("Copy Password");
                         }
