@@ -160,7 +160,11 @@ public class SocialContactsAdapter extends RecyclerView.Adapter<SocialContactsAd
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 FilteruserList = (ArrayList<Result>) filterResults.values;
-                notifyDataSetChanged();
+                if (filterResults.count > 0) {
+                    notifyDataSetChanged();
+                } else {
+//                    notifyDataSetInvalidated();
+                }
             }
         };
     }
