@@ -75,7 +75,7 @@ public class BusinessSocialAdapter extends RecyclerView.Adapter<BusinessSocialAd
     private void checkSubCategory(final String name, final String dist) {
         if (Utility.isOnline(mContext)) {
             pd = new ProgressDialog(mContext);
-            pd.setMessage("Getting  wait...");
+            pd.setMessage("Fetching Data wait...");
             pd.show();
             pd.setCancelable(false);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllBusinessSubCat,
