@@ -2,11 +2,13 @@ package hacker.l.emergency_help.adapter;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
@@ -68,19 +70,37 @@ public class SocialContactsAdapter extends RecyclerView.Adapter<SocialContactsAd
         holder.sms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String phone = FilteruserList.get(position).getPhone();
-                try {
-                    String msg = "I Need Your Help?";
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(phone, null, msg, null, null);
-                    Toast.makeText(mContext, "SMS sent.On" + phone,
-                            Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    Toast.makeText(mContext,
-                            "SMS faild, Please try Again.",
-                            Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Alert");
+                builder.setIcon(mContext.getResources().getDrawable(android.R.drawable.ic_dialog_alert));
+                builder.setMessage("Are your ready for send Message!");
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String phone = FilteruserList.get(position).getPhone();
+                        try {
+                            String msg = "I Need Your Help?";
+                            SmsManager smsManager = SmsManager.getDefault();
+                            smsManager.sendTextMessage(phone, null, msg, null, null);
+                            Toast.makeText(mContext, "SMS sent.On" + phone,
+                                    Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            Toast.makeText(mContext,
+                                    "SMS faild, Please try Again.",
+                                    Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
             }
         });
         holder.call.setOnClickListener(new View.OnClickListener() {

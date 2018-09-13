@@ -12,6 +12,8 @@ import android.hardware.camera2.CameraManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,12 +24,14 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,6 +47,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import org.jsoup.Jsoup;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -165,8 +172,78 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         layout_seggestion.setAnimation(animation);
         layout_panic.setAnimation(animation);
         layout_bOrg.setAnimation(animation);
+        checkForceUpdate();
+    }
+    public void checkForceUpdate() {
+
+        new AsyncTask<Void, String, String>() {
+            @Override
+            protected String doInBackground(Void... voids) {
+
+                String newVersion = null;
+                try {
+                    newVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + context.getPackageName() + "&hl=it")
+                            .timeout(10*1000)
+                            .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                            .referrer("http://www.google.com")
+                            .get()
+                            .select("div[itemprop=softwareVersion]")
+                            .first()
+                            .ownText();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return newVersion;
+            }
+
+            @Override
+            protected void onPostExecute(String onlineVersion) {
+                super.onPostExecute(onlineVersion);
+                if (onlineVersion != null && !onlineVersion.isEmpty()) {
+                    if (Float.valueOf(Utility.getAppVersionName(context)) < Float.valueOf(onlineVersion)) {
+                        //show dialog
+                        showUpdateDialog(context);
+                    } else {
+                        //  MoveNextScreen();
+                    }
+                }
+
+                Log.d("update", "Current version " + Utility.getAppVersionName(context) + "playstore version " + onlineVersion);
+            }
+        }.execute();
     }
 
+    private void showUpdateDialog(final Context context) {
+        //alert for error message
+
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+        final android.app.AlertDialog alert = builder.create();
+        View view = alert.getLayoutInflater().inflate(R.layout.custom_update_alert, null);
+        TextView title = (TextView) view.findViewById(R.id.textMessage);
+        TextView title2 = (TextView) view.findViewById(R.id.textMessage2);
+        Button ok = (Button) view.findViewById(R.id.buttonUpdate);
+        Button buttonCancel = (Button) view.findViewById(R.id.buttonCancel);
+        alert.setCustomTitle(view);
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + "fusionsoftware.loop.emergency_help" + "&hl=en"));
+                context.startActivity(intent);
+                alert.dismiss();
+            }
+        });
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+                //MoveNextScreen();
+            }
+        });
+        alert.show();
+        alert.setCanceledOnTouchOutside(false);
+    }
     @Override
     public void onStart() {
         super.onStart();

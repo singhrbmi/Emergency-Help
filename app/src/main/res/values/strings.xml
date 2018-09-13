@@ -1,12 +1,16 @@
 <resources>
-    <string name="app_name">Suraksha Kavach</string>
+    <string name="app_name">Suraksha Kavach Jharkhand</string>
     <string name="title_activity_dash_board">Suraksha Kavach</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Logout</string>
-
+    <!--//for force updates-->
+    <string name="Update_heading">Update Available</string>
+    <string name="update2">An update version of the app is now available.</string>
+    <string name="remind_me_later">Remind me Later</string>
+    <string name="update_text">Update Now</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Pending</string>
     <string name="title_activity_maps">Map</string>

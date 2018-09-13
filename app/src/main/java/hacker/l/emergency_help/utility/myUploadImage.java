@@ -22,10 +22,11 @@ public class myUploadImage {
     public static final String UPLOAD_URL = Contants.SERVICE_BASE_URL + Contants.uploadimage;
 
     private int serverResponseCode;
+    String fileName;
+
 
     public String uploadImageData(String file) {
-
-        String fileName = file;
+        fileName = file;
         HttpURLConnection conn = null;
         DataOutputStream dos = null;
         String lineEnd = "\r\n";
@@ -91,6 +92,7 @@ public class myUploadImage {
         if (serverResponseCode == 200) {
             StringBuilder sb = new StringBuilder();
             try {
+                assert conn != null;
                 BufferedReader rd = new BufferedReader(new InputStreamReader(conn
                         .getInputStream()));
                 String line;
@@ -99,6 +101,7 @@ public class myUploadImage {
                 }
                 rd.close();
             } catch (IOException ioex) {
+                ioex.printStackTrace();
             }
             return sb.toString();
         } else {

@@ -105,7 +105,7 @@ public class ViewAllAdministiveFragment extends Fragment {
     private void setAdapter() {
         if (Utility.isOnline(context)) {
             final ProgressDialog progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("Getting Wait");
+            progressDialog.setMessage("Fetching Data Wait");
             progressDialog.show();
             progressDialog.setCancelable(false);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllAdmin,

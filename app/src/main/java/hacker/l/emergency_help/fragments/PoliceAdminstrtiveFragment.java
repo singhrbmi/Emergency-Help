@@ -78,11 +78,13 @@ public class PoliceAdminstrtiveFragment extends Fragment {
     View view;
     Context context;
     RecyclerView recycleView;
-    List<String> districtList;
-    List<Result> resultList = null;
+
+    //    resultList = null;
     Spinner spinnerDist;
     String district;
     Result result;
+    List<Result> resultList = new ArrayList<>();
+    List<String> districtList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -101,15 +103,20 @@ public class PoliceAdminstrtiveFragment extends Fragment {
         if (!Utility.isOnline(context)) {
             Toast.makeText(context, "Connect Internet connection", Toast.LENGTH_SHORT).show();
         }
-        resultList = new ArrayList<>();
-        districtList = new ArrayList<>();
+
         spinnerDist = view.findViewById(R.id.spinnerDist);
         recycleView = view.findViewById(R.id.recycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
-        setSpinnerDistAdapter();
+
 //        getDataFromServer();
 //        setAdapter();
+    }
+
+    @Override
+    public void onStart() {
+        setSpinnerDistAdapter();
+        super.onStart();
     }
 
     private void setSpinnerDistAdapter() {
@@ -167,7 +174,7 @@ public class PoliceAdminstrtiveFragment extends Fragment {
                                     resultList.addAll(Arrays.asList(result));
                                 }
                             }
-                            PoliceAdapter socialAdapter = new PoliceAdapter(context, resultList,district);
+                            PoliceAdapter socialAdapter = new PoliceAdapter(context, resultList, district);
                             recycleView.setAdapter(socialAdapter);
 //                            if (response.equalsIgnoreCase("no")) {
 //                                Toast.makeText(context, "Any category not Found", Toast.LENGTH_SHORT).show();

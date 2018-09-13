@@ -1,6 +1,7 @@
 package hacker.l.emergency_help.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.text.ClipboardManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -73,6 +75,14 @@ public class AfterSacnActivity extends AppCompatActivity implements View.OnClick
             mainLayout.setVisibility(View.GONE);
             tv_show.setVisibility(View.VISIBLE);
             tv_show.setText(data);
+            tv_show.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ClipboardManager cm = (ClipboardManager) AfterSacnActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
+                    cm.setText(tv_show.getText().toString());
+                    Toast.makeText(AfterSacnActivity.this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
     }

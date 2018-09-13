@@ -3,6 +3,7 @@ package hacker.l.emergency_help.activity;
 import android.Manifest;
 import android.R;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -58,7 +60,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
-
+        showDialog();
         //Check if Google Play Services Available or not
         if (!CheckGooglePlayServices()) {
             finish();
@@ -162,6 +164,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
 
             @Override
             public void onClick(View v) {
+                showDialog();
                 mMap.clear();
                 String url = getUrl(latitude, longitude, search);
                 Object[] DataTransfer = new Object[2];
@@ -169,7 +172,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
                 DataTransfer[1] = url;
                 GetNearbyBanksData getNearbyBanksData = new GetNearbyBanksData();
                 getNearbyBanksData.execute(DataTransfer);
-                Toast.makeText(PlaceActivity.this, "These are your Nearby! ", Toast.LENGTH_LONG).show();
+                Toast.makeText(PlaceActivity.this, "These are your Nearby! hospital", Toast.LENGTH_LONG).show();
             }
         });
         Button btn_ambulance = (Button) findViewById(hacker.l.emergency_help.R.id.btn_ambulance);
@@ -178,6 +181,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
 
             @Override
             public void onClick(View v) {
+                showDialog();
                 mMap.clear();
                 String url = getUrl(latitude, longitude, search);
                 Object[] DataTransfer = new Object[2];
@@ -185,7 +189,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
                 DataTransfer[1] = url;
                 GetNearbyBanksData getNearbyBanksData = new GetNearbyBanksData();
                 getNearbyBanksData.execute(DataTransfer);
-                Toast.makeText(PlaceActivity.this, "These are your Nearby! ", Toast.LENGTH_LONG).show();
+                Toast.makeText(PlaceActivity.this, "These are your Nearby! ambulance ", Toast.LENGTH_LONG).show();
             }
         });
         Button btn_police = (Button) findViewById(hacker.l.emergency_help.R.id.btn_police);
@@ -194,6 +198,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
 
             @Override
             public void onClick(View v) {
+                showDialog();
                 mMap.clear();
                 String url = getUrl(latitude, longitude, search);
                 Object[] DataTransfer = new Object[2];
@@ -201,7 +206,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
                 DataTransfer[1] = url;
                 GetNearbyBanksData getNearbyBanksData = new GetNearbyBanksData();
                 getNearbyBanksData.execute(DataTransfer);
-                Toast.makeText(PlaceActivity.this, "These are your Nearby! ", Toast.LENGTH_LONG).show();
+                Toast.makeText(PlaceActivity.this, "These are your Nearby! police ", Toast.LENGTH_LONG).show();
             }
         });
         Button btn_atm = (Button) findViewById(hacker.l.emergency_help.R.id.btn_atm);
@@ -210,6 +215,7 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
 
             @Override
             public void onClick(View v) {
+                showDialog();
                 mMap.clear();
                 String url = getUrl(latitude, longitude, search);
                 Object[] DataTransfer = new Object[2];
@@ -218,9 +224,23 @@ public class PlaceActivity extends FragmentActivity implements OnMapReadyCallbac
                 GetNearbyBanksData getNearbyBanksData = new GetNearbyBanksData();
                 getNearbyBanksData.execute(DataTransfer);
 //                getNearbyBanksData.calcsDistance(latitude, longitude);
-                Toast.makeText(PlaceActivity.this, "These are your Nearby! ", Toast.LENGTH_LONG).show();
+                Toast.makeText(PlaceActivity.this, "These are your Nearby! atm", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    void showDialog() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Alert!");
+        progressDialog.setMessage("Please Wait Map is loading!");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 5000);
     }
 
     protected synchronized void buildGoogleApiClient() {

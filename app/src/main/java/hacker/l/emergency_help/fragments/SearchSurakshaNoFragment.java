@@ -143,7 +143,7 @@ public class SearchSurakshaNoFragment extends Fragment {
         if (sPhone.length() == 10) {
             if (Utility.isOnline(context)) {
                 pd = new ProgressDialog(context);
-                pd.setMessage("Search  wait...");
+                pd.setMessage("Searching  Wait Please...");
                 pd.show();
                 pd.setCancelable(false);
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.SearchsurakshaNo,
@@ -151,7 +151,13 @@ public class SearchSurakshaNoFragment extends Fragment {
                             @Override
                             public void onResponse(String response) {
 
-                                pd.dismiss();
+                                try {
+                                    if (pd.isShowing()) {
+                                        pd.dismiss();
+                                    }
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 if (!response.equalsIgnoreCase("no")) {
                                     MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
                                     if (myPojo != null) {
@@ -177,7 +183,13 @@ public class SearchSurakshaNoFragment extends Fragment {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                pd.dismiss();
+                                try {
+                                    if (pd.isShowing()) {
+                                        pd.dismiss();
+                                    }
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                             }
                         }) {
                     @Override

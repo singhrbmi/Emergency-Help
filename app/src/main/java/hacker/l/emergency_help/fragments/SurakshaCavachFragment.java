@@ -245,7 +245,7 @@ public class SurakshaCavachFragment extends Fragment {
         if (Utility.isOnline(context)) {
             if (validation()) {
                 pd = new ProgressDialog(context);
-                pd.setMessage("Adding wait...");
+                pd.setMessage("Uploading Data wait...");
                 pd.show();
                 pd.setCancelable(false);
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.surakshacavach,

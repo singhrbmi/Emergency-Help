@@ -87,7 +87,7 @@ public class UserAdviseFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
         pd = new ProgressDialog(context);
-        pd.setMessage("Getting  wait...");
+        pd.setMessage("Fetching Data wait...");
         pd.show();
         pd.setCancelable(false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAdvise,

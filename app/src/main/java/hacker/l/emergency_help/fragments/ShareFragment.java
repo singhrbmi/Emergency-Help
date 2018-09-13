@@ -63,14 +63,16 @@ public class ShareFragment extends Fragment {
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String shareBody = "Here is the share content body";
+                String shareBody = "Download And Share Suraksha Kavach Application. "+getEmoji()+getEmoji()+getEmoji()+getEmoji()+"\nhttps://play.google.com/store/apps/details?id=fusionsoftware.loop.emergency_help";
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Play Store Link");
+//                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "https://play.google.com/store/apps/details?id=fusionsoftware.loop.emergency_help");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(sharingIntent, "Share"));
             }
         });
     }
-
+    public String getEmoji(){
+        return new String(Character.toChars(0X1F447));
+    }
 }

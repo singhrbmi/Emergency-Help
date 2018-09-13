@@ -83,7 +83,7 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.MyViewHold
     private void checkSubCategory(final String name, final String dist) {
         if (Utility.isOnline(mContext)) {
             pd = new ProgressDialog(mContext);
-            pd.setMessage("Getting  wait...");
+            pd.setMessage("Fetching Data wait...");
             pd.show();
             pd.setCancelable(false);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllSubCategory,
@@ -97,7 +97,13 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.MyViewHold
                                 SubCategoryFragment fragment = SubCategoryFragment.newInstance(response, "");
                                 moveFragment(fragment);
                             }
-                            pd.dismiss();
+                            try {
+                                if (pd.isShowing()) {
+                                    pd.dismiss();
+                                }
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
 //                            MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
 //                            if (myPojo != null) {
 //                                for (Result result:myPojo.getResult()){
@@ -109,7 +115,13 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.MyViewHold
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            pd.dismiss();
+                            try {
+                                if (pd.isShowing()) {
+                                    pd.dismiss();
+                                }
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
                         }
                     }) {
                 @Override

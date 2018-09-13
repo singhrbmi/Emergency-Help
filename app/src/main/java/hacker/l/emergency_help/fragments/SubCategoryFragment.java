@@ -106,8 +106,8 @@ public class SubCategoryFragment extends Fragment {
 
             if (dist != null) {
                 tv_District.setText(dist);
-            } else {
-                tv_District.setText("Ranchi");
+//            } else {
+//                tv_District.setText("Ranchi");
             }
 //            Collections.reverse(results);
             SubCategoryAdapter subCategoryAdapter = new SubCategoryAdapter(context, results);

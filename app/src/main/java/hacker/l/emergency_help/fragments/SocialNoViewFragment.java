@@ -47,7 +47,7 @@ public class SocialNoViewFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String socialname;
     private String district, subCategory;
-    private boolean flag;
+    private boolean flag = false;
 
     public static SocialNoViewFragment newInstance(String socialname, String district, String subCategory, boolean flag) {
         SocialNoViewFragment fragment = new SocialNoViewFragment();
@@ -106,8 +106,8 @@ public class SocialNoViewFragment extends Fragment {
         }
         if (district != null) {
             tv_District.setText(district);
-        } else {
-            tv_District.setText("Ranchi");
+//        } else {
+//            tv_District.setText("Ranchi");
         }
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recycleView.setLayoutManager(linearLayoutManager);
@@ -117,19 +117,23 @@ public class SocialNoViewFragment extends Fragment {
             getCategoryData();
         }
         search_barUser = (SearchView) view.findViewById(R.id.search_barUser);
-        search_barUser.setIconified(true);
+//        search_barUser.setIconified(true);
         search_barUser.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // filter recycler view when query submitted
-                socialContactsAdapter.getFilter().filter(query);
+                if (query != null && socialContactsAdapter != null) {
+                    socialContactsAdapter.getFilter().filter(query);
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
                 // filter recycler view when text is changed
-                socialContactsAdapter.getFilter().filter(query);
+                if (query != null && socialContactsAdapter != null) {
+                    socialContactsAdapter.getFilter().filter(query);
+                }
                 return false;
             }
         });
@@ -138,14 +142,20 @@ public class SocialNoViewFragment extends Fragment {
     private void getSubCategoryData() {
         if (Utility.isOnline(context)) {
             pd = new ProgressDialog(context);
-            pd.setMessage("Getting  wait...");
+            pd.setMessage("Fetching Data wait...");
             pd.show();
             pd.setCancelable(false);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllSubCategoryPhone,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            pd.dismiss();
+                            try {
+                                if (pd.isShowing()) {
+                                    pd.dismiss();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
                             if (myPojo != null) {
                                 resultList.addAll(Arrays.asList(myPojo.getResult()));
@@ -164,7 +174,13 @@ public class SocialNoViewFragment extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            pd.dismiss();
+                            try {
+                                if (pd.isShowing()) {
+                                    pd.dismiss();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }) {
                 @Override
@@ -186,14 +202,20 @@ public class SocialNoViewFragment extends Fragment {
     private void getCategoryData() {
         if (Utility.isOnline(context)) {
             pd = new ProgressDialog(context);
-            pd.setMessage("Getting  wait...");
+            pd.setMessage("Fetching Data wait...");
             pd.show();
             pd.setCancelable(false);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Contants.SERVICE_BASE_URL + Contants.getAllPhone,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            pd.dismiss();
+                            try {
+                                if (pd.isShowing()) {
+                                    pd.dismiss();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             MyPojo myPojo = new Gson().fromJson(response, MyPojo.class);
                             if (myPojo != null) {
                                 resultList.addAll(Arrays.asList(myPojo.getResult()));
@@ -212,7 +234,13 @@ public class SocialNoViewFragment extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            pd.dismiss();
+                            try {
+                                if (pd.isShowing()) {
+                                    pd.dismiss();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }) {
                 @Override
