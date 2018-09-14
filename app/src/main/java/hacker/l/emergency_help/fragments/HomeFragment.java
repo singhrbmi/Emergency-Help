@@ -5,16 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.hardware.Camera;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,7 +18,6 @@ import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,7 +47,6 @@ import org.jsoup.Jsoup;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,10 +55,8 @@ import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.activity.DashBoardActivity;
 import hacker.l.emergency_help.activity.PlaceActivity;
 import hacker.l.emergency_help.activity.QrcodeScannerActivity;
-import hacker.l.emergency_help.adapter.AdviseAdapter;
 import hacker.l.emergency_help.models.MyPojo;
 import hacker.l.emergency_help.models.Result;
-import hacker.l.emergency_help.utility.AppLocationService;
 import hacker.l.emergency_help.utility.Contants;
 import hacker.l.emergency_help.utility.LocationAddress;
 import hacker.l.emergency_help.utility.Utility;
@@ -101,7 +93,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     LinearLayout layout_utility, layout_bOrg, layout_social, layout_panic, layout_hospital, layout_seggestion, layout_police, layout_jharadmistrtive, lyout_suraksha, lyout_help, lyout_about, lyout_account, lyout_barCode, lyout_share, lyout_setting;
     TextView tv_address;
     Camera.Parameters params;
-    AppLocationService appLocationService;
     MediaPlayer police, weshile;
 
     @Override
@@ -145,7 +136,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         layout_utility.setOnClickListener(this);
         layout_panic.setOnClickListener(this);
         layout_bOrg.setOnClickListener(this);
-        appLocationService = new AppLocationService(context);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
         animation.reset();
         layout_social.clearAnimation();
@@ -174,6 +164,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         layout_bOrg.setAnimation(animation);
         checkForceUpdate();
     }
+
     public void checkForceUpdate() {
 
         new AsyncTask<Void, String, String>() {
@@ -183,11 +174,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 String newVersion = null;
                 try {
                     newVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + context.getPackageName() + "&hl=it")
-                            .timeout(10*1000)
+                            .timeout(30000)
                             .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
                             .referrer("http://www.google.com")
                             .get()
-                            .select("div[itemprop=softwareVersion]")
+                            .select("div.hAyfc:nth-child(4) > span:nth-child(2) > div:nth-child(1) > span:nth-child(1)")
                             .first()
                             .ownText();
                 } catch (IOException e) {
@@ -244,19 +235,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         alert.show();
         alert.setCanceledOnTouchOutside(false);
     }
+
     @Override
     public void onStart() {
         super.onStart();
-        Location location = appLocationService
-                .getLocation(LocationManager.GPS_PROVIDER);
-        if (location != null) {
-            double latitude = location.getLatitude();
-            double longitude = location.getLongitude();
-            LocationAddress locationAddress = new LocationAddress();
-            locationAddress.getAddressFromLocation(latitude, longitude, context.getApplicationContext(), new GeocoderHandler());
-        } else {
-            //showSettingsAlert();
-        }
     }
 
     public void showSettingsAlert() {

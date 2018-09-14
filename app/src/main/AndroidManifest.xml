@@ -66,7 +66,6 @@
         <activity
             android:name=".activity.AdviceViewerActivity"
             android:label="Advise Viewer"></activity>
-        <service android:name=".utility.AppLocationService"/>
     </application>
 
 </manifest>

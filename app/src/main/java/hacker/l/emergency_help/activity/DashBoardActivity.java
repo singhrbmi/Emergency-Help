@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,6 +27,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import hacker.l.emergency_help.R;
 import hacker.l.emergency_help.database.DbHelper;
@@ -87,13 +92,55 @@ public class DashBoardActivity extends AppCompatActivity
             HomeFragment fragment = HomeFragment.newInstance("", "");
             moveHomeFragment(fragment);
         }
-        isStoragePermissionGranted();
-        isConteactPermissionGranted();
-        isPhoneCallPermissionGranted();
-        isSmsCallPermissionGranted();
-        isCameraCallPermissionGranted();
-        isLocationPermissionGranted();
+//        isStoragePermissionGranted();
+//        isConteactPermissionGranted();
+//        isPhoneCallPermissionGranted();
+//        isSmsCallPermissionGranted();
+//        isCameraCallPermissionGranted();
+//        isLocationPermissionGranted();
         setTitle("Dashboard");
+//        if (!checkAndRequestPermissions()){
+        checkAndRequestPermissions();
+//        }
+    }
+
+    private boolean checkAndRequestPermissions() {
+        int readcontact = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS);
+        int camera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        int storage = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int loc = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION);
+        int loc2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
+        int call = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE);
+        int sendSms = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (camera != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA);
+        }
+        if (readcontact != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_CONTACTS);
+        }
+        if (storage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (loc2 != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (loc != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+        if (call != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CALL_PHONE);
+        }
+        if (sendSms != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.SEND_SMS);
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray
+                    (new String[listPermissionsNeeded.size()]), 0);
+            return false;
+        }
+        return true;
     }
 
     public void setTitle(String title) {
@@ -196,96 +243,97 @@ public class DashBoardActivity extends AppCompatActivity
         }
     }
 
-    public boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            return true;
-        }
-    }
+//    public boolean isStoragePermissionGranted() {
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                return true;
+//            } else {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+//                return false;
+//            }
+//        } else { //permission is automatically granted on sdk<23 upon installation
+//            return true;
+//        }
+//    }
 
-    public boolean isConteactPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            if (checkSelfPermission(android.Manifest.permission.READ_CONTACTS)
-                    == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 2);
-                return false;
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            return true;
-        }
-    }
+//    public boolean isConteactPermissionGranted() {
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                return true;
+//            } else {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 2);
+//                return false;
+//            }
+//        } else { //permission is automatically granted on sdk<23 upon installation
+//            return true;
+//        }
+//    }
 
-    public boolean isLocationPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 6);
-                return false;
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            return true;
-        }
-    }
+//    public boolean isLocationPermissionGranted() {
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                return true;
+//            } else {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 6);
+//                return false;
+//            }
+//        } else { //permission is automatically granted on sdk<23 upon installation
+//            return true;
+//        }
+//    }
 
-    public boolean isPhoneCallPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            if (checkSelfPermission(Manifest.permission.CALL_PHONE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 3);
-                return false;
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            return true;
-        }
-    }
+//    public boolean isPhoneCallPermissionGranted() {
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                return true;
+//            } else {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 3);
+//                return false;
+//            }
+//        } else { //permission is automatically granted on sdk<23 upon installation
+//            return true;
+//        }
+//    }
 
-    public boolean isSmsCallPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            if (checkSelfPermission(Manifest.permission.SEND_SMS)
-                    == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 4);
-                return false;
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            return true;
-        }
-    }
+//    public boolean isSmsCallPermissionGranted() {
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                return true;
+//            } else {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 4);
+//                return false;
+//            }
+//        } else { //permission is automatically granted on sdk<23 upon installation
+//            return true;
+//        }
+//    }
 
-    public boolean isCameraCallPermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 21) {
-            if (checkSelfPermission(Manifest.permission.CAMERA)
-                    == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 5);
-                return false;
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            return true;
-        }
-    }
+//    public boolean isCameraCallPermissionGranted() {
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                return true;
+//            } else {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 5);
+//                return false;
+//            }
+//        } else { //permission is automatically granted on sdk<23 upon installation
+//            return true;
+//        }
+//    }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+                Toast.makeText(this, "All Permission Granted.", Toast.LENGTH_SHORT).show();
             }
         }
 //        if (requestCode == 2) {
