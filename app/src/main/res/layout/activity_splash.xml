@@ -79,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin10"
-                android:text="Welcome to Suraksha Kavach"
+                android:text="Welcome to Suraksha Kawach"
                 android:textColor="@color/selected_tab"
                 android:textSize="@dimen/textSize14" />
         </LinearLayout>

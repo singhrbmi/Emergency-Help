@@ -131,7 +131,7 @@ public class SplashActivity extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
         } else {
-            adminMsg.setText("Suraksha Kavach");
+            adminMsg.setText("Suraksha Kawach");
 
         }
     }
@@ -152,7 +152,7 @@ public class SplashActivity extends AppCompatActivity {
 //                        Collections.reverse(resultList);
                             adminMsg.setText(resultList.get(resultList.size() - 1));
                         } else {
-                            adminMsg.setText("Suraksha Kavach");
+                            adminMsg.setText("Suraksha Kawach");
                         }
                     }
                 },
@@ -189,7 +189,7 @@ public class SplashActivity extends AppCompatActivity {
                         }
                         if (resultListOwner.size() != 0) {
                             if (resultListOwner.get(resultListOwner.size() - 1) == null && !resultListOwner.get(resultListOwner.size() - 1).equalsIgnoreCase("")) {
-                                msg.setText("Welcome to Suraksha Kavach");
+                                msg.setText("Welcome to Suraksha Kawach");
                             } else {
                                 msg.setText(resultListOwner.get(resultListOwner.size() - 1));
                             }
@@ -201,7 +201,7 @@ public class SplashActivity extends AppCompatActivity {
                                 Picasso.with(SplashActivity.this).load(R.drawable.logo).into(imageMsg);
                             }
                         } else {
-                            msg.setText("Welcome to Suraksha Kavach");
+                            msg.setText("Welcome to Suraksha Kawach");
                         }
                     }
                 },
@@ -237,7 +237,7 @@ public class SplashActivity extends AppCompatActivity {
         adminMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!adminMsg.getText().toString().equalsIgnoreCase("Suraksha Kavach")) {
+                if (!adminMsg.getText().toString().equalsIgnoreCase("Suraksha Kawach")) {
                     Intent intent = new Intent(SplashActivity.this, AdviceViewerActivity.class);
                     intent.putExtra("advise", adminMsg.getText().toString());
                     intent.putExtra("date", dateList.get(dateList.size() - 1));
@@ -248,7 +248,7 @@ public class SplashActivity extends AppCompatActivity {
         msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!msg.getText().toString().equalsIgnoreCase("Welcome to Suraksha Kavach")) {
+                if (!msg.getText().toString().equalsIgnoreCase("Welcome to Suraksha Kawach")) {
                     Intent intent = new Intent(SplashActivity.this, AdviceViewerActivity.class);
                     intent.putExtra("advise", msg.getText().toString());
                     intent.putExtra("image", resultImageLst.get(resultImageLst.size() - 1));

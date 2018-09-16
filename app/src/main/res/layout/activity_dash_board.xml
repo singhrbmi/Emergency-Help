@@ -104,7 +104,7 @@
                         android:layout_marginLeft="@dimen/margin5"
                         android:layout_weight=".8"
                         android:gravity="center|left"
-                        android:text="Suraksha Kavach"
+                        android:text="Suraksha Kawach"
                         android:textColor="@color/white"
                         android:textSize="@dimen/textSize14" />
                 </LinearLayout>

@@ -63,7 +63,7 @@ public class ShareFragment extends Fragment {
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String shareBody = "Download And Share Suraksha Kavach Application. "+getEmoji()+getEmoji()+getEmoji()+getEmoji()+"\nhttps://play.google.com/store/apps/details?id=fusionsoftware.loop.emergency_help";
+                String shareBody = "Download And Share Suraksha Kawach Application. "+getEmoji()+getEmoji()+getEmoji()+getEmoji()+"\nhttps://play.google.com/store/apps/details?id=fusionsoftware.loop.emergency_help";
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
 //                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "https://play.google.com/store/apps/details?id=fusionsoftware.loop.emergency_help");

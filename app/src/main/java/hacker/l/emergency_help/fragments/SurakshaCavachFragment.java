@@ -98,7 +98,7 @@ public class SurakshaCavachFragment extends Fragment {
 
     private void intit() {
         DashBoardActivity dashBoardActivity = (DashBoardActivity) context;
-        dashBoardActivity.setTitle("Suraksha Kavach");
+        dashBoardActivity.setTitle("Suraksha Kawach");
         spinnerList = new ArrayList<>();
         spinnerList.add("Sri Maheswari Sabha,Ranchi");
         spinnerList.add("Lions Club of Ranchi Central");

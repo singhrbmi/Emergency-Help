@@ -48,7 +48,7 @@
                     android:layout_marginTop="@dimen/margin10"
                     android:fontFamily="sans-serif-condensed"
                     android:gravity="center"
-                    android:text="Suraksha Kavach\n Jharkhand"
+                    android:text="Suraksha Kawach\n Jharkhand"
                     android:textColor="@color/selected_tab"
                     android:textSize="@dimen/textSize25"
                     android:textStyle="bold" />
@@ -147,7 +147,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/margin10"
                                 android:gravity="center"
-                                android:text="Suraksha Kavach"
+                                android:text="Suraksha Kawach"
                                 android:textSize="@dimen/textSize14" />
 
 

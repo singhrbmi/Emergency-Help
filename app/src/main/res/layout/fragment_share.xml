@@ -39,7 +39,7 @@
                 android:drawableRight="@drawable/ic_share_black_24dp"
                 android:gravity="center"
                 android:paddingRight="@dimen/margin10"
-                android:text="Share Suraksha Kavach"
+                android:text="Share Suraksha Kawach"
                 android:textAllCaps="false"
                 android:textSize="@dimen/textSize16"
                 android:textColor="@color/white" />
