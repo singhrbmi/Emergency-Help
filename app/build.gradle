@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     defaultConfig {
         applicationId 'fusionsoftware.loop.emergency_help'
         minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 4
-        versionName "2.3"
+        targetSdkVersion 28
+        versionCode 5
+        versionName "2.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

@@ -16,7 +16,7 @@ public class Contants {
     public static final String APP_DIRECTORY = "/E" + DEFAULT_APPLICATION_NAME + "Directory/";
     public static final String DATABASE_NAME = "emergency.db";// Environment.getExternalStorageDirectory() +  APP_DIRECTORY + "evergreen.db";
 
-    public static String SERVICE_BASE_URL = "http://lalitsingh2.esy.es/emergency-help/";
+    public static String SERVICE_BASE_URL = "http://suraksha.loopfusion.in/apis/";
 
     public static String outputBasePath = Environment.getExternalStorageDirectory().getAbsolutePath();
     public static String outputDirectoryLocation = outputBasePath + "/evergreenUnzipped/";
